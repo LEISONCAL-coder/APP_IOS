@@ -10,7 +10,7 @@
     <title>AUDITORÍA PMT - MÓVIL Y ESCRITORIO</title>
     <style>
         :root { 
-            --primary: #002060; /* Azul institucional GSC */ /* Azul institucional Interventoría */
+            --primary: #002060; /* Azul institucional GSC */
             --secondary: #FF6600; /* Naranja Tránsito PMT */
             --accent: #d4af37;
             --border: #b0bec5;
@@ -281,11 +281,13 @@
             <tr>
                 <td>
                     <div class="header-container">
-                        <label class="logo-box" title="Toque para cargar logo Alcaldía">
-                            <span class="no-print" id="txt-logo1">+ Logo<br>Alcaldía</span>
-                            <img id="logo1" src="">
-                            <input type="file" accept="image/*" onchange="loadLogo(this, 'logo1', 'txt-logo1')">
-                        </label>
+                        <div class="logo-box">
+                            <img id="logo1" src="logo_entidad.png" style="display:block; cursor:pointer;" title="Click para cambiar logo" onclick="this.nextElementSibling.querySelector('input').click()" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <label class="no-print" style="cursor:pointer; width:100%; height:100%; display:none; align-items:center; justify-content:center; flex-direction:column; border: 2px dashed #90a4ae; background: #f4f7f8; border-radius: 6px;">
+                                <span>+ Logo Alcaldía</span>
+                                <input type="file" accept="image/*" onchange="loadLogo(this, 'logo1')">
+                            </label>
+                        </div>
                         
                         <div class="header-title">
                             <h1>AUDITORÍA EXCLUSIVA PMT</h1>
@@ -293,11 +295,13 @@
                             <p>Control de Interventoría - Seguridad Vial</p>
                         </div>
                         
-                        <label class="logo-box" title="Toque para cargar logo Interventoría">
-                            <span class="no-print" id="txt-logo2">+ Logo<br>Interventoría</span>
-                            <img id="logo2" src="">
-                            <input type="file" accept="image/*" onchange="loadLogo(this, 'logo2', 'txt-logo2')">
-                        </label>
+                        <div class="logo-box">
+                            <img id="logo2" src="logo_gsc.png" style="display:block; cursor:pointer;" title="Click para cambiar logo" onclick="this.nextElementSibling.querySelector('input').click()" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <label class="no-print" style="cursor:pointer; width:100%; height:100%; display:none; align-items:center; justify-content:center; flex-direction:column; border: 2px dashed #90a4ae; background: #f4f7f8; border-radius: 6px;">
+                                <span>+ Logo Interventor</span>
+                                <input type="file" accept="image/*" onchange="loadLogo(this, 'logo2')">
+                            </label>
+                        </div>
                     </div>
                 </td>
             </tr>

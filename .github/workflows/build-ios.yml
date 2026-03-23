@@ -34,7 +34,7 @@ jobs:
           rsync -a --exclude='cordova_project' --exclude='.git' --exclude='.github' ../ ./www/
           
           cp ../config.xml ./config.xml
-          cp ../logo_gsc.png ./logo_gsc.png
+          cp ../icon_ios.png ./icon_ios.png
 
       - name: Agregar Plataforma iOS
         run: |

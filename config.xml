@@ -21,7 +21,7 @@
         <preference name="Orientation" value="portrait" />
         <preference name="WKWebViewOnly" value="true" />
         <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
-        <icon src="logo_gsc.png" />
+        <icon src="icon_ios.png" width="1024" height="1024" />
         
         <edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="merge">
             <string>GSC Actas requiere acceso a la fototeca para adjuntar imágenes a los registros y evidencias.</string>

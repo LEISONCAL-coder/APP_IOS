@@ -77,7 +77,7 @@
             margin: 0 auto;
         }
 
-        /* Lista de MenÃº Nativo */
+        /* Lista de Menú Nativo */
         .menu-list {
             display: flex;
             flex-direction: column;
@@ -126,9 +126,6 @@
             font-weight: bold;
         }
     </style>
-    <script src="cordova.js"></script>
-    <script src="html2pdf.bundle.min.js"></script>
-    <script src="gsc_file_manager.js"></script>
 </head>
 <body>
 
@@ -142,52 +139,52 @@
     <main>
         <nav class="no-print" style="margin-bottom: 20px;">
             <select id="global-nav" onchange="if(this.value) window.location.href=this.value" style="padding: 12px; border-radius: 12px; font-weight: bold; background: white; color: var(--primary-color); outline: none; border: none; width: 100%; box-shadow: 0 1px 2px rgba(0,0,0,0.05); font-size: 16px;">
-                <option value="">Sartar a otra secciÃ³n...</option>
-                <option value="index.html">MenÃº Principal (Inicio)</option>
+                <option value="">Sartar a otra sección...</option>
+                <option value="index.html">Menú Principal (Inicio)</option>
                 <option value="acta_vecindad.html">Acta de Vecindad</option>
                 <option value="acta_entorno.html">Acta de Entorno</option>
                 <option value="proc_const.html">Proc. Constructivo</option>
-                <option value="pmt.html">PMT (TrÃ¡nsito)</option>
+                <option value="pmt.html">PMT (Tránsito)</option>
                 <option value="paga.html">PAGA (Ambiental)</option>
-                <option value="espec_tecn.html">Espec. TÃ©cnicas</option>
+                <option value="espec_tecn.html">Espec. Técnicas</option>
             </select>
         </nav>
 
         <div class="menu-list">
             <a href="acta_vecindad.html" class="menu-button">
-                <span class="menu-icon">ðŸ </span>
+                <span class="menu-icon">🏠</span>
                 <span class="menu-text">Acta Vecindad</span>
-                <span class="menu-arrow">â€º</span>
+                <span class="menu-arrow">›</span>
             </a>
             
             <a href="acta_entorno.html" class="menu-button">
-                <span class="menu-icon">ðŸ›£ï¸</span>
+                <span class="menu-icon">🛣️</span>
                 <span class="menu-text">Acta Entorno</span>
-                <span class="menu-arrow">â€º</span>
+                <span class="menu-arrow">›</span>
             </a>
             
             <a href="proc_const.html" class="menu-button">
-                <span class="menu-icon">ðŸš§</span>
+                <span class="menu-icon">🚧</span>
                 <span class="menu-text">Proc. Constructivo</span>
-                <span class="menu-arrow">â€º</span>
+                <span class="menu-arrow">›</span>
             </a>
             
             <a href="pmt.html" class="menu-button">
-                <span class="menu-icon">ðŸš›</span>
-                <span class="menu-text">PMT (TrÃ¡nsito)</span>
-                <span class="menu-arrow">â€º</span>
+                <span class="menu-icon">🚛</span>
+                <span class="menu-text">PMT (Tránsito)</span>
+                <span class="menu-arrow">›</span>
             </a>
             
             <a href="paga.html" class="menu-button">
-                <span class="menu-icon">ðŸŒ³</span>
+                <span class="menu-icon">🌳</span>
                 <span class="menu-text">PAGA (Ambiental)</span>
-                <span class="menu-arrow">â€º</span>
+                <span class="menu-arrow">›</span>
             </a>
             
             <a href="espec_tecn.html" class="menu-button">
-                <span class="menu-icon">ðŸ“„</span>
-                <span class="menu-text">Espec. TÃ©cnicas</span>
-                <span class="menu-arrow">â€º</span>
+                <span class="menu-icon">📄</span>
+                <span class="menu-text">Espec. Técnicas</span>
+                <span class="menu-arrow">›</span>
             </a>
         </div>
     </main>

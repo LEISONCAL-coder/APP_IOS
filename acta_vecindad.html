@@ -59,7 +59,7 @@
         input[type="radio"], input[type="checkbox"] { transform: scale(1.1); accent-color: var(--primary); cursor: pointer; }
         .tipo-acta-box { text-align: center; padding: 5px; margin-bottom: 15px; font-weight: bold; display: flex; justify-content: center; gap: 25px; font-size: 0.9rem; border-bottom: 2px solid var(--primary); padding-bottom: 10px;}
 
-        /* Tablas Limpias para Estado de ConstrucciÃƒÂ³n */
+        /* Tablas Limpias para Estado de Construcción */
         table.form-table { width: 100%; border-collapse: collapse; margin-bottom: 15px; font-size: 0.75rem; border: 1px solid black; }
         table.form-table th, table.form-table td { border: 1px solid black; padding: 4px; text-align: left; vertical-align: middle; }
         table.form-table th { background-color: #f0f4f8; text-align: center; color: var(--primary); font-weight: bold; -webkit-print-color-adjust: exact; print-color-adjust: exact;}
@@ -81,7 +81,7 @@
 
         .map-placeholder { width: 100%; height: 250px; background-color: #eee; display: flex; align-items: center; justify-content: center; font-style: italic; color: #999;}
         
-        /* Motor FotogrÃƒÂ¡fico Nativo (Adaptado de doctype y mejorado a index) */
+        /* Motor Fotográfico Nativo (Adaptado de doctype y mejorado a index) */
         .photo-controls { display: flex; justify-content: center; gap: 10px; margin: 15px 0; flex-wrap: wrap;}
         .btn-action { background-color: var(--primary); color: white; border: none; padding: 8px 15px; cursor: pointer; border-radius: 6px; font-weight: bold; text-transform: uppercase; font-size: 0.75rem; transition: all 0.2s ease-in-out; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .btn-action:hover { filter: brightness(1.1); transform: translateY(-1px); box-shadow: 0 4px 6px rgba(0,0,0,0.15); }
@@ -139,7 +139,7 @@
         .croquis-text { background: rgba(255,255,255,0.8); border-radius: 4px; padding: 0 2px; color: black; margin-left: 2px;}
 
         /* =======================================================================
-           8. BLINDAJE EXTREMO DE IMPRESIÃƒâ€œN (PORTRAIT / LANDSCAPE)
+           8. BLINDAJE EXTREMO DE IMPRESIÓN (PORTRAIT / LANDSCAPE)
            ======================================================================= */
         @media print {
             body { background: white; margin: 0; padding: 0; font-size: 8px; color: black; }
@@ -167,7 +167,7 @@
         }
 
         /* =======================================================================
-           9. DISEÃƒâ€˜O RESPONSIVO (TELÃƒâ€°FONOS)
+           9. DISEÑO RESPONSIVO (TELÉFONOS)
            ======================================================================= */
         @media screen and (max-width: 768px) {
             .container { padding: 10px; margin: 5px; }
@@ -191,25 +191,25 @@
     <nav>
         <select id="global-nav" onchange="if(this.value) window.location.href=this.value" style="padding: 6px; border-radius: 6px; font-weight: bold; background: white; color: var(--primary); outline: none; border: 1px solid #ccc; max-width: 100%;">
             <option value="">Ir a...</option>
-            <option value="index.html">MenÃƒÂº Principal (Inicio)</option>
+            <option value="index.html">Menú Principal (Inicio)</option>
             <option value="acta_vecindad.html">Acta de Vecindad</option>
             <option value="acta_entorno.html">Acta de Entorno</option>
             <option value="proc_const.html">Proc. Constructivo</option>
-            <option value="pmt.html">PMT (TrÃƒÂ¡nsito)</option>
+            <option value="pmt.html">PMT (Tránsito)</option>
             <option value="paga.html">PAGA (Ambiental)</option>
-            <option value="espec_tecn.html">Espec. TÃƒÂ©cnicas</option>
+            <option value="espec_tecn.html">Espec. Técnicas</option>
         </select>
-        <button onclick="openTab('config')">Ã¢Å¡â„¢Ã¯Â¸Â ConfiguraciÃƒÂ³n</button>
-        <button class="active" onclick="openTab('vecindad')">Ã°Å¸ÂÂ  Acta de Vecindad Oficial</button>
+        <button onclick="openTab('config')">⚙️ Configuración</button>
+        <button class="active" onclick="openTab('vecindad')">🏠 Acta de Vecindad Oficial</button>
     </nav>
 
     <div id="config" class="container tab-content">
         <h2>Datos del Contrato - Proyecto La Sonadora</h2>
         <table class="summary-table form-table" style="text-align: left; margin-top: 10px;">
             <tr><th style="width: 30%;">Campo</th><th>Valor</th></tr>
-            <tr><td>Proyecto</td><td><div contenteditable="true" id="cfg-proyecto" class="editable-div">MEJORAMIENTO DE LA VÃƒÂA GRANADA Ã¢â‚¬â€œ GUATAPÃƒâ€° SECTOR LA SONADORA Y LA PEÃƒâ€˜A, DEL MUNICIPIO DE GUATAPÃƒâ€°, ANTIOQUIA</div></td></tr>
+            <tr><td>Proyecto</td><td><div contenteditable="true" id="cfg-proyecto" class="editable-div">MEJORAMIENTO DE LA VÍA GRANADA – GUATAPÉ SECTOR LA SONADORA Y LA PEÑA, DEL MUNICIPIO DE GUATAPÉ, ANTIOQUIA</div></td></tr>
             <tr><td>Contratante</td><td><input type="text" id="cfg-contratante" value="EMPRESA AUTONOMA DE GUATAPE"></td></tr>
-            <tr><td>Nombre InterventorÃƒÂ­a</td><td><input type="text" id="cfg-interventoria" value="GRIMAUDIS SIERRA CORREA GSC S.A.S"></td></tr>
+            <tr><td>Nombre Interventoría</td><td><input type="text" id="cfg-interventoria" value="GRIMAUDIS SIERRA CORREA GSC S.A.S"></td></tr>
             <tr><td>Contratista de Obra</td><td><input type="text" id="cfg-contratista" value="CONSICOR S.A.S"></td></tr>
             <tr><td>Tramo Nombre</td><td><input type="text" id="cfg-tramo-nombre" value="TRAMO 1"></td></tr>
             <tr><td>Long. Aprox (mts)</td><td><input type="text" id="cfg-tramo-long" value="1200 m"></td></tr>
@@ -221,7 +221,7 @@
             <tr>
                 <td class="logo-cell"><img src="logo_consicor.png" alt="Consicor" onerror="this.style.display='none'"></td>
                 <td class="title-cell">ACTA DE VECINDAD</td>
-                <td class="logo-cell"><img src="logo_gsc.png" alt="GSC IngenierÃƒÂ­a" onerror="this.style.display='none'"></td>
+                <td class="logo-cell"><img src="logo_gsc.png" alt="GSC Ingeniería" onerror="this.style.display='none'"></td>
             </tr>
         </table>
         <table class="header-meta">
@@ -263,13 +263,13 @@
 
         <div class="top-split">
             <div class="top-left" id="map-container" style="position: relative; cursor: crosshair;" onclick="addCroquisMarker(event)">
-                <div style="position: absolute; top: 0; left: 0; background: var(--primary); color: white; padding: 2px 5px; font-weight: bold; font-size: 0.7rem; -webkit-print-color-adjust: exact; print-color-adjust: exact; z-index: 5;">1. ESQUEMA LOCALIZACIÃƒâ€œN</div>
+                <div style="position: absolute; top: 0; left: 0; background: var(--primary); color: white; padding: 2px 5px; font-weight: bold; font-size: 0.7rem; -webkit-print-color-adjust: exact; print-color-adjust: exact; z-index: 5;">1. ESQUEMA LOCALIZACIÓN</div>
                 <img src="mapa_tramo_1.jpg" id="mapa-global-img" alt="Plano del Proyecto" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="map-placeholder no-print" id="map-ph" style="display: none;">UbicaciÃƒÂ³n del Proyecto (mapa_tramo_X.jpg)</div>
+                <div class="map-placeholder no-print" id="map-ph" style="display: none;">Ubicación del Proyecto (mapa_tramo_X.jpg)</div>
                 <div id="map-markers" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events: none;"></div>
             </div>
             <div class="top-right">
-                <div class="section-title" style="border-top: none; border-left: none; border-right: none;">1. DATOS LOCALIZACIÃƒâ€œN Y TRAMO</div>
+                <div class="section-title" style="border-top: none; border-left: none; border-right: none;">1. DATOS LOCALIZACIÓN Y TRAMO</div>
                 <div class="tramo-info">
                     <div style="width: 30%;">Tramo Actual</div>
                     <div class="text-center" style="padding:0;">
@@ -287,14 +287,14 @@
                 </div>
                 <div class="tramo-info">
                     <div style="width: 30%;">Municipio</div>
-                    <div class="text-center" style="padding:0; flex-grow:1;"><input type="text" id="vec-muni" class="save-data text-center" style="width: 100%;" value="GUATAPÃƒâ€°"></div>
+                    <div class="text-center" style="padding:0; flex-grow:1;"><input type="text" id="vec-muni" class="save-data text-center" style="width: 100%;" value="GUATAPÉ"></div>
                 </div>
                 <div class="tramo-info">
                     <div style="width: 30%;">Vereda / Sector</div>
                     <div class="text-center" style="padding:0; flex-grow:1;">
                         <select id="vec-vereda" class="save-data text-center" style="width: 100%; border:none; outline:none; background:transparent; appearance:none; -webkit-appearance:none; text-align-last:center;">
                             <option value="LA SONADORA">LA SONADORA</option>
-                            <option value="LA PEÃƒâ€˜A">LA PEÃƒâ€˜A</option>
+                            <option value="LA PEÑA">LA PEÑA</option>
                         </select>
                     </div>
                 </div>
@@ -314,8 +314,8 @@
         <div class="section-title">2. DATOS DEL PREDIO</div>
         <table class="form-table">
             <tr>
-                <td colspan="2"><strong>DirecciÃƒÂ³n:</strong> <input type="text" id="v_dir" class="save-data" style="width:60%; display:inline-block;"></td>
-                <td colspan="2"><strong>TelÃƒÂ©fonos:</strong> <input type="text" id="v_tel" class="save-data" style="width:70%; display:inline-block;"></td>
+                <td colspan="2"><strong>Dirección:</strong> <input type="text" id="v_dir" class="save-data" style="width:60%; display:inline-block;"></td>
+                <td colspan="2"><strong>Teléfonos:</strong> <input type="text" id="v_tel" class="save-data" style="width:70%; display:inline-block;"></td>
             </tr>
             <tr>
                 <td colspan="3"><strong>Nombre de la persona que atiende la visita:</strong> <input type="text" id="v_atiende" class="save-data" style="width:60%; display:inline-block;"></td>
@@ -327,18 +327,18 @@
                     <div class="checkbox-group">
                         <label><input type="radio" class="save-data" id="v_ten_prop" name="v_tenencia" value="Propia"> 1. Propia</label>
                         <label><input type="radio" class="save-data" id="v_ten_arr" name="v_tenencia" value="En arriendo"> 2. En arriendo</label>
-                        <label><input type="radio" class="save-data" id="v_ten_pos" name="v_tenencia" value="PosesiÃƒÂ³n"> 3. PosesiÃƒÂ³n</label>
+                        <label><input type="radio" class="save-data" id="v_ten_pos" name="v_tenencia" value="Posesión"> 3. Posesión</label>
                         <label><input type="radio" class="save-data" id="v_ten_usu" name="v_tenencia" value="Usufructo"> 4. Usufructo</label>
                         <label><input type="radio" class="save-data" id="v_ten_col" name="v_tenencia" value="Propiedad colectiva"> 5. Propiedad colectiva</label>
                     </div>
                 </td>
             </tr>
             <tr>
-                <td colspan="3"><strong>Nombre del responsable / propietario de la construcciÃƒÂ³n:</strong> <input type="text" id="v_prop" class="save-data" style="width:50%; display:inline-block;"></td>
+                <td colspan="3"><strong>Nombre del responsable / propietario de la construcción:</strong> <input type="text" id="v_prop" class="save-data" style="width:50%; display:inline-block;"></td>
                 <td><strong>CC No.:</strong> <input type="text" id="v_cc" class="save-data" style="width:60%; display:inline-block;"></td>
             </tr>
             <tr>
-                <td style="width: 25%;"><strong>Edad de la construcciÃƒÂ³n:</strong> <input type="text" id="v_edad_const" class="save-data" style="width:60px; display:inline-block;"></td>
+                <td style="width: 25%;"><strong>Edad de la construcción:</strong> <input type="text" id="v_edad_const" class="save-data" style="width:60px; display:inline-block;"></td>
                 <td style="width: 25%;"><strong>No. de Apartamentos:</strong> <input type="number" id="v_apts" class="save-data" style="width:40px; display:inline-block;"></td>
                 <td colspan="2" style="width: 50%;"><strong>No. de pisos:</strong> <input type="number" id="v_pisos" class="save-data" style="width:40px; display:inline-block;"></td>
             </tr>
@@ -348,13 +348,13 @@
                 <td colspan="2" style="width: 50%;"><strong>Mujeres jefas de hogar:</strong> <input type="number" id="v_mujeres" class="save-data" style="width:40px; display:inline-block;"></td>
             </tr>
             <tr>
-                <td style="width: 30%;"><strong>NiÃƒÂ±os (menores de 14 aÃƒÂ±os):</strong> <input type="number" id="v_ninos" class="save-data" style="width:40px; display:inline-block;"></td>
-                <td colspan="2" style="width: 40%;"><strong>Adultos mayores (mÃƒÂ¡s de 60 aÃƒÂ±os):</strong> <input type="number" id="v_adultos" class="save-data" style="width:40px; display:inline-block;"></td>
-                <td style="width: 30%;"><strong>Personas en situaciÃƒÂ³n de discapacidad:</strong> <input type="number" id="v_discap" class="save-data" style="width:40px; display:inline-block;"></td>
+                <td style="width: 30%;"><strong>Niños (menores de 14 años):</strong> <input type="number" id="v_ninos" class="save-data" style="width:40px; display:inline-block;"></td>
+                <td colspan="2" style="width: 40%;"><strong>Adultos mayores (más de 60 años):</strong> <input type="number" id="v_adultos" class="save-data" style="width:40px; display:inline-block;"></td>
+                <td style="width: 30%;"><strong>Personas en situación de discapacidad:</strong> <input type="number" id="v_discap" class="save-data" style="width:40px; display:inline-block;"></td>
             </tr>
             <tr>
                 <td colspan="4">
-                    <strong>CLASIFICACIÃƒâ€œN CATASTRAL:</strong>
+                    <strong>CLASIFICACIÓN CATASTRAL:</strong>
                     <div class="checkbox-group" style="display:inline-flex; vertical-align:middle; padding:0 10px;">
                         <label><input type="radio" class="save-data" name="v_catastral" id="v_cat_urb" value="Urbano"> 1. Urbano</label>
                         <label><input type="radio" class="save-data" name="v_catastral" id="v_cat_rur" value="Rural"> 2. Rural</label>
@@ -373,7 +373,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <strong>CON LICENCIA DE CONSTRUCCIÃƒâ€œN:</strong>
+                    <strong>CON LICENCIA DE CONSTRUCCIÓN:</strong>
                     <div class="checkbox-group" style="display:inline-flex; vertical-align:middle; padding:0 10px;">
                         <label><input type="radio" class="save-data" name="v_licencia" id="v_lic_si" value="Si"> 1. Si</label>
                         <label><input type="radio" class="save-data" name="v_licencia" id="v_lic_no" value="No"> 2. No</label>
@@ -392,7 +392,7 @@
                 <td colspan="4" style="padding: 0;">
                     <table style="width: 100%; border-collapse: collapse;">
                         <tr>
-                            <td colspan="3" style="text-align: center; font-weight: bold; background: #f0f4f8; border-bottom: 1px solid black;">SERVICIOS PÃƒÅ¡BLICOS</td>
+                            <td colspan="3" style="text-align: center; font-weight: bold; background: #f0f4f8; border-bottom: 1px solid black;">SERVICIOS PÚBLICOS</td>
                         </tr>
                         <tr>
                             <td style="width: 30%; font-weight: bold; border-right: 1px solid black; border-bottom: 1px solid black; text-align: center;">Item</td>
@@ -416,7 +416,7 @@
                             <td><div contenteditable="true" id="sp_2obs" class="editable-div save-div" style="min-height: 15px;"></div></td>
                         </tr>
                         <tr>
-                            <td style="border-right: 1px solid black;">3. EnergÃƒÂ­a</td>
+                            <td style="border-right: 1px solid black;">3. Energía</td>
                             <td style="border-right: 1px solid black; text-align:center;">
                                 <label><input type="radio" class="save-data" name="sp_3val" id="sp_3y" value="SI"> S</label> &nbsp;
                                 <label><input type="radio" class="save-data" name="sp_3val" id="sp_3n" value="NO"> N</label>
@@ -432,7 +432,7 @@
                             <td><div contenteditable="true" id="sp_4obs" class="editable-div save-div" style="min-height: 15px;"></div></td>
                         </tr>
                         <tr>
-                            <td style="border-right: 1px solid black;">5. TelÃƒÂ©fono</td>
+                            <td style="border-right: 1px solid black;">5. Teléfono</td>
                             <td style="border-right: 1px solid black; text-align:center;">
                                 <label><input type="radio" class="save-data" name="sp_5val" id="sp_5y" value="SI"> S</label> &nbsp;
                                 <label><input type="radio" class="save-data" name="sp_5val" id="sp_5n" value="NO"> N</label>
@@ -440,7 +440,7 @@
                             <td><div contenteditable="true" id="sp_5obs" class="editable-div save-div" style="min-height: 15px;"></div></td>
                         </tr>
                         <tr>
-                            <td style="border-right: 1px solid black;">6. TelevisiÃƒÂ³n cable</td>
+                            <td style="border-right: 1px solid black;">6. Televisión cable</td>
                             <td style="border-right: 1px solid black; text-align:center;">
                                 <label><input type="radio" class="save-data" name="sp_6val" id="sp_6y" value="SI"> S</label> &nbsp;
                                 <label><input type="radio" class="save-data" name="sp_6val" id="sp_6n" value="NO"> N</label>
@@ -470,7 +470,7 @@
                 <td colspan="4" style="padding: 0;">
                     <table style="width: 100%; border-collapse: collapse; border-top: none;">
                         <tr>
-                            <td style="width: 60%; font-weight: bold; background: #f0f4f8; border-right: 1px solid black; border-bottom: 1px solid black; text-align: center;">DESTINACIÃƒâ€œN ECONÃƒâ€œMICA</td>
+                            <td style="width: 60%; font-weight: bold; background: #f0f4f8; border-right: 1px solid black; border-bottom: 1px solid black; text-align: center;">DESTINACIÓN ECONÓMICA</td>
                             <td style="width: 40%; font-weight: bold; background: #f0f4f8; border-bottom: 1px solid black; text-align: center;">ACCESOS VEHICULARES</td>
                         </tr>
                         <tr>
@@ -504,35 +504,35 @@
             </tr>
         </table>
         
-        <div class="section-title">3. DESCRIPCIÃƒâ€œN DEL SISTEMA ESTRUCTURAL</div>
+        <div class="section-title">3. DESCRIPCIÓN DEL SISTEMA ESTRUCTURAL</div>
         <table class="form-table">
             <tr>
-                <td colspan="4" style="background: #f0f4f8; font-weight: bold; text-align: center;">CIMENTACIÃƒâ€œN / SISTEMA DE CUBIERTA</td>
+                <td colspan="4" style="background: #f0f4f8; font-weight: bold; text-align: center;">CIMENTACIÓN / SISTEMA DE CUBIERTA</td>
             </tr>
             <tr>
                 <td style="width: 25%; vertical-align: top;">
-                    <strong>CIMENTACIÃƒâ€œN:</strong><br>
+                    <strong>CIMENTACIÓN:</strong><br>
                     <label style="display:block;"><input type="checkbox" id="cim_1" class="save-data"> 1. Zapatas</label>
                     <label style="display:block;"><input type="checkbox" id="cim_2" class="save-data"> 2. Vigas corridas</label>
                     <label style="display:block;"><input type="checkbox" id="cim_3" class="save-data"> 3. Sistema mixto</label>
                     <label style="display:block;"><input type="checkbox" id="cim_4" class="save-data"> 4. Caissons</label>
-                    <label style="display:block;"><input type="checkbox" id="cim_5" class="save-data"> 5. Concreto ciclÃƒÂ³peo</label>
+                    <label style="display:block;"><input type="checkbox" id="cim_5" class="save-data"> 5. Concreto ciclópeo</label>
                     <label style="display:block;"><input type="checkbox" id="cim_6" class="save-data"> 6. Pilotes</label>
-                    <label style="display:block;"><input type="checkbox" id="cim_7" class="save-data"> 7. Placa de cimentaciÃƒÂ³n</label>
+                    <label style="display:block;"><input type="checkbox" id="cim_7" class="save-data"> 7. Placa de cimentación</label>
                     <label style="display:block;"><input type="checkbox" id="cim_8" class="save-data"> 8. No identificada</label>
                     <label style="display:block;"><input type="checkbox" id="cim_9" class="save-data"> 9. No existe</label>
-                    <label style="display:block;"><input type="checkbox" id="cim_10" class="save-data"> 10. Otro. Ã‚Â¿CuÃƒÂ¡l? <input type="text" id="cim_10txt" class="save-data border-bottom" style="width: 50%"></label>
+                    <label style="display:block;"><input type="checkbox" id="cim_10" class="save-data"> 10. Otro. ¿Cuál? <input type="text" id="cim_10txt" class="save-data border-bottom" style="width: 50%"></label>
                 </td>
                 <td style="width: 25%; vertical-align: top;">
                     <strong>SISTEMA DE ENTREPISO:</strong><br>
                     <label style="display:block;"><input type="checkbox" id="ent_1" class="save-data"> 1. Placa maciza de concreto</label>
                     <label style="display:block;"><input type="checkbox" id="ent_2" class="save-data"> 2. Placa aligerada de concreto</label>
-                    <label style="display:block;"><input type="checkbox" id="ent_3" class="save-data"> 3. LÃƒÂ¡mina colaborante (Steel deck)</label>
-                    <label style="display:block;"><input type="checkbox" id="ent_4" class="save-data"> 4. Vigas metÃƒÂ¡licas</label>
-                    <label style="display:block;"><input type="checkbox" id="ent_5" class="save-data"> 5. Cerchas metÃƒÂ¡licas</label>
+                    <label style="display:block;"><input type="checkbox" id="ent_3" class="save-data"> 3. Lámina colaborante (Steel deck)</label>
+                    <label style="display:block;"><input type="checkbox" id="ent_4" class="save-data"> 4. Vigas metálicas</label>
+                    <label style="display:block;"><input type="checkbox" id="ent_5" class="save-data"> 5. Cerchas metálicas</label>
                     <label style="display:block;"><input type="checkbox" id="ent_6" class="save-data"> 6. Entramado en madera</label>
                     <label style="display:block;"><input type="checkbox" id="ent_7" class="save-data"> 7. No aplica</label>
-                    <label style="display:block;"><input type="checkbox" id="ent_8" class="save-data"> 8. Otro. Ã‚Â¿CuÃƒÂ¡l? <input type="text" id="ent_8txt" class="save-data border-bottom" style="width: 50%"></label>
+                    <label style="display:block;"><input type="checkbox" id="ent_8" class="save-data"> 8. Otro. ¿Cuál? <input type="text" id="ent_8txt" class="save-data border-bottom" style="width: 50%"></label>
                 </td>
                 <td style="width: 50%; vertical-align: top; padding: 0;" colspan="2">
                     <table style="width: 100%; border-collapse: collapse; border: none;">
@@ -540,21 +540,21 @@
                             <td style="border: none; border-bottom: 1px solid black; padding: 5px;">
                                 <strong>SISTEMA ESTRUCTURAL:</strong><br>
                                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px; font-size: 0.7rem;">
-                                    <label><input type="checkbox" id="se_1" class="save-data"> 1. PÃƒÂ³rticos en concreto reforzado</label>
-                                    <label><input type="checkbox" id="se_9" class="save-data"> 9. PÃƒÂ³rticos arriostrados en acero</label>
+                                    <label><input type="checkbox" id="se_1" class="save-data"> 1. Pórticos en concreto reforzado</label>
+                                    <label><input type="checkbox" id="se_9" class="save-data"> 9. Pórticos arriostrados en acero</label>
                                     <label><input type="checkbox" id="se_2" class="save-data"> 2. Muros estructurales en concreto</label>
-                                    <label><input type="checkbox" id="se_10" class="save-data"> 10. PÃƒÂ³rticos y paneles en madera</label>
+                                    <label><input type="checkbox" id="se_10" class="save-data"> 10. Pórticos y paneles en madera</label>
                                     <label><input type="checkbox" id="se_3" class="save-data"> 3. Sistema combinado en concreto</label>
-                                    <label><input type="checkbox" id="se_11" class="save-data"> 11. PÃƒÂ³rticos y paneles en otros</label>
+                                    <label><input type="checkbox" id="se_11" class="save-data"> 11. Pórticos y paneles en otros</label>
                                     <label><input type="checkbox" id="se_4" class="save-data"> 4. Prefabricados en concreto</label>
                                     <label><input type="checkbox" id="se_12" class="save-data"> 12. Muros en bahareque</label>
-                                    <label><input type="checkbox" id="se_5" class="save-data"> 5. MamposterÃƒÂ­a confinada</label>
+                                    <label><input type="checkbox" id="se_5" class="save-data"> 5. Mampostería confinada</label>
                                     <label><input type="checkbox" id="se_13" class="save-data"> 13. Muros en tapia pisada</label>
-                                    <label><input type="checkbox" id="se_6" class="save-data"> 6. MamposterÃƒÂ­a reforzada</label>
+                                    <label><input type="checkbox" id="se_6" class="save-data"> 6. Mampostería reforzada</label>
                                     <label><input type="checkbox" id="se_14" class="save-data"> 14. Muros en adobe</label>
-                                    <label><input type="checkbox" id="se_7" class="save-data"> 7. MamposterÃƒÂ­a no reforzada</label>
-                                    <label><input type="checkbox" id="se_15" class="save-data"> 15. ConstrucciÃƒÂ³n improvisada</label>
-                                    <label><input type="checkbox" id="se_8" class="save-data"> 8. PÃƒÂ³rticos en acero</label>
+                                    <label><input type="checkbox" id="se_7" class="save-data"> 7. Mampostería no reforzada</label>
+                                    <label><input type="checkbox" id="se_15" class="save-data"> 15. Construcción improvisada</label>
+                                    <label><input type="checkbox" id="se_8" class="save-data"> 8. Pórticos en acero</label>
                                     <label><input type="checkbox" id="se_16" class="save-data"> 16. Mixto / 17. Otro <input type="text" id="se_17txt" class="save-data border-bottom" style="width: 40px"></label>                                    
                                 </div>
                             </td>
@@ -585,27 +585,27 @@
                     <strong>SISTEMA DE CUBIERTA:</strong><br>
                     <label style="display:block;"><input type="checkbox" id="cub_1" class="save-data"> 1. Placa en concreto</label>
                     <label style="display:block;"><input type="checkbox" id="cub_2" class="save-data"> 2. Placa en Steel deck</label>
-                    <label style="display:block;"><input type="checkbox" id="cub_3" class="save-data"> 3. Estructura metÃƒÂ¡lica y teja</label>
+                    <label style="display:block;"><input type="checkbox" id="cub_3" class="save-data"> 3. Estructura metálica y teja</label>
                     <label style="display:block;"><input type="checkbox" id="cub_4" class="save-data"> 4. Estructura en madera y teja</label>
-                    <label style="display:block;"><input type="checkbox" id="cub_5" class="save-data"> 5. Otro. Ã‚Â¿CuÃƒÂ¡l? <input type="text" id="cub_5txt" class="save-data border-bottom" style="width: 50%"></label>
+                    <label style="display:block;"><input type="checkbox" id="cub_5" class="save-data"> 5. Otro. ¿Cuál? <input type="text" id="cub_5txt" class="save-data border-bottom" style="width: 50%"></label>
                 </td>
                 <td style="width: 25%; vertical-align: top;">
                     <strong>REFORMAS EN LA ESTRUCTURA:</strong><br>
                     <label style="display:block;">1. Reformas: <input type="radio" class="save-data" name="ref_est" id="re_s" value="SI"> SI <input type="radio" class="save-data" name="ref_est" id="re_n" value="NO"> NO</label>
                     <label style="display:block;">2. En altura (pisos extra): <input type="number" id="re_alt" class="save-data border-bottom" style="width: 40px;"></label>
-                    <label style="display:block;">3. En extensiÃƒÂ³n (m ancho): <input type="number" id="re_ext" class="save-data border-bottom" style="width: 40px;"></label>
+                    <label style="display:block;">3. En extensión (m ancho): <input type="number" id="re_ext" class="save-data border-bottom" style="width: 40px;"></label>
                     <label style="display:block;">4. En profund. (m fondo): <input type="number" id="re_pro" class="save-data border-bottom" style="width: 40px;"></label>
-                    <label style="display:block;">5. Otro. Ã‚Â¿CuÃƒÂ¡l? <input type="text" id="re_otr" class="save-data border-bottom" style="width: 50%"></label>
+                    <label style="display:block;">5. Otro. ¿Cuál? <input type="text" id="re_otr" class="save-data border-bottom" style="width: 50%"></label>
                 </td>
                 <td colspan="2" style="width: 50%; vertical-align: top;">
-                    <strong>TIPOLOGÃƒÂA ESTRUCTURAL DE LA EDIFICACIÃƒâ€œN:</strong><br>
+                    <strong>TIPOLOGÍA ESTRUCTURAL DE LA EDIFICACIÓN:</strong><br>
                     <label style="display:block;"><input type="checkbox" id="tip_1" class="save-data"> 1. Edificaciones con reforzamiento especial</label>
                     <label style="display:block;"><input type="checkbox" id="tip_2" class="save-data"> 2. Edificaciones reforzadas</label>
-                    <label style="display:block;"><input type="checkbox" id="tip_3" class="save-data"> 3. MamposterÃƒÂ­a no reforzada</label>
-                    <label style="display:block;"><input type="checkbox" id="tip_4" class="save-data"> 4. Estructuras con confinamiento deficiente e hÃƒÂ­bridas</label>
+                    <label style="display:block;"><input type="checkbox" id="tip_3" class="save-data"> 3. Mampostería no reforzada</label>
+                    <label style="display:block;"><input type="checkbox" id="tip_4" class="save-data"> 4. Estructuras con confinamiento deficiente e híbridas</label>
                     <label style="display:block;"><input type="checkbox" id="tip_5" class="save-data"> 5. Estructuras ligeras</label>
                     <label style="display:block;"><input type="checkbox" id="tip_6" class="save-data"> 6. Construcciones simples</label>
-                    <label style="display:block;"><input type="checkbox" id="tip_7" class="save-data"> 7. Otro. Ã‚Â¿CuÃƒÂ¡l? <input type="text" id="tip_7txt" class="save-data border-bottom" style="width: 50%"></label>
+                    <label style="display:block;"><input type="checkbox" id="tip_7" class="save-data"> 7. Otro. ¿Cuál? <input type="text" id="tip_7txt" class="save-data border-bottom" style="width: 50%"></label>
                 </td>
             </tr>
             <tr>
@@ -619,7 +619,7 @@
 <div class="section-title">4. ESTADO DEL EXTERIOR DEL PREDIO</div>
 <table class="form-table" style="margin-bottom: 5px;">
 <tr><th colspan="7" class="table-subtitle">ESTADO DE LAS FACHADAS</th></tr>
-<tr><td colspan="4" style="text-align:center;"><strong>Elementos Afectados:</strong></td><td colspan="3" style="text-align:center;"><strong>Nivel de DaÃƒÂ±o:</strong></td></tr>
+<tr><td colspan="4" style="text-align:center;"><strong>Elementos Afectados:</strong></td><td colspan="3" style="text-align:center;"><strong>Nivel de Daño:</strong></td></tr>
 <tr>
 <td style="text-align:center; width:15%;"><label><input type="checkbox" class="save-data" id="fac_GRIETAS"> GRIETAS</label></td>
 <td style="text-align:center; width:15%;"><label><input type="checkbox" class="save-data" id="fac_FISURAS"> FISURAS</label></td>
@@ -629,11 +629,11 @@
 <td style="text-align:center; width:13%;"><label><input type="radio" name="fac_lvl" id="fac_r" value="REGULAR" class="save-data"> REGULAR</label></td>
 <td style="text-align:center; width:13%;"><label><input type="radio" name="fac_lvl" id="fac_m" value="MALO" class="save-data"> MALO</label></td>
 </tr>
-<tr><td colspan="7"><strong>DESCRIPCIÃƒâ€œN DE LAS AVERÃƒÂAS / AFECTACIONES:</strong><div contenteditable="true" id="obs_fac" class="editable-div save-div" style="min-height: 25px;"></div></td></tr>
+<tr><td colspan="7"><strong>DESCRIPCIÓN DE LAS AVERÍAS / AFECTACIONES:</strong><div contenteditable="true" id="obs_fac" class="editable-div save-div" style="min-height: 25px;"></div></td></tr>
 </table>
 <table class="form-table" style="margin-bottom: 5px;">
 <tr><th colspan="7" class="table-subtitle">ESTADO DE LAS FACHADAS LATERALES Y CONTRAFACHADAS</th></tr>
-<tr><td colspan="4" style="text-align:center;"><strong>Elementos Afectados:</strong></td><td colspan="3" style="text-align:center;"><strong>Nivel de DaÃƒÂ±o:</strong></td></tr>
+<tr><td colspan="4" style="text-align:center;"><strong>Elementos Afectados:</strong></td><td colspan="3" style="text-align:center;"><strong>Nivel de Daño:</strong></td></tr>
 <tr>
 <td style="text-align:center; width:15%;"><label><input type="checkbox" class="save-data" id="fac_lat_GRIETAS"> GRIETAS</label></td>
 <td style="text-align:center; width:15%;"><label><input type="checkbox" class="save-data" id="fac_lat_FISURAS"> FISURAS</label></td>
@@ -643,11 +643,11 @@
 <td style="text-align:center; width:13%;"><label><input type="radio" name="fac_lat_lvl" id="fac_lat_r" value="REGULAR" class="save-data"> REGULAR</label></td>
 <td style="text-align:center; width:13%;"><label><input type="radio" name="fac_lat_lvl" id="fac_lat_m" value="MALO" class="save-data"> MALO</label></td>
 </tr>
-<tr><td colspan="7"><strong>DESCRIPCIÃƒâ€œN DE LAS AVERÃƒÂAS / AFECTACIONES:</strong><div contenteditable="true" id="obs_fac_lat" class="editable-div save-div" style="min-height: 25px;"></div></td></tr>
+<tr><td colspan="7"><strong>DESCRIPCIÓN DE LAS AVERÍAS / AFECTACIONES:</strong><div contenteditable="true" id="obs_fac_lat" class="editable-div save-div" style="min-height: 25px;"></div></td></tr>
 </table>
 <table class="form-table" style="margin-bottom: 5px;">
 <tr><th colspan="7" class="table-subtitle">ESTADO DE ANDENES Y ACCESOS</th></tr>
-<tr><td colspan="4" style="text-align:center;"><strong>Elementos Afectados:</strong></td><td colspan="3" style="text-align:center;"><strong>Nivel de DaÃƒÂ±o:</strong></td></tr>
+<tr><td colspan="4" style="text-align:center;"><strong>Elementos Afectados:</strong></td><td colspan="3" style="text-align:center;"><strong>Nivel de Daño:</strong></td></tr>
 <tr>
 <td style="text-align:center; width:15%;"><label><input type="checkbox" class="save-data" id="acc_GRIETAS"> GRIETAS</label></td>
 <td style="text-align:center; width:15%;"><label><input type="checkbox" class="save-data" id="acc_FISURAS"> FISURAS</label></td>
@@ -657,8 +657,8 @@
 <td style="text-align:center; width:13%;"><label><input type="radio" name="acc_lvl" id="acc_r" value="REGULAR" class="save-data"> REGULAR</label></td>
 <td style="text-align:center; width:13%;"><label><input type="radio" name="acc_lvl" id="acc_m" value="MALO" class="save-data"> MALO</label></td>
 </tr>
-<tr><td colspan="7"><strong>Distancia de construcciÃƒÂ³n a vÃƒÂ­a (m):</strong> <input type="number" id="acc_dist" class="save-data border-bottom" style="width:50px;"> &nbsp;&nbsp; <strong>Grosor andÃƒÂ©n aproximado (cm):</strong> <input type="number" id="acc_grosor" class="save-data border-bottom" style="width:50px;"></td></tr>
-<tr><td colspan="7"><strong>DESCRIPCIÃƒâ€œN DE LAS AVERÃƒÂAS / AFECTACIONES:</strong><div contenteditable="true" id="obs_acc" class="editable-div save-div" style="min-height: 25px;"></div></td></tr>
+<tr><td colspan="7"><strong>Distancia de construcción a vía (m):</strong> <input type="number" id="acc_dist" class="save-data border-bottom" style="width:50px;"> &nbsp;&nbsp; <strong>Grosor andén aproximado (cm):</strong> <input type="number" id="acc_grosor" class="save-data border-bottom" style="width:50px;"></td></tr>
+<tr><td colspan="7"><strong>DESCRIPCIÓN DE LAS AVERÍAS / AFECTACIONES:</strong><div contenteditable="true" id="obs_acc" class="editable-div save-div" style="min-height: 25px;"></div></td></tr>
 </table>
 <table class="form-table" style="margin-bottom: 5px;">
 <tr><th colspan="7" class="table-subtitle">ESTADO DE CERRAMIENTOS</th></tr>
@@ -671,7 +671,7 @@
 <label><input type="checkbox" class="save-data" id="cer_chk_MURO"> MURO</label>
 <label><input type="checkbox" class="save-data" id="cer_chk_OTROS"> OTROS</label>
 </div></td></tr>
-<tr><td colspan="7"><strong>DESCRIPCIÃƒâ€œN DE LAS AVERÃƒÂAS / AFECTACIONES:</strong><div contenteditable="true" id="obs_cer" class="editable-div save-div" style="min-height: 25px;"></div></td></tr>
+<tr><td colspan="7"><strong>DESCRIPCIÓN DE LAS AVERÍAS / AFECTACIONES:</strong><div contenteditable="true" id="obs_cer" class="editable-div save-div" style="min-height: 25px;"></div></td></tr>
 </table>
 <div class="section-title">5. ESTADO DEL INTERIOR DEL PREDIO</div>
 <p style="font-size: 0.7rem; font-style: italic; text-align: center; margin-bottom: 5px;">(Incluye pisos, paredes, techos y/o cielo raso)</p>
@@ -686,7 +686,7 @@
 <td style="text-align:center; width:13%;"><label><input type="radio" name="int_1_lvl" id="int_1_r" value="REGULAR" class="save-data"> REGULAR</label></td>
 <td style="text-align:center; width:13%;"><label><input type="radio" name="int_1_lvl" id="int_1_m" value="MALO" class="save-data"> MALO</label></td>
 </tr>
-<tr><td colspan="7"><strong>DESCRIPCIÃƒâ€œN DE LAS AVERÃƒÂAS:</strong><div contenteditable="true" id="obs_{prefix}" class="editable-div save-div" style="min-height: 25px;"></div></td></tr>
+<tr><td colspan="7"><strong>DESCRIPCIÓN DE LAS AVERÍAS:</strong><div contenteditable="true" id="obs_{prefix}" class="editable-div save-div" style="min-height: 25px;"></div></td></tr>
 </table>
 <table class="form-table" style="margin-bottom: 5px;">
 <tr><th colspan="7" class="table-subtitle" style="display:flex; align-items:center;">ESTADO DE: &nbsp; <input type="text" id="n_int_2" class="save-data" placeholder="Ej. Sala, Cocina, Alcoba 1..." style="width:60%; border-bottom:1px solid #333; background:transparent;"></th></tr>
@@ -699,7 +699,7 @@
 <td style="text-align:center; width:13%;"><label><input type="radio" name="int_2_lvl" id="int_2_r" value="REGULAR" class="save-data"> REGULAR</label></td>
 <td style="text-align:center; width:13%;"><label><input type="radio" name="int_2_lvl" id="int_2_m" value="MALO" class="save-data"> MALO</label></td>
 </tr>
-<tr><td colspan="7"><strong>DESCRIPCIÃƒâ€œN DE LAS AVERÃƒÂAS:</strong><div contenteditable="true" id="obs_{prefix}" class="editable-div save-div" style="min-height: 25px;"></div></td></tr>
+<tr><td colspan="7"><strong>DESCRIPCIÓN DE LAS AVERÍAS:</strong><div contenteditable="true" id="obs_{prefix}" class="editable-div save-div" style="min-height: 25px;"></div></td></tr>
 </table>
 <table class="form-table" style="margin-bottom: 5px;">
 <tr><th colspan="7" class="table-subtitle" style="display:flex; align-items:center;">ESTADO DE: &nbsp; <input type="text" id="n_int_3" class="save-data" placeholder="Ej. Sala, Cocina, Alcoba 1..." style="width:60%; border-bottom:1px solid #333; background:transparent;"></th></tr>
@@ -712,7 +712,7 @@
 <td style="text-align:center; width:13%;"><label><input type="radio" name="int_3_lvl" id="int_3_r" value="REGULAR" class="save-data"> REGULAR</label></td>
 <td style="text-align:center; width:13%;"><label><input type="radio" name="int_3_lvl" id="int_3_m" value="MALO" class="save-data"> MALO</label></td>
 </tr>
-<tr><td colspan="7"><strong>DESCRIPCIÃƒâ€œN DE LAS AVERÃƒÂAS:</strong><div contenteditable="true" id="obs_{prefix}" class="editable-div save-div" style="min-height: 25px;"></div></td></tr>
+<tr><td colspan="7"><strong>DESCRIPCIÓN DE LAS AVERÍAS:</strong><div contenteditable="true" id="obs_{prefix}" class="editable-div save-div" style="min-height: 25px;"></div></td></tr>
 </table>
 <table class="form-table" style="margin-bottom: 5px;">
 <tr><th colspan="7" class="table-subtitle" style="display:flex; align-items:center;">ESTADO DE: &nbsp; <input type="text" id="n_int_4" class="save-data" placeholder="Ej. Sala, Cocina, Alcoba 1..." style="width:60%; border-bottom:1px solid #333; background:transparent;"></th></tr>
@@ -725,7 +725,7 @@
 <td style="text-align:center; width:13%;"><label><input type="radio" name="int_4_lvl" id="int_4_r" value="REGULAR" class="save-data"> REGULAR</label></td>
 <td style="text-align:center; width:13%;"><label><input type="radio" name="int_4_lvl" id="int_4_m" value="MALO" class="save-data"> MALO</label></td>
 </tr>
-<tr><td colspan="7"><strong>DESCRIPCIÃƒâ€œN DE LAS AVERÃƒÂAS:</strong><div contenteditable="true" id="obs_{prefix}" class="editable-div save-div" style="min-height: 25px;"></div></td></tr>
+<tr><td colspan="7"><strong>DESCRIPCIÓN DE LAS AVERÍAS:</strong><div contenteditable="true" id="obs_{prefix}" class="editable-div save-div" style="min-height: 25px;"></div></td></tr>
 </table>
 <table class="form-table" style="margin-bottom: 5px;">
 <tr><th colspan="7" class="table-subtitle" style="display:flex; align-items:center;">ESTADO DE: &nbsp; <input type="text" id="n_int_5" class="save-data" placeholder="Ej. Sala, Cocina, Alcoba 1..." style="width:60%; border-bottom:1px solid #333; background:transparent;"></th></tr>
@@ -738,7 +738,7 @@
 <td style="text-align:center; width:13%;"><label><input type="radio" name="int_5_lvl" id="int_5_r" value="REGULAR" class="save-data"> REGULAR</label></td>
 <td style="text-align:center; width:13%;"><label><input type="radio" name="int_5_lvl" id="int_5_m" value="MALO" class="save-data"> MALO</label></td>
 </tr>
-<tr><td colspan="7"><strong>DESCRIPCIÃƒâ€œN DE LAS AVERÃƒÂAS:</strong><div contenteditable="true" id="obs_{prefix}" class="editable-div save-div" style="min-height: 25px;"></div></td></tr>
+<tr><td colspan="7"><strong>DESCRIPCIÓN DE LAS AVERÍAS:</strong><div contenteditable="true" id="obs_{prefix}" class="editable-div save-div" style="min-height: 25px;"></div></td></tr>
 </table>
 <table class="form-table" style="margin-bottom: 5px;">
 <tr><th colspan="7" class="table-subtitle" style="display:flex; align-items:center;">ESTADO DE: &nbsp; <input type="text" id="n_int_6" class="save-data" placeholder="Ej. Sala, Cocina, Alcoba 1..." style="width:60%; border-bottom:1px solid #333; background:transparent;"></th></tr>
@@ -751,13 +751,13 @@
 <td style="text-align:center; width:13%;"><label><input type="radio" name="int_6_lvl" id="int_6_r" value="REGULAR" class="save-data"> REGULAR</label></td>
 <td style="text-align:center; width:13%;"><label><input type="radio" name="int_6_lvl" id="int_6_m" value="MALO" class="save-data"> MALO</label></td>
 </tr>
-<tr><td colspan="7"><strong>DESCRIPCIÃƒâ€œN DE LAS AVERÃƒÂAS:</strong><div contenteditable="true" id="obs_{prefix}" class="editable-div save-div" style="min-height: 25px;"></div></td></tr>
+<tr><td colspan="7"><strong>DESCRIPCIÓN DE LAS AVERÍAS:</strong><div contenteditable="true" id="obs_{prefix}" class="editable-div save-div" style="min-height: 25px;"></div></td></tr>
 </table>
-<div class="section-title">6. REGISTRO FOTOGRÃƒÂFICO</div>
+<div class="section-title">6. REGISTRO FOTOGRÁFICO</div>
         <div class="photo-controls no-print">
             <input type="file" id="vec-foto-upload" multiple accept="image/*" class="hidden-file-input" onchange="loadPhotosCompressed(event, 'vec-photo-grid')">
-            <label class="btn-action" style="display:flex; align-items:center; justify-content:center; cursor:pointer;" for="vec-foto-upload">Ã°Å¸â€œÂ¸ Subir Fotos</label>
-            <button class="btn-action btn-clear" onclick="clearAllPhotos('vec-photo-grid')">Ã°Å¸â€”â€˜Ã¯Â¸Â Limpiar Todas</button>
+            <label class="btn-action" style="display:flex; align-items:center; justify-content:center; cursor:pointer;" for="vec-foto-upload">📸 Subir Fotos</label>
+            <button class="btn-action btn-clear" onclick="clearAllPhotos('vec-photo-grid')">🗑️ Limpiar Todas</button>
         </div>
         <div class="photo-grid" id="vec-photo-grid"></div>
 
@@ -774,40 +774,40 @@
                 <div class="firma-box">
                     <div class="firma-img-container"><img id="f-ent-1" class="firma-img"></div>
                     <div class="firma-controls no-print">
-                        <button class="btn-firma" onclick="openSignaturePad('f-ent-1')">Ã¢Å“ÂÃ¯Â¸Â</button>
+                        <button class="btn-firma" onclick="openSignaturePad('f-ent-1')">✍️</button>
                         <input type="file" id="up-f-ent-1" accept="image/*" class="hidden-file-input" onchange="loadSignatureImg(event, 'f-ent-1')">
-                        <label class="btn-firma" style="display:flex; align-items:center; justify-content:center; cursor:pointer;" for="up-f-ent-1">Ã°Å¸â€œÂ</label>
-                        <button class="btn-firma" onclick="clearSignature('f-ent-1')">Ã¢ÂÅ’</button>
+                        <label class="btn-firma" style="display:flex; align-items:center; justify-content:center; cursor:pointer;" for="up-f-ent-1">📁</label>
+                        <button class="btn-firma" onclick="clearSignature('f-ent-1')">❌</button>
                     </div>
                     Responsable Unidad Social<br>C.C / NIT <input type="text" id="firma_cc_1" class="save-data" style="width: 80%; border-bottom: 1px dotted #ccc; display: inline-block;">
                 </div>
                 <div class="firma-box">
                     <div class="firma-img-container"><img id="f-ent-2" class="firma-img"></div>
                     <div class="firma-controls no-print">
-                        <button class="btn-firma" onclick="openSignaturePad('f-ent-2')">Ã¢Å“ÂÃ¯Â¸Â</button>
+                        <button class="btn-firma" onclick="openSignaturePad('f-ent-2')">✍️</button>
                         <input type="file" id="up-f-ent-2" accept="image/*" class="hidden-file-input" onchange="loadSignatureImg(event, 'f-ent-2')">
-                        <label class="btn-firma" style="display:flex; align-items:center; justify-content:center; cursor:pointer;" for="up-f-ent-2">Ã°Å¸â€œÂ</label>
-                        <button class="btn-firma" onclick="clearSignature('f-ent-2')">Ã¢ÂÅ’</button>
+                        <label class="btn-firma" style="display:flex; align-items:center; justify-content:center; cursor:pointer;" for="up-f-ent-2">📁</label>
+                        <button class="btn-firma" onclick="clearSignature('f-ent-2')">❌</button>
                     </div>
-                    Ing. Residente Contratista<br>MatrÃƒÂ­cula Profesional No. <input type="text" id="firma_cc_2" class="save-data" style="width: 80%; border-bottom: 1px dotted #ccc; display: inline-block;">
+                    Ing. Residente Contratista<br>Matrícula Profesional No. <input type="text" id="firma_cc_2" class="save-data" style="width: 80%; border-bottom: 1px dotted #ccc; display: inline-block;">
                 </div>
                 <div class="firma-box">
                     <div class="firma-img-container"><img id="f-ent-3" class="firma-img"></div>
                     <div class="firma-controls no-print">
-                        <button class="btn-firma" onclick="openSignaturePad('f-ent-3')">Ã¢Å“ÂÃ¯Â¸Â</button>
+                        <button class="btn-firma" onclick="openSignaturePad('f-ent-3')">✍️</button>
                         <input type="file" id="up-f-ent-3" accept="image/*" class="hidden-file-input" onchange="loadSignatureImg(event, 'f-ent-3')">
-                        <label class="btn-firma" style="display:flex; align-items:center; justify-content:center; cursor:pointer;" for="up-f-ent-3">Ã°Å¸â€œÂ</label>
-                        <button class="btn-firma" onclick="clearSignature('f-ent-3')">Ã¢ÂÅ’</button>
+                        <label class="btn-firma" style="display:flex; align-items:center; justify-content:center; cursor:pointer;" for="up-f-ent-3">📁</label>
+                        <button class="btn-firma" onclick="clearSignature('f-ent-3')">❌</button>
                     </div>
-                    Ing. Residente InterventorÃƒÂ­a<br>MatrÃƒÂ­cula Profesional No. <input type="text" id="firma_cc_3" class="save-data" style="width: 80%; border-bottom: 1px dotted #ccc; display: inline-block;">
+                    Ing. Residente Interventoría<br>Matrícula Profesional No. <input type="text" id="firma_cc_3" class="save-data" style="width: 80%; border-bottom: 1px dotted #ccc; display: inline-block;">
                 </div>
                 <div class="firma-box">
                     <div class="firma-img-container"><img id="f-ent-4" class="firma-img"></div>
                     <div class="firma-controls no-print">
-                        <button class="btn-firma" onclick="openSignaturePad('f-ent-4')">Ã¢Å“ÂÃ¯Â¸Â</button>
+                        <button class="btn-firma" onclick="openSignaturePad('f-ent-4')">✍️</button>
                         <input type="file" id="up-f-ent-4" accept="image/*" class="hidden-file-input" onchange="loadSignatureImg(event, 'f-ent-4')">
-                        <label class="btn-firma" style="display:flex; align-items:center; justify-content:center; cursor:pointer;" for="up-f-ent-4">Ã°Å¸â€œÂ</label>
-                        <button class="btn-firma" onclick="clearSignature('f-ent-4')">Ã¢ÂÅ’</button>
+                        <label class="btn-firma" style="display:flex; align-items:center; justify-content:center; cursor:pointer;" for="up-f-ent-4">📁</label>
+                        <button class="btn-firma" onclick="clearSignature('f-ent-4')">❌</button>
                     </div>
                     Responsable del Inmueble<br>C.C / NIT <input type="text" id="firma_cc_4" class="save-data" style="width: 80%; border-bottom: 1px dotted #ccc; display: inline-block;">
                 </div>
@@ -815,10 +815,10 @@
         </div>
 
         <div class="photo-controls no-print" style="margin-top: 30px;">
-            <button class="btn-action btn-save" onclick="exportarActaVecindad()">Ã°Å¸â€™Â¾ Guardar Proyecto (.json)</button>
+            <button class="btn-action btn-save" onclick="exportarActaVecindad()">💾 Guardar Proyecto (.json)</button>
             <input type="file" id="file-import-vecindad" accept=".json" class="hidden-file-input" onchange="importarActaVecindad(event)">
-            <label class="btn-action btn-load" style="display:flex; align-items:center; justify-content:center; cursor:pointer;" for="file-import-vecindad">Ã°Å¸â€œâ€š Cargar Proyecto</label>
-            <button class="btn-action btn-print" onclick="generarPDF()">Ã°Å¸â€“Â¨Ã¯Â¸Â Exportar PDF Oficial</button>
+            <label class="btn-action btn-load" style="display:flex; align-items:center; justify-content:center; cursor:pointer;" for="file-import-vecindad">📂 Cargar Proyecto</label>
+            <button class="btn-action btn-print" onclick="generarPDF()">🖨️ Exportar PDF Oficial</button>
         </div>
     </div>
 
@@ -839,7 +839,7 @@
         // PWA
         if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').catch(err => { console.log('SW offline ready'); }); }); }
 
-        // SISTEMA DE TOAST (UX MÃƒÅ¡LTIPLE)
+        // SISTEMA DE TOAST (UX MÚLTIPLE)
         function showToast(msj) {
             let toast = document.getElementById('toast-container');
             toast.innerText = msj;
@@ -847,7 +847,7 @@
             setTimeout(() => { toast.classList.remove('show'); }, 3000);
         }
 
-        // PESTAÃƒâ€˜AS Y CONFIGURACIÃƒâ€œN
+        // PESTAÑAS Y CONFIGURACIÓN
         function openTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
@@ -935,11 +935,11 @@
             mark.style.left = x + '%';
             mark.style.top = y + '%';
             mark.title = "Doble clic para eliminar. Arrastre para mover.";
-            mark.innerHTML = `Ã¢ÂÅ’<span class="croquis-text"> ${texto}</span>`;
+            mark.innerHTML = `❌<span class="croquis-text"> ${texto}</span>`;
             
             mark.ondblclick = function(e) {
                 e.stopPropagation();
-                if(confirm(`Ã‚Â¿Desea borrar la marca: ${texto}?`)) {
+                if(confirm(`¿Desea borrar la marca: ${texto}?`)) {
                     this.remove();
                 }
             };
@@ -956,7 +956,7 @@
             container.appendChild(mark);
         }
 
-        // Tramos idÃƒÂ©ntico a index.html
+        // Tramos idéntico a index.html
         const DATOS_TRAMOS = {
             "1": { inicio: "K4+684", fin: "K5+211", long: "527 m", nombre: "TRAMO 1" },
             "2": { inicio: "K5+371", fin: "K5+577", long: "206 m", nombre: "TRAMO 2" },
@@ -981,7 +981,7 @@
             imgMap.src = `mapa_tramo_${numTramo}.jpg`;
             imgMap.onerror = function() {
                 this.style.display = 'none'; phMap.style.display = 'flex';
-                phMap.innerText = `Plano General Tramo ${numTramo} (AsegÃƒÂºrese de subir mapa_tramo_${numTramo}.jpg)`;
+                phMap.innerText = `Plano General Tramo ${numTramo} (Asegúrese de subir mapa_tramo_${numTramo}.jpg)`;
             };
             imgMap.onload = function() { this.style.display = 'block'; phMap.style.display = 'none'; };
         }
@@ -1005,7 +1005,7 @@
             if (formatted) input.value = formatted;
         }
 
-        // MOTOR FOTOGRAFICO CON COMPRESIÃƒâ€œN
+        // MOTOR FOTOGRAFICO CON COMPRESIÓN
         function loadPhotosCompressed(event, gridId) {
             const files = event.target.files;
             const grid = document.getElementById(gridId);
@@ -1037,7 +1037,7 @@
                         card.innerHTML = `
                             <button class="delete-btn no-print" onclick="this.parentElement.remove()">X</button>
                             <img src="${compressedDataUrl}">
-                            <div contenteditable="true" class="photo-desc editable-div" placeholder="DescripciÃƒÂ³n de la foto..."></div>
+                            <div contenteditable="true" class="photo-desc editable-div" placeholder="Descripción de la foto..."></div>
                         `;
                         grid.appendChild(card);
                     }
@@ -1047,7 +1047,7 @@
         }
 
         function clearAllPhotos(gridId) {
-            if(confirm("Ã‚Â¿EstÃƒÂ¡ seguro de eliminar todas las fotos de vecindad?")) { document.getElementById(gridId).innerHTML = ''; }
+            if(confirm("¿Está seguro de eliminar todas las fotos de vecindad?")) { document.getElementById(gridId).innerHTML = ''; }
         }
 
         // MOTOR DE FIRMAS CANVA GSC
@@ -1162,8 +1162,7 @@
             let blob = new Blob([JSON.stringify(data)], {type: "application/json"});
             let fileToSave = new File([blob], fileName, {type: "application/json"});
             
-            saveJSONNativo('Acta_Vecindad', fileName, data);`);
-            }
+            saveJSONNativo('Acta_Vecindad', fileName, data);
         }
 
         function importarActaVecindad(event) {
@@ -1173,7 +1172,7 @@
             reader.onload = function(e) {
                 try {
                     let data = JSON.parse(e.target.result);
-                    if (data.tipo !== 'vecindad_relacional_v3') { showToast("Error: Archivo incorrecto o versiÃƒÂ³n antigua."); return; }
+                    if (data.tipo !== 'vecindad_relacional_v3') { showToast("Error: Archivo incorrecto o versión antigua."); return; }
 
                     for(let id in data.config) {
                         let el = document.getElementById(id);
@@ -1235,7 +1234,7 @@
 
                     actualizarMapaGlobal(document.getElementById('cfg-tramo-actual').value, true);
                     showToast("Proyecto Cargado Correctamente.");
-                } catch (error) { showToast("Error: Archivo daÃƒÂ±ado."); console.error(error); }
+                } catch (error) { showToast("Error: Archivo dañado."); console.error(error); }
             }; reader.readAsText(file);
             event.target.value = ''; 
         }
@@ -1243,10 +1242,8 @@
         function generarPDF() {
         let actaNum = document.getElementById('acta-num') ? document.getElementById('acta-num').value.trim() : 'SN';
         let tramoInfo = document.getElementById('cfg-tramo-actual') ? document.getElementById('cfg-tramo-actual').value : 'General';
-        let fileName = `Acta_Vecindad_${tramoInfo}_N${actaNum}.pdf`;
-        try {
-            savePDFNativo('Acta_Vecindad', fileName, document.getElementById('vecindad'), true);
-        } catch(e) { console.error('Error in PDF', e); }
+        let fileName = "Acta_Vecindad" + "_T" + tramoInfo + "_N" + actaNum + ".pdf";
+        savePDFNativo('Acta_Vecindad', fileName, document.getElementById('vecindad'), true);
     }
 
     </script>

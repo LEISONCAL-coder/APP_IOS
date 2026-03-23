@@ -7,11 +7,11 @@
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>AUDITORÃƒÂA PMT - MÃƒâ€œVIL Y ESCRITORIO</title>
+    <title>AUDITORÍA PMT - MÓVIL Y ESCRITORIO</title>
     <style>
         :root { 
-            --primary: #002855; /* Azul institucional InterventorÃƒÂ­a */
-            --secondary: #FF6600; /* Naranja TrÃƒÂ¡nsito PMT */
+            --primary: #002855; /* Azul institucional Interventoría */
+            --secondary: #FF6600; /* Naranja Tránsito PMT */
             --accent: #d4af37;
             --border: #b0bec5;
             --bg-light: #f5f7f8;
@@ -36,7 +36,7 @@
             border-radius: 8px;
         }
 
-        /* ESTRUCTURA PARA IMPRESIÃƒâ€œN CON MEMBRETE REPETITIVO */
+        /* ESTRUCTURA PARA IMPRESIÓN CON MEMBRETE REPETITIVO */
         .print-wrapper { width: 100%; border-collapse: collapse; }
         .print-wrapper > thead { display: table-header-group; }
         .print-wrapper > tbody { display: table-row-group; }
@@ -82,7 +82,7 @@
         .info-table .bg-gray { background: var(--bg-light); font-weight: bold; color: var(--primary); width: 15%; font-size: 12px;}
         .info-input { width: 100%; border: none; background: transparent; font-size: 14px; outline: none; font-family: inherit; -webkit-appearance: none; appearance: none; border-bottom: 1px dotted #ccc;}
 
-        /* TABLAS DE AUDITORÃƒÂA ESCRITORIO */
+        /* TABLAS DE AUDITORÍA ESCRITORIO */
         .section-title { 
             background: var(--primary); color: white; padding: 10px 15px; font-size: 14px; 
             margin-top: 25px; margin-bottom: 0; border-left: 6px solid var(--secondary);
@@ -97,7 +97,7 @@
         .col-eval { width: 12%; text-align: center; }
         .col-obs { width: 40%; }
 
-        /* SEMÃƒÂFORO Y CONTROLES (OPTIMIZADO iOS/ANDROID) */
+        /* SEMÁFORO Y CONTROLES (OPTIMIZADO iOS/ANDROID) */
         .status-select { 
             width: 100%; padding: 12px 8px; font-weight: bold; text-align: center; 
             border: 1px solid #ccc; border-radius: 6px; cursor: pointer; font-size: 12px;
@@ -156,11 +156,11 @@
         .modal-buttons { margin-top: 15px; display: flex; justify-content: center; gap: 10px; }
         .modal-buttons button { padding: 8px 15px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
 
-        /* ALERTA CRÃƒÂTICA PMT */
+        /* ALERTA CRÍTICA PMT */
         .alert-box { background: #ffebee; border: 2px dashed #d32f2f; padding: 15px; margin: 20px 0; border-radius: 6px; color: #b71c1c; font-size: 13px; text-align: center;}
 
         /* ========================================================= */
-        /* ADAPTACIÃƒâ€œN MÃƒâ€œVIL (PANTALLAS PEQUEÃƒâ€˜AS - CELULARES) */
+        /* ADAPTACIÓN MÓVIL (PANTALLAS PEQUEÑAS - CELULARES) */
         /* ========================================================= */
         @media screen and (max-width: 768px) {
             body { padding: 5px; }
@@ -199,7 +199,7 @@
         }
 
         /* ========================================================= */
-        /* ESTILOS DE IMPRESIÃƒâ€œN (PDF) */
+        /* ESTILOS DE IMPRESIÓN (PDF) */
         /* ========================================================= */
         @media print {
             body { background: white; padding: 0; font-size: 11px; }
@@ -242,13 +242,13 @@
     <nav class="no-print" style="background-color: var(--primary); padding: 10px; display: flex; justify-content: center; position: sticky; top: 0; z-index: 10000; margin-bottom: 20px;">
         <select id="global-nav" onchange="if(this.value) window.location.href=this.value" style="padding: 8px; border-radius: 6px; font-weight: bold; background: white; color: var(--primary); outline: none; border: 1px solid #ccc; max-width: 100%; width: 90%;">
             <option value="">Ir a...</option>
-            <option value="index.html">MenÃƒÂº Principal (Inicio)</option>
+            <option value="index.html">Menú Principal (Inicio)</option>
             <option value="acta_vecindad.html">Acta de Vecindad</option>
             <option value="acta_entorno.html">Acta de Entorno</option>
             <option value="proc_const.html">Proc. Constructivo</option>
-            <option value="pmt.html">PMT (TrÃƒÂ¡nsito)</option>
+            <option value="pmt.html">PMT (Tránsito)</option>
             <option value="paga.html">PAGA (Ambiental)</option>
-            <option value="espec_tecn.html">Espec. TÃƒÂ©cnicas</option>
+            <option value="espec_tecn.html">Espec. Técnicas</option>
         </select>
     </nav>
 
@@ -266,13 +266,13 @@
 </div>
 
 <div class="fab-container no-print">
-    <button class="btn-action btn-print" onclick="generarPDF()">Ã°Å¸â€“Â¨Ã¯Â¸Â Guardar PDF</button>
-    <button class="btn-action" style="background: #0288d1;" onclick="exportData('json')">Ã°Å¸â€™Â¾ Guardar .json</button>
+    <button class="btn-action btn-print" onclick="generarPDF()">🖨️ Guardar PDF</button>
+    <button class="btn-action" style="background: #0288d1;" onclick="exportData('json')">💾 Guardar .json</button>
     <label class="btn-action" style="background: #e65100; cursor: pointer; text-align: center; display: inline-block;">
-        Ã°Å¸â€œâ€š Cargar Datos
+        📂 Cargar Datos
         <input type="file" accept=".json, .gsc" style="display: none;" onchange="importData(event)">
     </label>
-    <button class="btn-action" style="background: #d32f2f;" onclick="if(confirm('Ã‚Â¿Borrar todo y reiniciar el acta?')) location.reload()">Ã°Å¸â€”â€˜Ã¯Â¸Â Limpiar</button>
+    <button class="btn-action" style="background: #d32f2f;" onclick="if(confirm('¿Borrar todo y reiniciar el acta?')) location.reload()">🗑️ Limpiar</button>
 </div>
 
 <div class="paper-container">
@@ -281,20 +281,20 @@
             <tr>
                 <td>
                     <div class="header-container">
-                        <label class="logo-box" title="Toque para cargar logo AlcaldÃƒÂ­a">
-                            <span class="no-print" id="txt-logo1">+ Logo<br>AlcaldÃƒÂ­a</span>
+                        <label class="logo-box" title="Toque para cargar logo Alcaldía">
+                            <span class="no-print" id="txt-logo1">+ Logo<br>Alcaldía</span>
                             <img id="logo1" src="">
                             <input type="file" accept="image/*" onchange="loadLogo(this, 'logo1', 'txt-logo1')">
                         </label>
                         
                         <div class="header-title">
-                            <h1>AUDITORÃƒÂA EXCLUSIVA PMT</h1>
-                            <h2>Mejoramiento VÃƒÂ­a Granada - GuatapÃƒÂ© (Sect. La Sonadora - La PeÃƒÂ±a)</h2>
-                            <p>Control de InterventorÃƒÂ­a - Seguridad Vial</p>
+                            <h1>AUDITORÍA EXCLUSIVA PMT</h1>
+                            <h2>Mejoramiento Vía Granada - Guatapé (Sect. La Sonadora - La Peña)</h2>
+                            <p>Control de Interventoría - Seguridad Vial</p>
                         </div>
                         
-                        <label class="logo-box" title="Toque para cargar logo InterventorÃƒÂ­a">
-                            <span class="no-print" id="txt-logo2">+ Logo<br>InterventorÃƒÂ­a</span>
+                        <label class="logo-box" title="Toque para cargar logo Interventoría">
+                            <span class="no-print" id="txt-logo2">+ Logo<br>Interventoría</span>
                             <img id="logo2" src="">
                             <input type="file" accept="image/*" onchange="loadLogo(this, 'logo2', 'txt-logo2')">
                         </label>
@@ -322,7 +322,7 @@
                     </table>
 
                     <div class="alert-box">
-                        <b>ALERTA DE SEGURIDAD VIAL:</b> El ancho de plataforma es de 5m. Si se estÃƒÂ¡n construyendo <b>rieles o placas huellas</b>, el acero de refuerzo obstaculiza toda la vÃƒÂ­a. <b>DEBE EXIGIRSE CIERRE TOTAL</b> y usar vÃƒÂ­a alterna por La PeÃƒÂ±a (8.5 km).
+                        <b>ALERTA DE SEGURIDAD VIAL:</b> El ancho de plataforma es de 5m. Si se están construyendo <b>rieles o placas huellas</b>, el acero de refuerzo obstaculiza toda la vía. <b>DEBE EXIGIRSE CIERRE TOTAL</b> y usar vía alterna por La Peña (8.5 km).
                     </div>
 
                     <div class="section-title">1. DISPOSITIVOS MANUALES Y PERSONAL (BANDEREROS)</div>
@@ -330,7 +330,7 @@
                         <thead>
                             <tr>
                                 <th class="col-ficha">REF.</th>
-                                <th class="col-req">ESPECIFICACIÃƒâ€œN PMT A EVALUAR</th>
+                                <th class="col-req">ESPECIFICACIÓN PMT A EVALUAR</th>
                                 <th class="col-eval">ESTADO</th>
                                 <th class="col-obs">HALLAZGOS Y FOTOS</th>
                             </tr>
@@ -338,7 +338,7 @@
                         <tbody>
                             <tr>
                                 <td data-label="Ficha:" class="col-ficha">PMT-7.4</td>
-                                <td data-label="Requisito:" class="col-req"><b>DotaciÃƒÂ³n (Chaleco e Impermeable):</b> Ã‚Â¿Chaleco naranja reflectivo NTC-4739? En lluvia: Ã‚Â¿Impermeable amarillo con cinta reflectiva blanca horizontal de 15cm en el tÃƒÂ³rax?</td>
+                                <td data-label="Requisito:" class="col-req"><b>Dotación (Chaleco e Impermeable):</b> ¿Chaleco naranja reflectivo NTC-4739? En lluvia: ¿Impermeable amarillo con cinta reflectiva blanca horizontal de 15cm en el tórax?</td>
                                 <td data-label="Estado:" class="col-eval">
                                     <select class="status-select" onchange="changeColor(this)">
                                         <option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option>
@@ -346,13 +346,13 @@
                                 </td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea placeholder="Detalle el estado de la indumentaria..."></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencia</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencia</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
                                     <div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
                                 <td data-label="Ficha:" class="col-ficha">PMT-7.4</td>
-                                <td data-label="Requisito:" class="col-req"><b>Herramientas (Paletas y Radios):</b> Ã‚Â¿Uso de paletas PARE/SIGA (min. 45cm diÃƒÂ¡metro reflectivo Tipo IV) con soporte blanco de <b>mÃƒÂ­nimo 1.60m</b>? Ã‚Â¿Tienen Radios Bidireccionales?</td>
+                                <td data-label="Requisito:" class="col-req"><b>Herramientas (Paletas y Radios):</b> ¿Uso de paletas PARE/SIGA (min. 45cm diámetro reflectivo Tipo IV) con soporte blanco de <b>mínimo 1.60m</b>? ¿Tienen Radios Bidireccionales?</td>
                                 <td data-label="Estado:" class="col-eval">
                                     <select class="status-select" onchange="changeColor(this)">
                                         <option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option>
@@ -360,19 +360,19 @@
                                 </td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea placeholder="Verifique funcionamiento de radios y altura del soporte..."></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencia</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencia</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
                                     <div class="image-gallery"></div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <div class="section-title">2. SEÃƒâ€˜ALIZACIÃƒâ€œN VERTICAL (MATERIALES Y ANCLAJE)</div>
+                    <div class="section-title">2. SEÑALIZACIÓN VERTICAL (MATERIALES Y ANCLAJE)</div>
                     <table class="audit-table">
                         <thead>
                             <tr>
                                 <th class="col-ficha">REF.</th>
-                                <th class="col-req">ESPECIFICACIÃƒâ€œN PMT A EVALUAR</th>
+                                <th class="col-req">ESPECIFICACIÓN PMT A EVALUAR</th>
                                 <th class="col-eval">ESTADO</th>
                                 <th class="col-obs">HALLAZGOS Y FOTOS</th>
                             </tr>
@@ -380,21 +380,21 @@
                         <tbody>
                             <tr>
                                 <td data-label="Ficha:" class="col-ficha">PMT-7.1</td>
-                                <td data-label="Requisito:" class="col-req"><b>Postes y Materiales:</b> Ã‚Â¿Fondo naranja reflectivo? Ã‚Â¿Postes en perfil ÃƒÂ¡ngulo hierro 2"x2"x1/4" o tubo galvanizado 2" con tapas metÃƒÂ¡licas soldadas? (Prohibido hormigueo).</td>
+                                <td data-label="Requisito:" class="col-req"><b>Postes y Materiales:</b> ¿Fondo naranja reflectivo? ¿Postes en perfil ángulo hierro 2"x2"x1/4" o tubo galvanizado 2" con tapas metálicas soldadas? (Prohibido hormigueo).</td>
                                 <td data-label="Estado:" class="col-eval">
                                     <select class="status-select" onchange="changeColor(this)">
                                         <option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option>
                                     </select>
                                 </td>
                                 <td data-label="Evidencias:" class="col-obs">
-                                    <textarea placeholder="Revise material, oxidaciÃƒÂ³n y presencia de tapas..."></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencia</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
+                                    <textarea placeholder="Revise material, oxidación y presencia de tapas..."></textarea>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencia</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
                                     <div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
                                 <td data-label="Ficha:" class="col-ficha">PMT-7.1</td>
-                                <td data-label="Requisito:" class="col-req"><b>Anclaje Antirrobo:</b> Ã‚Â¿EstÃƒÂ¡n los postes anclados en <b>concreto de 14 MPa</b> con una longitud mÃƒÂ­nima de empotramiento de <b>50 cm</b>?</td>
+                                <td data-label="Requisito:" class="col-req"><b>Anclaje Antirrobo:</b> ¿Están los postes anclados en <b>concreto de 14 MPa</b> con una longitud mínima de empotramiento de <b>50 cm</b>?</td>
                                 <td data-label="Estado:" class="col-eval">
                                     <select class="status-select" onchange="changeColor(this)">
                                         <option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option>
@@ -402,19 +402,19 @@
                                 </td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea placeholder="Compruebe la firmeza y anclaje al suelo..."></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencia</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencia</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
                                     <div class="image-gallery"></div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <div class="section-title">3. CANALIZACIÃƒâ€œN Y LOGÃƒÂSTICA DE CIERRES</div>
+                    <div class="section-title">3. CANALIZACIÓN Y LOGÍSTICA DE CIERRES</div>
                     <table class="audit-table">
                         <thead>
                             <tr>
                                 <th class="col-ficha">REF.</th>
-                                <th class="col-req">ESPECIFICACIÃƒâ€œN PMT A EVALUAR</th>
+                                <th class="col-req">ESPECIFICACIÓN PMT A EVALUAR</th>
                                 <th class="col-eval">ESTADO</th>
                                 <th class="col-obs">HALLAZGOS Y FOTOS</th>
                             </tr>
@@ -422,43 +422,43 @@
                         <tbody>
                             <tr>
                                 <td data-label="Ficha:" class="col-ficha">PMT-7.3</td>
-                                <td data-label="Requisito:" class="col-req"><b>Dispositivos de CanalizaciÃƒÂ³n:</b> Ã‚Â¿Se evidencian las cantidades mÃƒÂ­nimas en el frente: 44 Barreras PlÃƒÂ¡sticas (Maletines), 42 Balizas y 2 Barricadas de listÃƒÂ³n?</td>
+                                <td data-label="Requisito:" class="col-req"><b>Dispositivos de Canalización:</b> ¿Se evidencian las cantidades mínimas en el frente: 44 Barreras Plásticas (Maletines), 42 Balizas y 2 Barricadas de listón?</td>
                                 <td data-label="Estado:" class="col-eval">
                                     <select class="status-select" onchange="changeColor(this)">
                                         <option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option>
                                     </select>
                                 </td>
                                 <td data-label="Evidencias:" class="col-obs">
-                                    <textarea placeholder="Indique faltantes de elementos de canalizaciÃƒÂ³n..."></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencia</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
+                                    <textarea placeholder="Indique faltantes de elementos de canalización..."></textarea>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencia</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
                                     <div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
                                 <td data-label="Ficha:" class="col-ficha">PMT-6.1</td>
-                                <td data-label="Requisito:" class="col-req"><b>GestiÃƒÂ³n de Carril (Muros/Alcantarillas):</b> En cierres parciales, Ã‚Â¿se garantiza un ancho libre mÃƒÂ­nimo de <b>2.50 metros</b> para el trÃƒÂ¡nsito de vehÃƒÂ­culos, chivas y peatones?</td>
+                                <td data-label="Requisito:" class="col-req"><b>Gestión de Carril (Muros/Alcantarillas):</b> En cierres parciales, ¿se garantiza un ancho libre mínimo de <b>2.50 metros</b> para el tránsito de vehículos, chivas y peatones?</td>
                                 <td data-label="Estado:" class="col-eval">
                                     <select class="status-select" onchange="changeColor(this)">
                                         <option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option>
                                     </select>
                                 </td>
                                 <td data-label="Evidencias:" class="col-obs">
-                                    <textarea placeholder="Medir ancho de vÃƒÂ­a ÃƒÂºtil dejado por el contratista..."></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencia</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
+                                    <textarea placeholder="Medir ancho de vía útil dejado por el contratista..."></textarea>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencia</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
                                     <div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
                                 <td data-label="Ficha:" class="col-ficha">PMT-6.1</td>
-                                <td data-label="Requisito:" class="col-req"><b>DesvÃƒÂ­os por Cierre Total:</b> Ã‚Â¿EstÃƒÂ¡n ubicados los Pasacalles (Ej: "VÃƒÂ­a cerrada a 12km usar vÃƒÂ­a PeÃƒÂ±ol - Santuario") y se dirige el trÃƒÂ¡fico correctamente a la ruta alterna?</td>
+                                <td data-label="Requisito:" class="col-req"><b>Desvíos por Cierre Total:</b> ¿Están ubicados los Pasacalles (Ej: "Vía cerrada a 12km usar vía Peñol - Santuario") y se dirige el tráfico correctamente a la ruta alterna?</td>
                                 <td data-label="Estado:" class="col-eval">
                                     <select class="status-select" onchange="changeColor(this)">
                                         <option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option>
                                     </select>
                                 </td>
                                 <td data-label="Evidencias:" class="col-obs">
-                                    <textarea placeholder="EvaluaciÃƒÂ³n de seÃƒÂ±alizaciÃƒÂ³n informativa a distancia..."></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencia</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
+                                    <textarea placeholder="Evaluación de señalización informativa a distancia..."></textarea>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencia</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
                                     <div class="image-gallery"></div>
                                 </td>
                             </tr>
@@ -475,10 +475,10 @@
                                             <img id="firma-1" class="firma-img" src="">
                                         </div>
                                         <div class="firma-controls no-print" style="margin-top: 8px; display: flex; justify-content: center; gap: 5px;">
-                                            <button type="button" class="btn-firma" onclick="openSignaturePad('firma-1')">Ã¢Å“ÂÃ¯Â¸Â</button>
+                                            <button type="button" class="btn-firma" onclick="openSignaturePad('firma-1')">✍️</button>
                                             <input type="file" id="up-firma-1" accept="image/*" class="hidden-file-input" onchange="loadSignatureImg(event, 'firma-1')">
-                                            <label class="btn-firma" for="up-firma-1" style="cursor:pointer; margin:0;">Ã°Å¸â€œÂ</label>
-                                            <button type="button" class="btn-firma" onclick="clearSignature('firma-1')">Ã¢ÂÅ’</button>
+                                            <label class="btn-firma" for="up-firma-1" style="cursor:pointer; margin:0;">📁</label>
+                                            <button type="button" class="btn-firma" onclick="clearSignature('firma-1')">❌</button>
                                         </div>
                                         <div style="padding: 5px 10px 15px 10px; font-size: 13px; color: #444; font-weight: normal; line-height: 1.5;">
                                             Representante Del Contratista<br>
@@ -492,13 +492,13 @@
                                             <img id="firma-2" class="firma-img" src="">
                                         </div>
                                         <div class="firma-controls no-print" style="margin-top: 8px; display: flex; justify-content: center; gap: 5px;">
-                                            <button type="button" class="btn-firma" onclick="openSignaturePad('firma-2')">Ã¢Å“ÂÃ¯Â¸Â</button>
+                                            <button type="button" class="btn-firma" onclick="openSignaturePad('firma-2')">✍️</button>
                                             <input type="file" id="up-firma-2" accept="image/*" class="hidden-file-input" onchange="loadSignatureImg(event, 'firma-2')">
-                                            <label class="btn-firma" for="up-firma-2" style="cursor:pointer; margin:0;">Ã°Å¸â€œÂ</label>
-                                            <button type="button" class="btn-firma" onclick="clearSignature('firma-2')">Ã¢ÂÅ’</button>
+                                            <label class="btn-firma" for="up-firma-2" style="cursor:pointer; margin:0;">📁</label>
+                                            <button type="button" class="btn-firma" onclick="clearSignature('firma-2')">❌</button>
                                         </div>
                                         <div style="padding: 5px 10px 15px 10px; font-size: 13px; color: #444; font-weight: normal; line-height: 1.5;">
-                                            Representante De La InterventorÃƒÂ­a<br>
+                                            Representante De La Interventoría<br>
                                             C.C <input type="text" style="width: calc(100% - 30px); border: none; border-bottom: 1px dotted #ccc; font-size: 13px; background: transparent; outline: none; margin-top: 0; text-align: left;">
                                         </div>
                                     </div>
@@ -509,13 +509,13 @@
                                             <img id="firma-3" class="firma-img" src="">
                                         </div>
                                         <div class="firma-controls no-print" style="margin-top: 8px; display: flex; justify-content: center; gap: 5px;">
-                                            <button type="button" class="btn-firma" onclick="openSignaturePad('firma-3')">Ã¢Å“ÂÃ¯Â¸Â</button>
+                                            <button type="button" class="btn-firma" onclick="openSignaturePad('firma-3')">✍️</button>
                                             <input type="file" id="up-firma-3" accept="image/*" class="hidden-file-input" onchange="loadSignatureImg(event, 'firma-3')">
-                                            <label class="btn-firma" for="up-firma-3" style="cursor:pointer; margin:0;">Ã°Å¸â€œÂ</label>
-                                            <button type="button" class="btn-firma" onclick="clearSignature('firma-3')">Ã¢ÂÅ’</button>
+                                            <label class="btn-firma" for="up-firma-3" style="cursor:pointer; margin:0;">📁</label>
+                                            <button type="button" class="btn-firma" onclick="clearSignature('firma-3')">❌</button>
                                         </div>
                                         <div style="padding: 5px 10px 15px 10px; font-size: 13px; color: #444; font-weight: normal; line-height: 1.5;">
-                                            Responsable De AdministraciÃƒÂ³n Municipal De GuatapÃƒÂ©<br>
+                                            Responsable De Administración Municipal De Guatapé<br>
                                             Antioquia<br>
                                             C.C <input type="text" style="width: calc(100% - 30px); border: none; border-bottom: 1px dotted #ccc; font-size: 13px; background: transparent; outline: none; margin-top: 0; text-align: left;">
                                         </div>
@@ -579,7 +579,7 @@
         }
     }
 
-    // Carga mÃƒÂºltiple de fotos desde GalerÃƒÂ­a o CÃƒÂ¡mara con compresiÃƒÂ³n (MÃƒÂ³vil)
+    // Carga múltiple de fotos desde Galería o Cámara con compresión (Móvil)
     function handleFiles(input) {
         const gallery = input.parentElement.nextElementSibling;
         
@@ -591,7 +591,7 @@
                     imgOriginal.src = e.target.result;
                     imgOriginal.onload = function() {
                         const canvas = document.createElement('canvas');
-                        const MAX_DIM = 800; // CompresiÃƒÂ³n
+                        const MAX_DIM = 800; // Compresión
                         let width = imgOriginal.width; let height = imgOriginal.height;
                         if (width > height) { if (width > MAX_DIM) { height *= MAX_DIM / width; width = MAX_DIM; } } 
                         else { if (height > MAX_DIM) { width *= MAX_DIM / height; height = MAX_DIM; } }
@@ -605,9 +605,9 @@
                         img.src = compressedDataUrl;
                         img.title = "Toca para eliminar";
                         
-                        // Al tocar la imagen (mÃƒÂ³vil) o hacer click (PC), se elimina previo aviso
+                        // Al tocar la imagen (móvil) o hacer click (PC), se elimina previo aviso
                         img.onclick = function() {
-                            if(confirm("Ã‚Â¿Deseas eliminar esta fotografÃƒÂ­a del registro?")) {
+                            if(confirm("¿Deseas eliminar esta fotografía del registro?")) {
                                 this.remove();
                             }
                         };
@@ -620,7 +620,7 @@
         input.value = ""; // Limpiar input para permitir seleccionar la misma u otras fotos luego
     }
 
-    // Sistema de SemÃƒÂ¡foro para el Estado de cumplimiento
+    // Sistema de Semáforo para el Estado de cumplimiento
     function changeColor(selectElement) {
         selectElement.classList.remove('status-cumple', 'status-nocumple', 'status-na');
         if (selectElement.value === 'cumple') {
@@ -654,12 +654,9 @@
     }
 
     function generarPDF() {
-        let actaNum = document.getElementById('acta-num') ? document.getElementById('acta-num').value.trim() : 'SN';
-        let tramoInfo = document.getElementById('cfg-tramo-actual') ? document.getElementById('cfg-tramo-actual').value : 'General';
-        let fileName = `PMT_${tramoInfo}_N${actaNum}.pdf`;
-        try {
-            savePDFNativo('PMT', fileName, document.body, true);
-        } catch(e) { console.error('Error in PDF', e); }
+        let d = new Date(); let stamp = d.toISOString().slice(0,10);
+        let fileName = "PMT" + "_" + stamp + ".pdf";
+        savePDFNativo('PMT', fileName, document.querySelector('.paper-container') || document.body, true);
     }
 
     // Cargar datos desde .json
@@ -705,7 +702,7 @@
                             img.src = src;
                             img.title = "Toca para eliminar evidencia";
                             img.onclick = function() {
-                                if(confirm("Ã‚Â¿Eliminar esta fotografÃƒÂ­a tÃƒÂ©cnica del reporte?")) this.remove();
+                                if(confirm("¿Eliminar esta fotografía técnica del reporte?")) this.remove();
                             };
                             galleries[i].appendChild(img);
                         });
@@ -727,7 +724,7 @@
                 
                 showToast("Datos cargados correctamente", "success");
             } catch (err) {
-                showToast("Error al leer el archivo. AsegÃƒÂºrate de que sea un archivo vÃƒÂ¡lido.", "error");
+                showToast("Error al leer el archivo. Asegúrate de que sea un archivo válido.", "error");
             }
         };
         reader.readAsText(file);

@@ -7,7 +7,7 @@
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>AUDITORÃƒÂA TÃƒâ€°CNICA PRO - VÃƒÂA GUATAPÃƒâ€°</title>
+    <title>AUDITORÍA TÉCNICA PRO - VÍA GUATAPÉ</title>
     <style>
         :root { 
             --primary: #0a2e50; 
@@ -194,13 +194,13 @@
     <nav class="no-print" style="background-color: var(--primary); padding: 10px; display: flex; justify-content: center; position: sticky; top: 0; z-index: 10000; margin-bottom: 20px;">
         <select id="global-nav" onchange="if(this.value) window.location.href=this.value" style="padding: 8px; border-radius: 6px; font-weight: bold; background: white; color: var(--primary); outline: none; border: 1px solid #ccc; max-width: 100%; width: 90%;">
             <option value="">Ir a...</option>
-            <option value="index.html">MenÃƒÂº Principal (Inicio)</option>
+            <option value="index.html">Menú Principal (Inicio)</option>
             <option value="acta_vecindad.html">Acta de Vecindad</option>
             <option value="acta_entorno.html">Acta de Entorno</option>
             <option value="proc_const.html">Proc. Constructivo</option>
-            <option value="pmt.html">PMT (TrÃƒÂ¡nsito)</option>
+            <option value="pmt.html">PMT (Tránsito)</option>
             <option value="paga.html">PAGA (Ambiental)</option>
-            <option value="espec_tecn.html">Espec. TÃƒÂ©cnicas</option>
+            <option value="espec_tecn.html">Espec. Técnicas</option>
         </select>
     </nav>
 
@@ -218,10 +218,10 @@
 </div>
 
 <div class="fab-container no-print">
-    <button class="btn-action btn-print" onclick="generarPDF()">Ã°Å¸â€“Â¨Ã¯Â¸Â Generar PDF</button>
-    <button class="btn-action" style="background: #0288d1;" onclick="exportData('json')">Ã°Å¸â€™Â¾ Guardar .json</button>
+    <button class="btn-action btn-print" onclick="generarPDF()">🖨️ Generar PDF</button>
+    <button class="btn-action" style="background: #0288d1;" onclick="exportData('json')">💾 Guardar .json</button>
     <label class="btn-action" style="background: #e65100; cursor: pointer; text-align: center; display: inline-block;">
-        Ã°Å¸â€œâ€š Cargar Datos
+        📂 Cargar Datos
         <input type="file" accept=".json, .gsc" style="display: none;" onchange="importData(event)">
     </label>
 </div>
@@ -229,7 +229,7 @@
 <div class="paper-container">
     
     <div class="app-notice no-print">
-        Ã°Å¸â€™Â¡ <b>Nota Readdle Documents:</b> Si el botÃƒÂ³n no responde, usa el menÃƒÂº (...) y selecciona <b>"Guardar como PDF"</b> o <b>"Compartir -> Imprimir"</b>.
+        💡 <b>Nota Readdle Documents:</b> Si el botón no responde, usa el menú (...) y selecciona <b>"Guardar como PDF"</b> o <b>"Compartir -> Imprimir"</b>.
     </div>
 
     <table class="print-wrapper">
@@ -240,15 +240,15 @@
                         <div class="logo-box">
                             <img id="logo1" src="logo_entidad.png" style="display:block; cursor:pointer;" title="Click para cambiar logo" onclick="this.nextElementSibling.querySelector('input').click()" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <label class="no-print" style="cursor:pointer; width:100%; height:100%; display:none; align-items:center; justify-content:center; flex-direction:column;">
-                                <span>+ Logo AlcaldÃƒÂ­a</span>
+                                <span>+ Logo Alcaldía</span>
                                 <input type="file" accept="image/*" onchange="loadLogo(this, 'logo1')">
                             </label>
                         </div>
                         
                         <div class="header-title">
-                            <h1>ACTA DE AUDITORÃƒÂA Y CONTROL CONSTRUCTIVO</h1>
-                            <h2>VÃƒÂA RURAL GRANADA - GUATAPÃƒâ€° (SECTOR LA SONADORA Y LA PEÃƒâ€˜A)</h2>
-                            <p>INSPECCIÃƒâ€œN TÃƒâ€°CNICA DETALLADA - ISC</p>
+                            <h1>ACTA DE AUDITORÍA Y CONTROL CONSTRUCTIVO</h1>
+                            <h2>VÍA RURAL GRANADA - GUATAPÉ (SECTOR LA SONADORA Y LA PEÑA)</h2>
+                            <p>INSPECCIÓN TÉCNICA DETALLADA - ISC</p>
                         </div>
                         
                         <div class="logo-box">
@@ -269,7 +269,7 @@
                     <table class="info-table">
                         <tr>
                             <td class="bg-gray">Contratista:</td>
-                            <td><input type="text" class="info-input" placeholder="Nombre/RazÃƒÂ³n Social"></td>
+                            <td><input type="text" class="info-input" placeholder="Nombre/Razón Social"></td>
                             <td class="bg-gray">Fecha / Hora:</td>
                             <td><input type="datetime-local" class="info-input" id="fecha-hoy"></td>
                         </tr>
@@ -283,252 +283,252 @@
 
                     <div class="section-title">1. PRELIMINARES</div>
                     <table class="audit-table">
-                        <thead><tr><th class="col-ficha">ÃƒÂTEM</th><th class="col-req">REQUERIMIENTO TÃƒâ€°CNICO AL DETALLE</th><th class="col-eval">ESTADO</th><th class="col-obs">REGISTRO Y EVIDENCIA FOTOGRÃƒÂFICA</th></tr></thead>
+                        <thead><tr><th class="col-ficha">ÍTEM</th><th class="col-req">REQUERIMIENTO TÉCNICO AL DETALLE</th><th class="col-eval">ESTADO</th><th class="col-obs">REGISTRO Y EVIDENCIA FOTOGRÁFICA</th></tr></thead>
                         <tbody>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">1.1</td>
+                                <td data-label="Ítem:" class="col-ficha">1.1</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>LocalizaciÃƒÂ³n, trazado y replanteo.</b>
-                                    <span class="param-desc">DelimitaciÃƒÂ³n del ÃƒÂ¡rea especÃƒÂ­fica. Desmonte manual de vegetaciÃƒÂ³n usando motosierra para arbustos y guadaÃƒÂ±a para vegetaciÃƒÂ³n densa. RecolecciÃƒÂ³n y agrupado manual con rastrillos/palas.</span>
-                                    <span class="tolerance">Uso de palas mecÃƒÂ¡nicas/cargadores frontales para cargue. Exige EPP: cascos, guantes, gafas, botas puntera.</span>
+                                    <b>Localización, trazado y replanteo.</b>
+                                    <span class="param-desc">Delimitación del área específica. Desmonte manual de vegetación usando motosierra para arbustos y guadaña para vegetación densa. Recolección y agrupado manual con rastrillos/palas.</span>
+                                    <span class="tolerance">Uso de palas mecánicas/cargadores frontales para cargue. Exige EPP: cascos, guantes, gafas, botas puntera.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <div class="section-title">2. CONSTRUCCIÃƒâ€œN DE PLACA HUELLA</div>
+                    <div class="section-title">2. CONSTRUCCIÓN DE PLACA HUELLA</div>
                     <table class="audit-table">
-                        <thead><tr><th class="col-ficha">ÃƒÂTEM</th><th class="col-req">REQUERIMIENTO TÃƒâ€°CNICO AL DETALLE</th><th class="col-eval">ESTADO</th><th class="col-obs">REGISTRO Y EVIDENCIA FOTOGRÃƒÂFICA</th></tr></thead>
+                        <thead><tr><th class="col-ficha">ÍTEM</th><th class="col-req">REQUERIMIENTO TÉCNICO AL DETALLE</th><th class="col-eval">ESTADO</th><th class="col-obs">REGISTRO Y EVIDENCIA FOTOGRÁFICA</th></tr></thead>
                         <tbody>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">2.1</td>
+                                <td data-label="Ítem:" class="col-ficha">2.1</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>ExcavaciÃƒÂ³n en material comÃƒÂºn de la explanaciÃƒÂ³n, canales y prÃƒÂ©stamos.</b>
-                                    <span class="param-desc">Incluye cargue y disposiciÃƒÂ³n final del material sobrante. Uso de retroexcavadora (oruga/llanta) y bulldozer (140-160 HP). Motoniveladora para afinar superficie. Compactador rodillo para asegurar base firme.</span>
+                                    <b>Excavación en material común de la explanación, canales y préstamos.</b>
+                                    <span class="param-desc">Incluye cargue y disposición final del material sobrante. Uso de retroexcavadora (oruga/llanta) y bulldozer (140-160 HP). Motoniveladora para afinar superficie. Compactador rodillo para asegurar base firme.</span>
                                     <span class="tolerance">NOTA: No incluye transporte.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">2.2</td>
+                                <td data-label="Ítem:" class="col-ficha">2.2</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>ExcavaciÃƒÂ³n manual en material comÃƒÂºn.</b>
-                                    <span class="param-desc">RemociÃƒÂ³n en suelo blando o semi-compacto con herramientas manuales como palas, picos y barretas. Uso de carretillas o costales.</span>
-                                    <span class="tolerance">Incluye cargue, transporte y disposiciÃƒÂ³n final del material sobrante.</span>
+                                    <b>Excavación manual en material común.</b>
+                                    <span class="param-desc">Remoción en suelo blando o semi-compacto con herramientas manuales como palas, picos y barretas. Uso de carretillas o costales.</span>
+                                    <span class="tolerance">Incluye cargue, transporte y disposición final del material sobrante.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">2.3</td>
+                                <td data-label="Ítem:" class="col-ficha">2.3</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>ConformaciÃƒÂ³n de la calzada existente con bulldozer.</b>
-                                    <span class="param-desc">Incluye nivelaciÃƒÂ³n, compactaciÃƒÂ³n, limpieza y reconstrucciÃƒÂ³n de cunetas.</span>
-                                    <span class="tolerance">CompactaciÃƒÂ³n con equipo adecuado (rodillo liso, pata de cabra o vibratorio).</span>
+                                    <b>Conformación de la calzada existente con bulldozer.</b>
+                                    <span class="param-desc">Incluye nivelación, compactación, limpieza y reconstrucción de cunetas.</span>
+                                    <span class="tolerance">Compactación con equipo adecuado (rodillo liso, pata de cabra o vibratorio).</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">2.4</td>
+                                <td data-label="Ítem:" class="col-ficha">2.4</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Lleno proveniente de la excavaciÃƒÂ³n para terraplenes compactado mecanicamente.</b>
+                                    <b>Lleno proveniente de la excavación para terraplenes compactado mecanicamente.</b>
                                     <span class="param-desc">No incluye transporte.</span>
-                                    <span class="tolerance">Exigencia mÃƒÂ­nima: Densidad mÃƒÂ­nima del 95% de la obtenida en el ensayo del Proctor modificado.</span>
+                                    <span class="tolerance">Exigencia mínima: Densidad mínima del 95% de la obtenida en el ensayo del Proctor modificado.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">2.5</td>
+                                <td data-label="Ítem:" class="col-ficha">2.5</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Suministro, colocaciÃƒÂ³n, conformaciÃƒÂ³n y compactaciÃƒÂ³n de Subbase granular.</b>
+                                    <b>Suministro, colocación, conformación y compactación de Subbase granular.</b>
                                     <span class="param-desc">No incluye transporte.</span>
-                                    <span class="tolerance">CompactaciÃƒÂ³n hasta obtener una densidad mÃƒÂ­nima del 95%, de la obtenida en el ensayo del Proctor modificado.</span>
+                                    <span class="tolerance">Compactación hasta obtener una densidad mínima del 95%, de la obtenida en el ensayo del Proctor modificado.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">2.6</td>
+                                <td data-label="Ítem:" class="col-ficha">2.6</td>
                                 <td data-label="Requisito:" class="col-req">
                                     <b>Concreto Clase D (21 MPa). Placa huella en concreto.</b>
                                     <span class="strength-note">F'c exigido: 3000 PSI (21 MPa)</span>
                                     <span class="param-desc">Incluye formaleta en madera o equivalente. Uso de vibradores o herramientas manuales. Acabado texturizado (escobillado) antideslizante.</span>
-                                    <span class="tolerance">Curado (agua, mantas hÃƒÂºmedas o productos quÃƒÂ­micos).</span>
+                                    <span class="tolerance">Curado (agua, mantas húmedas o productos químicos).</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">2.7</td>
+                                <td data-label="Ítem:" class="col-ficha">2.7</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Concreto Clase G (CiclÃƒÂ³peo con concreto clase F - 14 MPa y Piedra de 2" a 4").</b>
+                                    <b>Concreto Clase G (Ciclópeo con concreto clase F - 14 MPa y Piedra de 2" a 4").</b>
                                     <span class="strength-note">F'c matriz exigido: 2000 PSI (14 MPa)</span>
-                                    <span class="param-desc">CompactaciÃƒÂ³n con herramienta manual o vibradores de aguja. Curado continuo por al menos 7 dÃƒÂ­as.</span>
-                                    <span class="tolerance">ProporciÃƒÂ³n de piedra no supera el 40% del volumen.</span>
+                                    <span class="param-desc">Compactación con herramienta manual o vibradores de aguja. Curado continuo por al menos 7 días.</span>
+                                    <span class="tolerance">Proporción de piedra no supera el 40% del volumen.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">2.8</td>
+                                <td data-label="Ítem:" class="col-ficha">2.8</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Suministro, transporte y colocaciÃƒÂ³n de Acero de refuerzo fy=420 Mpa (Grado 60).</b>
+                                    <b>Suministro, transporte y colocación de Acero de refuerzo fy=420 Mpa (Grado 60).</b>
                                     <span class="param-desc">Libre de contacto con humedad, lodo o materiales contaminantes.</span>
-                                    <span class="tolerance">Apoyo sobre calzas plÃƒÂ¡sticas o de mortero (recubrimiento mÃƒÂ­nimo 5 cm).</span>
+                                    <span class="tolerance">Apoyo sobre calzas plásticas o de mortero (recubrimiento mínimo 5 cm).</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">2.9</td>
+                                <td data-label="Ítem:" class="col-ficha">2.9</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Transporte de materiales de afirmado, sub-base, base y mezcla asfÃƒÂ¡ltica para distancias superiores a 1000 m medidos a partir de 100 m.</b>
-                                    <span class="param-desc">Controlado con planillas de acarreo y hojas de cubicaciÃƒÂ³n.</span>
-                                    <span class="tolerance">Material compacto (Incluye 30% de expansiÃƒÂ³n).</span>
+                                    <b>Transporte de materiales de afirmado, sub-base, base y mezcla asfáltica para distancias superiores a 1000 m medidos a partir de 100 m.</b>
+                                    <span class="param-desc">Controlado con planillas de acarreo y hojas de cubicación.</span>
+                                    <span class="tolerance">Material compacto (Incluye 30% de expansión).</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">2.10</td>
+                                <td data-label="Ítem:" class="col-ficha">2.10</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Transporte de sobrantes provenientes de la excavaciÃƒÂ³n, canales, prÃƒÂ©stamos para distancias superiores a 1000 m medidos a partir de 100 m.</b>
-                                    <span class="param-desc">Descarga en sitio de disposiciÃƒÂ³n final autorizado.</span>
-                                    <span class="tolerance">Material compacto (Incluye 30% de expansiÃƒÂ³n).</span>
+                                    <b>Transporte de sobrantes provenientes de la excavación, canales, préstamos para distancias superiores a 1000 m medidos a partir de 100 m.</b>
+                                    <span class="param-desc">Descarga en sitio de disposición final autorizado.</span>
+                                    <span class="tolerance">Material compacto (Incluye 30% de expansión).</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">2.11</td>
+                                <td data-label="Ítem:" class="col-ficha">2.11</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Derechos de botadero para material de excavaciÃƒÂ³n.</b>
+                                    <b>Derechos de botadero para material de excavación.</b>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
 
                         </tbody>
                     </table>
 
-                    <div class="section-title">3. CONSTRUCCIÃƒâ€œN CUNETAS</div>
+                    <div class="section-title">3. CONSTRUCCIÓN CUNETAS</div>
                     <table class="audit-table">
-                        <thead><tr><th class="col-ficha">ÃƒÂTEM</th><th class="col-req">REQUERIMIENTO TÃƒâ€°CNICO AL DETALLE</th><th class="col-eval">ESTADO</th><th class="col-obs">REGISTRO Y EVIDENCIA FOTOGRÃƒÂFICA</th></tr></thead>
+                        <thead><tr><th class="col-ficha">ÍTEM</th><th class="col-req">REQUERIMIENTO TÉCNICO AL DETALLE</th><th class="col-eval">ESTADO</th><th class="col-obs">REGISTRO Y EVIDENCIA FOTOGRÁFICA</th></tr></thead>
                         <tbody>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">3.1</td>
+                                <td data-label="Ítem:" class="col-ficha">3.1</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>ExcavaciÃƒÂ³n manual en material comÃƒÂºn.</b>
+                                    <b>Excavación manual en material común.</b>
                                     <span class="param-desc">Uso de picas, palas y azadones.</span>
-                                    <span class="tolerance">Incluye cargue, transporte y disposiciÃƒÂ³n final del material sobrante.</span>
+                                    <span class="tolerance">Incluye cargue, transporte y disposición final del material sobrante.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">3.2</td>
+                                <td data-label="Ítem:" class="col-ficha">3.2</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Descapote a mÃƒÂ¡quina del terreno natural hasta 30 cm.</b>
-                                    <span class="param-desc">Apila ordenadamente en taludes o depÃƒÂ³sitos temporales.</span>
-                                    <span class="tolerance">Incluye disposiciÃƒÂ³n final de los materiales. No incluye transporte.</span>
+                                    <b>Descapote a máquina del terreno natural hasta 30 cm.</b>
+                                    <span class="param-desc">Apila ordenadamente en taludes o depósitos temporales.</span>
+                                    <span class="tolerance">Incluye disposición final de los materiales. No incluye transporte.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">3.3</td>
+                                <td data-label="Ítem:" class="col-ficha">3.3</td>
                                 <td data-label="Requisito:" class="col-req">
                                     <b>Concreto Clase D (21 MPa). Cunetas.</b>
                                     <span class="strength-note">F'c exigido: 3000 PSI (21 MPa)</span>
                                     <span class="param-desc">Instalan formaletas. Vibrando con aguja o manualmente. Alisa y perfila la cuneta con regla y llana.</span>
-                                    <span class="tolerance">Cura el concreto por al menos 7 dÃƒÂ­as.</span>
+                                    <span class="tolerance">Cura el concreto por al menos 7 días.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">3.4</td>
+                                <td data-label="Ítem:" class="col-ficha">3.4</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Suministro, transporte y colocaciÃƒÂ³n de Acero de refuerzo fy=420 Mpa (Grado 60).</b>
-                                    <span class="tolerance">Libre de ÃƒÂ³xido, pintura o grasa.</span>
+                                    <b>Suministro, transporte y colocación de Acero de refuerzo fy=420 Mpa (Grado 60).</b>
+                                    <span class="tolerance">Libre de óxido, pintura o grasa.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">3.5</td>
+                                <td data-label="Ítem:" class="col-ficha">3.5</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Transporte de sobrantes provenientes de la excavaciÃƒÂ³n, canales, prÃƒÂ©stamos para distancias superiores a 1000 m medidos a partir de 100 m.</b>
-                                    <span class="tolerance">Material compacto (Incluye 30% de expansiÃƒÂ³n).</span>
+                                    <b>Transporte de sobrantes provenientes de la excavación, canales, préstamos para distancias superiores a 1000 m medidos a partir de 100 m.</b>
+                                    <span class="tolerance">Material compacto (Incluye 30% de expansión).</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">3.6</td>
+                                <td data-label="Ítem:" class="col-ficha">3.6</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Derechos de botadero para material de excavaciÃƒÂ³n.</b>
+                                    <b>Derechos de botadero para material de excavación.</b>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
 
@@ -537,120 +537,120 @@
 
                     <div class="section-title">4. OBRAS DE DRENAJE</div>
                     <table class="audit-table">
-                        <thead><tr><th class="col-ficha">ÃƒÂTEM</th><th class="col-req">REQUERIMIENTO TÃƒâ€°CNICO AL DETALLE</th><th class="col-eval">ESTADO</th><th class="col-obs">REGISTRO Y EVIDENCIA FOTOGRÃƒÂFICA</th></tr></thead>
+                        <thead><tr><th class="col-ficha">ÍTEM</th><th class="col-req">REQUERIMIENTO TÉCNICO AL DETALLE</th><th class="col-eval">ESTADO</th><th class="col-obs">REGISTRO Y EVIDENCIA FOTOGRÁFICA</th></tr></thead>
                         <tbody>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">4.1</td>
+                                <td data-label="Ítem:" class="col-ficha">4.1</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>ExcavaciÃƒÂ³n en material comÃƒÂºn de la explanaciÃƒÂ³n, canales y prÃƒÂ©stamos.</b>
-                                    <span class="param-desc">Incluye cargue y disposiciÃƒÂ³n final del material sobrante.</span>
+                                    <b>Excavación en material común de la explanación, canales y préstamos.</b>
+                                    <span class="param-desc">Incluye cargue y disposición final del material sobrante.</span>
                                     <span class="tolerance">No incluye transporte.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">4.2</td>
+                                <td data-label="Ítem:" class="col-ficha">4.2</td>
                                 <td data-label="Requisito:" class="col-req">
                                     <b>Concreto Clase F (14 MPa). Solados de E=0.05 m.</b>
                                     <span class="strength-note">F'c exigido: 2000 PSI (14 MPa)</span>
-                                    <span class="tolerance">Cura durante al menos 7 dÃƒÂ­as.</span>
+                                    <span class="tolerance">Cura durante al menos 7 días.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">4.3</td>
+                                <td data-label="Ítem:" class="col-ficha">4.3</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Suministro, transporte y colocaciÃƒÂ³n de Concreto Clase D (21 MPa) para Muros, disipadores, aletas y estribos.</b>
+                                    <b>Suministro, transporte y colocación de Concreto Clase D (21 MPa) para Muros, disipadores, aletas y estribos.</b>
                                     <span class="strength-note">F'c exigido: 3000 PSI (21 MPa)</span>
                                     <span class="param-desc">Incluye impermeabilizante, formaleta para acabado a la vista, desmoldante.</span>
-                                    <span class="tolerance">Cura mÃƒÂ­nimo de 7 dÃƒÂ­as.</span>
+                                    <span class="tolerance">Cura mínimo de 7 días.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">4.4</td>
+                                <td data-label="Ítem:" class="col-ficha">4.4</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Suministro, transporte y colocaciÃƒÂ³n de Acero de refuerzo fy=420 Mpa (Grado 60).</b>
-                                    <span class="tolerance">Libre de ÃƒÂ³xidos o suciedad.</span>
+                                    <b>Suministro, transporte y colocación de Acero de refuerzo fy=420 Mpa (Grado 60).</b>
+                                    <span class="tolerance">Libre de óxidos o suciedad.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">4.5</td>
+                                <td data-label="Ítem:" class="col-ficha">4.5</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Suministro, transporte y colocaciÃƒÂ³n de tuberÃƒÂ­a PVC 36" para alcantarillado.</b>
+                                    <b>Suministro, transporte y colocación de tubería PVC 36" para alcantarillado.</b>
                                     <span class="param-desc">Cama de apoyo en material granular, nivelada y compactada.</span>
                                     <span class="tolerance">Campana-espiga, asegurando el ajuste con anillos de caucho.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">4.6</td>
+                                <td data-label="Ítem:" class="col-ficha">4.6</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Transporte de sobrantes provenientes de la excavaciÃƒÂ³n, canales, prÃƒÂ©stamos para distancias superiores a 1000 m medidos a partir de 100 m.</b>
-                                    <span class="tolerance">Material compacto (Incluye 30% de expansiÃƒÂ³n).</span>
+                                    <b>Transporte de sobrantes provenientes de la excavación, canales, préstamos para distancias superiores a 1000 m medidos a partir de 100 m.</b>
+                                    <span class="tolerance">Material compacto (Incluye 30% de expansión).</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">4.7</td>
+                                <td data-label="Ítem:" class="col-ficha">4.7</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>ExcavaciÃƒÂ³n manual en material comÃƒÂºn.</b>
-                                    <span class="param-desc">En zonas de difÃƒÂ­cil acceso o de precisiÃƒÂ³n.</span>
-                                    <span class="tolerance">Incluye cargue, transporte y disposiciÃƒÂ³n final del material sobrante.</span>
+                                    <b>Excavación manual en material común.</b>
+                                    <span class="param-desc">En zonas de difícil acceso o de precisión.</span>
+                                    <span class="tolerance">Incluye cargue, transporte y disposición final del material sobrante.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">4.8</td>
+                                <td data-label="Ítem:" class="col-ficha">4.8</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Lleno manual compactado con material proveniente de la excavaciÃƒÂ³n hasta obtener una densidad mÃƒÂ­nima del 95%, de la obtenida en el ensayo del Proctor modificado.</b>
-                                    <span class="param-desc">Incluye selecciÃƒÂ³n, acarreo interno y compactaciÃƒÂ³n del material.</span>
+                                    <b>Lleno manual compactado con material proveniente de la excavación hasta obtener una densidad mínima del 95%, de la obtenida en el ensayo del Proctor modificado.</b>
+                                    <span class="param-desc">Incluye selección, acarreo interno y compactación del material.</span>
                                     <span class="tolerance">Compacta con pisones manuales o equipo liviano, como placas vibratorias o canguros.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">4.9</td>
+                                <td data-label="Ítem:" class="col-ficha">4.9</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Derechos de botadero para material de excavaciÃƒÂ³n.</b>
+                                    <b>Derechos de botadero para material de excavación.</b>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
 
@@ -659,57 +659,57 @@
 
                     <div class="section-title">5. OBRAS ADICIONALES</div>
                     <table class="audit-table">
-                        <thead><tr><th class="col-ficha">ÃƒÂTEM</th><th class="col-req">REQUERIMIENTO TÃƒâ€°CNICO AL DETALLE</th><th class="col-eval">ESTADO</th><th class="col-obs">REGISTRO Y EVIDENCIA FOTOGRÃƒÂFICA</th></tr></thead>
+                        <thead><tr><th class="col-ficha">ÍTEM</th><th class="col-req">REQUERIMIENTO TÉCNICO AL DETALLE</th><th class="col-eval">ESTADO</th><th class="col-obs">REGISTRO Y EVIDENCIA FOTOGRÁFICA</th></tr></thead>
                         <tbody>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">5.1</td>
+                                <td data-label="Ítem:" class="col-ficha">5.1</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>DemoliciÃƒÂ³n de estructuras (Concreto reforzado).</b>
-                                    <span class="param-desc">Uso de maquinaria adecuada (retroexcavadoras, martillos neumÃƒÂ¡ticos, etc.).</span>
-                                    <span class="tolerance">Incluye cargue y disposiciÃƒÂ³n de los materiales provenientes de la demoliciÃƒÂ³n. No incluye transporte.</span>
+                                    <b>Demolición de estructuras (Concreto reforzado).</b>
+                                    <span class="param-desc">Uso de maquinaria adecuada (retroexcavadoras, martillos neumáticos, etc.).</span>
+                                    <span class="tolerance">Incluye cargue y disposición de los materiales provenientes de la demolición. No incluye transporte.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">5.2</td>
+                                <td data-label="Ítem:" class="col-ficha">5.2</td>
                                 <td data-label="Requisito:" class="col-req">
                                     <b>Transporte de sobrantes de demoliciones.</b>
                                     <span class="param-desc">Medido suelto para distancias superiores a 1000 m medidos a partir de 100 m.</span>
-                                    <span class="tolerance">Incluye un 30% adicional por expansiÃƒÂ³n natural.</span>
+                                    <span class="tolerance">Incluye un 30% adicional por expansión natural.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">5.3</td>
+                                <td data-label="Ítem:" class="col-ficha">5.3</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Suministro, transporte e instalaciÃƒÂ³n de SeÃƒÂ±al Vertical de Transito Tipo SP y/o SR en lÃƒÂ¡mina reflectiva 60x60.</b>
-                                    <span class="tolerance">InstalaciÃƒÂ³n se efectÃƒÂºa mediante el uso de postes metÃƒÂ¡licos, cimentados en concreto.</span>
+                                    <b>Suministro, transporte e instalación de Señal Vertical de Transito Tipo SP y/o SR en lámina reflectiva 60x60.</b>
+                                    <span class="tolerance">Instalación se efectúa mediante el uso de postes metálicos, cimentados en concreto.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="ÃƒÂtem:" class="col-ficha">5.4</td>
+                                <td data-label="Ítem:" class="col-ficha">5.4</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Suministro, transporte e instalaciÃƒÂ³n de seÃƒÂ±al vertical SP 75 Delineador de curva.</b>
+                                    <b>Suministro, transporte e instalación de señal vertical SP 75 Delineador de curva.</b>
                                     <span class="strength-note">F'c anclaje exigido: 2000 PSI (14 MPa)</span>
-                                    <span class="tolerance">Incluye fijaciÃƒÂ³n en ÃƒÂ¡ngulo de 2x1/4" y concreto de 2000 psi para empotrar.</span>
+                                    <span class="tolerance">Incluye fijación en ángulo de 2x1/4" y concreto de 2000 psi para empotrar.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                         </tbody>
@@ -736,10 +736,10 @@
                             </div>
                             <div class="firma-bottom">
                                 <div class="firma-controls no-print" style="justify-content: center; margin-top: 5px; margin-bottom: 10px;">
-                                    <button type="button" class="btn-firma" onclick="openSignaturePad('firma-1')">Ã¢Å“ÂÃ¯Â¸Â</button>
+                                    <button type="button" class="btn-firma" onclick="openSignaturePad('firma-1')">✍️</button>
                                     <input type="file" id="up-firma-1" accept="image/*" class="hidden-file-input" onchange="loadSignatureImg(event, 'firma-1')">
-                                    <label class="btn-firma" for="up-firma-1" style="cursor:pointer; margin:0;">Ã°Å¸â€œÂ</label>
-                                    <button type="button" class="btn-firma" onclick="clearSignature('firma-1')">Ã¢ÂÅ’</button>
+                                    <label class="btn-firma" for="up-firma-1" style="cursor:pointer; margin:0;">📁</label>
+                                    <button type="button" class="btn-firma" onclick="clearSignature('firma-1')">❌</button>
                                 </div>
                                 <span style="font-size: 12px; color: #333;">Representante Del Contratista</span>
                                 <div class="firma-input-row">
@@ -754,12 +754,12 @@
                             </div>
                             <div class="firma-bottom">
                                 <div class="firma-controls no-print" style="justify-content: center; margin-top: 5px; margin-bottom: 10px;">
-                                    <button type="button" class="btn-firma" onclick="openSignaturePad('firma-2')">Ã¢Å“ÂÃ¯Â¸Â</button>
+                                    <button type="button" class="btn-firma" onclick="openSignaturePad('firma-2')">✍️</button>
                                     <input type="file" id="up-firma-2" accept="image/*" class="hidden-file-input" onchange="loadSignatureImg(event, 'firma-2')">
-                                    <label class="btn-firma" for="up-firma-2" style="cursor:pointer; margin:0;">Ã°Å¸â€œÂ</label>
-                                    <button type="button" class="btn-firma" onclick="clearSignature('firma-2')">Ã¢ÂÅ’</button>
+                                    <label class="btn-firma" for="up-firma-2" style="cursor:pointer; margin:0;">📁</label>
+                                    <button type="button" class="btn-firma" onclick="clearSignature('firma-2')">❌</button>
                                 </div>
-                                <span style="font-size: 12px; color: #333;">Representante De La InterventorÃƒÂ­a</span>
+                                <span style="font-size: 12px; color: #333;">Representante De La Interventoría</span>
                                 <div class="firma-input-row">
                                     <span style="font-size: 12px; color: #333; margin-right: 5px;">C.C</span>
                                     <input type="text">
@@ -772,12 +772,12 @@
                             </div>
                             <div class="firma-bottom">
                                 <div class="firma-controls no-print" style="justify-content: center; margin-top: 5px; margin-bottom: 10px;">
-                                    <button type="button" class="btn-firma" onclick="openSignaturePad('firma-3')">Ã¢Å“ÂÃ¯Â¸Â</button>
+                                    <button type="button" class="btn-firma" onclick="openSignaturePad('firma-3')">✍️</button>
                                     <input type="file" id="up-firma-3" accept="image/*" class="hidden-file-input" onchange="loadSignatureImg(event, 'firma-3')">
-                                    <label class="btn-firma" for="up-firma-3" style="cursor:pointer; margin:0;">Ã°Å¸â€œÂ</label>
-                                    <button type="button" class="btn-firma" onclick="clearSignature('firma-3')">Ã¢ÂÅ’</button>
+                                    <label class="btn-firma" for="up-firma-3" style="cursor:pointer; margin:0;">📁</label>
+                                    <button type="button" class="btn-firma" onclick="clearSignature('firma-3')">❌</button>
                                 </div>
-                                <span style="font-size: 12px; color: #333;">Responsable De AdministraciÃƒÂ³n Municipal De GuatapÃƒÂ©<br>Antioquia</span>
+                                <span style="font-size: 12px; color: #333;">Responsable De Administración Municipal De Guatapé<br>Antioquia</span>
                                 <div class="firma-input-row">
                                     <span style="font-size: 12px; color: #333; margin-right: 5px;">C.C</span>
                                     <input type="text">
@@ -793,7 +793,7 @@
 </div>
 
 <script>
-    // Fecha automÃƒÂ¡tica ajustada a datetime-local
+    // Fecha automática ajustada a datetime-local
     const now = new Date();
     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
     document.getElementById('fecha-hoy').value = now.toISOString().slice(0,16);
@@ -838,7 +838,7 @@
         }
     }
 
-    // GalerÃƒÂ­a Multifoto con compresiÃƒÂ³n
+    // Galería Multifoto con compresión
     function handleFiles(input) {
         const gallery = input.parentElement.nextElementSibling;
         
@@ -850,7 +850,7 @@
                     imgOriginal.src = e.target.result;
                     imgOriginal.onload = function() {
                         const canvas = document.createElement('canvas');
-                        const MAX_DIM = 800; // CompresiÃƒÂ³n
+                        const MAX_DIM = 800; // Compresión
                         let width = imgOriginal.width; let height = imgOriginal.height;
                         if (width > height) { if (width > MAX_DIM) { height *= MAX_DIM / width; width = MAX_DIM; } } 
                         else { if (height > MAX_DIM) { width *= MAX_DIM / height; height = MAX_DIM; } }
@@ -864,7 +864,7 @@
                         img.src = compressedDataUrl;
                         img.title = "Toca para eliminar evidencia";
                         img.onclick = function() {
-                            if(confirm("Ã‚Â¿Eliminar esta fotografÃƒÂ­a tÃƒÂ©cnica del reporte?")) this.remove();
+                            if(confirm("¿Eliminar esta fotografía técnica del reporte?")) this.remove();
                         };
                         gallery.appendChild(img);
                     }
@@ -875,7 +875,7 @@
         input.value = ""; 
     }
 
-    // Cambio dinÃƒÂ¡mico SemÃƒÂ¡foro
+    // Cambio dinámico Semáforo
     function changeColor(selectElement) {
         selectElement.classList.remove('status-cumple', 'status-nocumple', 'status-na');
         if (selectElement.value === 'cumple') selectElement.classList.add('status-cumple');
@@ -905,12 +905,9 @@
     }
 
     function generarPDF() {
-        let actaNum = document.getElementById('acta-num') ? document.getElementById('acta-num').value.trim() : 'SN';
-        let tramoInfo = document.getElementById('cfg-tramo-actual') ? document.getElementById('cfg-tramo-actual').value : 'General';
-        let fileName = `Proc_Construccion_${tramoInfo}_N${actaNum}.pdf`;
-        try {
-            savePDFNativo('Proc_Construccion', fileName, document.body, true);
-        } catch(e) { console.error('Error in PDF', e); }
+        let d = new Date(); let stamp = d.toISOString().slice(0,10);
+        let fileName = "Proc_Construccion" + "_" + stamp + ".pdf";
+        savePDFNativo('Proc_Construccion', fileName, document.querySelector('.paper-container') || document.body, true);
     }
 
     // Cargar datos desde JSON
@@ -956,7 +953,7 @@
                             img.src = src;
                             img.title = "Toca para eliminar evidencia";
                             img.onclick = function() {
-                                if(confirm("Ã‚Â¿Eliminar esta fotografÃƒÂ­a tÃƒÂ©cnica del reporte?")) this.remove();
+                                if(confirm("¿Eliminar esta fotografía técnica del reporte?")) this.remove();
                             };
                             galleries[i].appendChild(img);
                         });
@@ -978,7 +975,7 @@
                 
                 showToast("Datos cargados correctamente", "success");
             } catch (err) {
-                showToast("Error al leer el archivo. AsegÃƒÂºrate de que sea un archivo vÃƒÂ¡lido JSON.", "error");
+                showToast("Error al leer el archivo. Asegúrate de que sea un archivo válido JSON.", "error");
             }
         };
         reader.readAsText(file);

@@ -7,10 +7,10 @@
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>AUDITORÃƒÂA TÃƒâ€°CNICA PRO - GUATAPÃƒâ€° (MULTIFOTO)</title>
+    <title>AUDITORÍA TÉCNICA PRO - GUATAPÉ (MULTIFOTO)</title>
     <style>
         :root { 
-            --primary: #0a2e50; /* Azul InterventorÃƒÂ­a */
+            --primary: #0a2e50; /* Azul Interventoría */
             --secondary: #b8860b; /* Dorado institucional */
             --accent: #d35400;
             --border: #b0bec5;
@@ -36,7 +36,7 @@
             border-radius: 6px;
         }
 
-        /* ESTRUCTURA PARA IMPRESIÃƒâ€œN CON MEMBRETE REPETITIVO */
+        /* ESTRUCTURA PARA IMPRESIÓN CON MEMBRETE REPETITIVO */
         .print-wrapper { width: 100%; border-collapse: collapse; }
         .print-wrapper > thead { display: table-header-group; }
         .print-wrapper > tbody { display: table-row-group; }
@@ -82,7 +82,7 @@
         .info-table .bg-gray { background: var(--bg-light); font-weight: bold; color: var(--primary); width: 15%; font-size: 11px;}
         .info-input { width: 100%; border: none; background: transparent; font-size: 12px; outline: none; font-family: inherit; -webkit-appearance: none; appearance: none; border-bottom: 1px dotted #ccc;}
 
-        /* TABLAS DE AUDITORÃƒÂA ESCRITORIO */
+        /* TABLAS DE AUDITORÍA ESCRITORIO */
         .section-title { 
             background: var(--primary); color: white; padding: 10px 15px; font-size: 13px; 
             margin-top: 25px; margin-bottom: 0; border-left: 6px solid var(--secondary);
@@ -100,7 +100,7 @@
         .param-desc { font-size: 11px; color: #444; display: block; margin-top: 4px; }
         .tolerance { font-size: 9px; color: #d35400; font-weight: bold; display: block; margin-top: 3px; }
 
-        /* SEMÃƒÂFORO Y CONTROLES (OPTIMIZADO iOS/ANDROID) */
+        /* SEMÁFORO Y CONTROLES (OPTIMIZADO iOS/ANDROID) */
         .status-select { 
             width: 100%; padding: 10px 5px; font-weight: bold; text-align: center; 
             border: 1px solid #ccc; border-radius: 6px; cursor: pointer; font-size: 12px;
@@ -134,7 +134,7 @@
             border-radius: 6px; object-fit: cover; cursor: pointer; 
         }
 
-        /* CAJA DE RECHAZO TÃƒâ€°CNICO */
+        /* CAJA DE RECHAZO TÉCNICO */
         .rejection-box {
             border: 2px solid #c62828; background-color: #ffebee; padding: 15px; 
             margin: 25px 0; border-radius: 6px; border-left: 10px solid #c62828;
@@ -177,7 +177,7 @@
         .modal-buttons button { padding: 8px 15px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
 
         /* ========================================================= */
-        /* ADAPTACIÃƒâ€œN MÃƒâ€œVIL (PANTALLAS PEQUEÃƒâ€˜AS) */
+        /* ADAPTACIÓN MÓVIL (PANTALLAS PEQUEÑAS) */
         /* ========================================================= */
         @media screen and (max-width: 768px) {
             body { padding: 5px; }
@@ -217,7 +217,7 @@
         }
 
         /* ========================================================= */
-        /* ESTILOS DE IMPRESIÃƒâ€œN (PDF) */
+        /* ESTILOS DE IMPRESIÓN (PDF) */
         /* ========================================================= */
         @media print {
             body { background: white; padding: 0; font-size: 10px; }
@@ -260,13 +260,13 @@
     <nav class="no-print" style="background-color: var(--primary); padding: 10px; display: flex; justify-content: center; position: sticky; top: 0; z-index: 10000; margin-bottom: 20px;">
         <select id="global-nav" onchange="if(this.value) window.location.href=this.value" style="padding: 8px; border-radius: 6px; font-weight: bold; background: white; color: var(--primary); outline: none; border: 1px solid #ccc; max-width: 100%; width: 90%;">
             <option value="">Ir a...</option>
-            <option value="index.html">MenÃƒÂº Principal (Inicio)</option>
+            <option value="index.html">Menú Principal (Inicio)</option>
             <option value="acta_vecindad.html">Acta de Vecindad</option>
             <option value="acta_entorno.html">Acta de Entorno</option>
             <option value="proc_const.html">Proc. Constructivo</option>
-            <option value="pmt.html">PMT (TrÃƒÂ¡nsito)</option>
+            <option value="pmt.html">PMT (Tránsito)</option>
             <option value="paga.html">PAGA (Ambiental)</option>
-            <option value="espec_tecn.html">Espec. TÃƒÂ©cnicas</option>
+            <option value="espec_tecn.html">Espec. Técnicas</option>
         </select>
     </nav>
 
@@ -284,10 +284,10 @@
 </div>
 
 <div class="fab-container no-print">
-    <button class="btn-action btn-print" onclick="generarPDF()">Ã°Å¸â€“Â¨Ã¯Â¸Â Imprimir / Guardar PDF</button>
-    <button class="btn-action" style="background: #0288d1;" onclick="exportData('json')">Ã°Å¸â€™Â¾ Guardar .json</button>
+    <button class="btn-action btn-print" onclick="generarPDF()">🖨️ Imprimir / Guardar PDF</button>
+    <button class="btn-action" style="background: #0288d1;" onclick="exportData('json')">💾 Guardar .json</button>
     <label class="btn-action" style="background: #e65100; cursor: pointer; text-align: center; display: inline-block;">
-        Ã°Å¸â€œâ€š Cargar Datos
+        📂 Cargar Datos
         <input type="file" accept=".json, .gsc" style="display: none;" onchange="importData(event)">
     </label>
 </div>
@@ -301,21 +301,21 @@
                         <div class="logo-box">
                             <img id="logo1" src="logo_entidad.png" style="display:block; cursor:pointer;" title="Click para cambiar logo" onclick="this.nextElementSibling.querySelector('input').click()" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <label class="no-print" style="cursor:pointer; width:100%; height:100%; display:none; align-items:center; justify-content:center; flex-direction:column; border: 2px dashed #90a4ae; background: #f4f7f8; border-radius: 6px;">
-                                <span>+ Logo AlcaldÃƒÂ­a</span>
+                                <span>+ Logo Alcaldía</span>
                                 <input type="file" accept="image/*" onchange="loadLogo(this, 'logo1')">
                             </label>
                         </div>
                         
                         <div class="header-title">
-                            <h1>ACTA DE INSPECCIÃƒâ€œN TÃƒâ€°CNICA ESTRUCTURAL</h1>
-                            <h2>MEJORAMIENTO VÃƒÂA GRANADA - GUATAPÃƒâ€° (LA SONADORA - LA PEÃƒâ€˜A)</h2>
-                            <p>Control de InterventorÃƒÂ­a INVIAS 2022 / NSR-10 / PAGA</p>
+                            <h1>ACTA DE INSPECCIÓN TÉCNICA ESTRUCTURAL</h1>
+                            <h2>MEJORAMIENTO VÍA GRANADA - GUATAPÉ (LA SONADORA - LA PEÑA)</h2>
+                            <p>Control de Interventoría INVIAS 2022 / NSR-10 / PAGA</p>
                         </div>
                         
                         <div class="logo-box">
                             <img id="logo2" src="logo_gsc.png" style="display:block; cursor:pointer;" title="Click para cambiar logo" onclick="this.nextElementSibling.querySelector('input').click()" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <label class="no-print" style="cursor:pointer; width:100%; height:100%; display:none; align-items:center; justify-content:center; flex-direction:column; border: 2px dashed #90a4ae; background: #f4f7f8; border-radius: 6px;">
-                                <span>+ Logo InterventorÃƒÂ­a</span>
+                                <span>+ Logo Interventoría</span>
                                 <input type="file" accept="image/*" onchange="loadLogo(this, 'logo2')">
                             </label>
                         </div>
@@ -330,7 +330,7 @@
                     <table class="info-table">
                         <tr>
                             <td class="bg-gray">Contratista:</td>
-                            <td><input type="text" class="info-input" placeholder="Nombre/RazÃƒÂ³n Social"></td>
+                            <td><input type="text" class="info-input" placeholder="Nombre/Razón Social"></td>
                             <td class="bg-gray">Fecha / Hora:</td>
                             <td><input type="datetime-local" class="info-input" id="fecha-hoy"></td>
                         </tr>
@@ -342,23 +342,23 @@
                         </tr>
                     </table>
 
-                    <div class="section-title">1. TOPOGRAFÃƒÂA, MOVIMIENTO DE TIERRAS Y SUBRASANTE</div>
+                    <div class="section-title">1. TOPOGRAFÍA, MOVIMIENTO DE TIERRAS Y SUBRASANTE</div>
                     <table class="audit-table">
                         <thead>
                             <tr>
-                                <th class="col-ficha">CÃƒâ€œDIGO</th>
-                                <th class="col-req">CRITERIO DE EVALUACIÃƒâ€œN (INVIAS 2022)</th>
-                                <th class="col-eval">VERIFICACIÃƒâ€œN</th>
-                                <th class="col-obs">REGISTRO TÃƒâ€°CNICO Y FOTOGRÃƒÂFICO</th>
+                                <th class="col-ficha">CÓDIGO</th>
+                                <th class="col-req">CRITERIO DE EVALUACIÓN (INVIAS 2022)</th>
+                                <th class="col-eval">VERIFICACIÓN</th>
+                                <th class="col-obs">REGISTRO TÉCNICO Y FOTOGRÁFICO</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td data-label="CÃƒÂ³digo:" class="col-ficha">INV-210</td>
+                                <td data-label="Código:" class="col-ficha">INV-210</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Replanteo y Perfiles:</b> VerificaciÃƒÂ³n de cotas de subrasante, bombeo y peraltes.
-                                    <span class="param-desc">La cota no debe variar en mÃƒÂ¡s de 3 cm respecto al proyecto y nunca superar la teÃƒÂ³rica.</span>
-                                    <span class="tolerance">Tolerancia AltimÃƒÂ©trica: Ã‚Â± 3 cm / PlanimÃƒÂ©trica: Ã‚Â± 5 cm</span>
+                                    <b>Replanteo y Perfiles:</b> Verificación de cotas de subrasante, bombeo y peraltes.
+                                    <span class="param-desc">La cota no debe variar en más de 3 cm respecto al proyecto y nunca superar la teórica.</span>
+                                    <span class="tolerance">Tolerancia Altimétrica: ± 3 cm / Planimétrica: ± 5 cm</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval">
                                     <select class="status-select" onchange="changeColor(this)">
@@ -367,14 +367,14 @@
                                 </td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea placeholder="Abscisas evaluadas, cotas tomadas..."></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
                                     <div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="CÃƒÂ³digo:" class="col-ficha">INV-610</td>
+                                <td data-label="Código:" class="col-ficha">INV-610</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>CompactaciÃƒÂ³n Subrasante y CBR:</b> Control de humedad y ensayos de densidad en campo.
+                                    <b>Compactación Subrasante y CBR:</b> Control de humedad y ensayos de densidad en campo.
                                     <span class="param-desc">El material inestable o con exceso de humedad (acolchonamientos > 20mm) debe ser reemplazado/mejorado.</span>
                                     <span class="tolerance">Norma: Min 95% Proctor Mod. | Lote: 1 ensayo c/100m. | CBR > 3.0%</span>
                                 </td>
@@ -384,8 +384,8 @@
                                     </select>
                                 </td>
                                 <td data-label="Evidencias:" class="col-obs">
-                                    <textarea placeholder="Resultados ensayo cono de arena o densÃƒÂ­metro..."></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
+                                    <textarea placeholder="Resultados ensayo cono de arena o densímetro..."></textarea>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
                                     <div class="image-gallery"></div>
                                 </td>
                             </tr>
@@ -396,19 +396,19 @@
                     <table class="audit-table">
                         <thead>
                             <tr>
-                                <th class="col-ficha">CÃƒâ€œDIGO</th>
-                                <th class="col-req">CRITERIO DE EVALUACIÃƒâ€œN (INVIAS 2022)</th>
-                                <th class="col-eval">VERIFICACIÃƒâ€œN</th>
-                                <th class="col-obs">REGISTRO TÃƒâ€°CNICO Y FOTOGRÃƒÂFICO</th>
+                                <th class="col-ficha">CÓDIGO</th>
+                                <th class="col-req">CRITERIO DE EVALUACIÓN (INVIAS 2022)</th>
+                                <th class="col-eval">VERIFICACIÓN</th>
+                                <th class="col-obs">REGISTRO TÉCNICO Y FOTOGRÁFICO</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td data-label="CÃƒÂ³digo:" class="col-ficha">INV-320</td>
+                                <td data-label="Código:" class="col-ficha">INV-320</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Subbase Granular:</b> ExtensiÃƒÂ³n, nivelaciÃƒÂ³n y espesor. Agregados libres de materia orgÃƒÂ¡nica y segregaciÃƒÂ³n.
-                                    <span class="param-desc">ComprobaciÃƒÂ³n de lisura superficial. No se permite mezclar en el ÃƒÂ¡rea de colocaciÃƒÂ³n.</span>
-                                    <span class="tolerance">Espesor diseÃƒÂ±o: 15 cm | Tolerancia rasante: +0 mm / -15 mm | D. L.A < 50%</span>
+                                    <b>Subbase Granular:</b> Extensión, nivelación y espesor. Agregados libres de materia orgánica y segregación.
+                                    <span class="param-desc">Comprobación de lisura superficial. No se permite mezclar en el área de colocación.</span>
+                                    <span class="tolerance">Espesor diseño: 15 cm | Tolerancia rasante: +0 mm / -15 mm | D. L.A < 50%</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval">
                                     <select class="status-select" onchange="changeColor(this)">
@@ -417,16 +417,16 @@
                                 </td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea placeholder="Espesores medidos en campo..."></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
                                     <div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="CÃƒÂ³digo:" class="col-ficha">CAP-8.14</td>
+                                <td data-label="Código:" class="col-ficha">CAP-8.14</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Concreto Placa Huella y CiclÃƒÂ³peo:</b> Mezcla de rieles y franja central.
-                                    <span class="param-desc">El concreto ciclÃƒÂ³peo para el centro no puede exceder el 40% de volumen en piedra rajÃƒÂ³n (redondeada preferiblemente).</span>
-                                    <span class="tolerance">Clase D (f'c = 21 MPa / 3000 PSI) | Espesor: 15 cm | CaÃƒÂ­da mezcla mÃƒÂ¡x 1.50m</span>
+                                    <b>Concreto Placa Huella y Ciclópeo:</b> Mezcla de rieles y franja central.
+                                    <span class="param-desc">El concreto ciclópeo para el centro no puede exceder el 40% de volumen en piedra rajón (redondeada preferiblemente).</span>
+                                    <span class="tolerance">Clase D (f'c = 21 MPa / 3000 PSI) | Espesor: 15 cm | Caída mezcla máx 1.50m</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval">
                                     <select class="status-select" onchange="changeColor(this)">
@@ -435,16 +435,16 @@
                                 </td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea placeholder="Remisiones, volumen vaciado, uso de vibrador..."></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
                                     <div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="CÃƒÂ³digo:" class="col-ficha">INV-630</td>
+                                <td data-label="Código:" class="col-ficha">INV-630</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Concreto para Cunetas:</b> ConstrucciÃƒÂ³n de cunetas para el drenaje longitudinal de la vÃƒÂ­a.
-                                    <span class="param-desc">Verificar las dimensiones de las cunetas segÃƒÂºn los planos estructurales.</span>
-                                    <span class="tolerance">Clase D (f'c = 21 MPa / 3000 PSI) a los 28 dÃƒÂ­as.</span>
+                                    <b>Concreto para Cunetas:</b> Construcción de cunetas para el drenaje longitudinal de la vía.
+                                    <span class="param-desc">Verificar las dimensiones de las cunetas según los planos estructurales.</span>
+                                    <span class="tolerance">Clase D (f'c = 21 MPa / 3000 PSI) a los 28 días.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval">
                                     <select class="status-select" onchange="changeColor(this)">
@@ -453,7 +453,7 @@
                                 </td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea placeholder="Muestreo de cilindros, curado, control dimensional..."></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
                                     <div class="image-gallery"></div>
                                 </td>
                             </tr>
@@ -464,19 +464,19 @@
                     <table class="audit-table">
                         <thead>
                             <tr>
-                                <th class="col-ficha">CÃƒâ€œDIGO</th>
-                                <th class="col-req">CRITERIO DE EVALUACIÃƒâ€œN (INVIAS 2022)</th>
-                                <th class="col-eval">VERIFICACIÃƒâ€œN</th>
-                                <th class="col-obs">REGISTRO TÃƒâ€°CNICO Y FOTOGRÃƒÂFICO</th>
+                                <th class="col-ficha">CÓDIGO</th>
+                                <th class="col-req">CRITERIO DE EVALUACIÓN (INVIAS 2022)</th>
+                                <th class="col-eval">VERIFICACIÓN</th>
+                                <th class="col-obs">REGISTRO TÉCNICO Y FOTOGRÁFICO</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td data-label="CÃƒÂ³digo:" class="col-ficha">INV-640</td>
+                                <td data-label="Código:" class="col-ficha">INV-640</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Acero de Refuerzo:</b> Estado de las barras (sin ÃƒÂ³xido escamoso/barro), amarres y recubrimientos (uso de panelas de concreto).
-                                    <span class="param-desc">Doblado en frÃƒÂ­o exclusivamente. Traslapos segÃƒÂºn despiece estructural.</span>
-                                    <span class="tolerance">Recubrimientos segÃƒÂºn NSR-10 (Ã‚Â±5mm) | SeparaciÃƒÂ³n min. barras: 25mm o 1.33 x TMA</span>
+                                    <b>Acero de Refuerzo:</b> Estado de las barras (sin óxido escamoso/barro), amarres y recubrimientos (uso de panelas de concreto).
+                                    <span class="param-desc">Doblado en frío exclusivamente. Traslapos según despiece estructural.</span>
+                                    <span class="tolerance">Recubrimientos según NSR-10 (±5mm) | Separación min. barras: 25mm o 1.33 x TMA</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval">
                                     <select class="status-select" onchange="changeColor(this)">
@@ -485,16 +485,16 @@
                                 </td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea placeholder="Detalle de parrillas, traslapos, separadores..."></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
                                     <div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="CÃƒÂ³digo:" class="col-ficha">INV-630</td>
+                                <td data-label="Código:" class="col-ficha">INV-630</td>
                                 <td data-label="Requisito:" class="col-req">
                                     <b>Concreto Estructural (Clase C):</b> Muros, disipadores, aletas, tableros de puente y Box Culvert. 
-                                    <span class="param-desc">Toma de cilindros obligatoria. Curado inmediato al retirar formaleta (tela saturada o quÃƒÂ­mico claro).</span>
-                                    <span class="tolerance">Clase C (f'c = 28 MPa / 4000 PSI) | Asentamiento 4" Ã‚Â±1" | Curado mÃƒÂ­n. 7 a 14 dÃƒÂ­as.</span>
+                                    <span class="param-desc">Toma de cilindros obligatoria. Curado inmediato al retirar formaleta (tela saturada o químico claro).</span>
+                                    <span class="tolerance">Clase C (f'c = 28 MPa / 4000 PSI) | Asentamiento 4" ±1" | Curado mín. 7 a 14 días.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval">
                                     <select class="status-select" onchange="changeColor(this)">
@@ -503,16 +503,16 @@
                                 </td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea placeholder="Datos de cilindros tomados, tipo de curado aplicado..."></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
                                     <div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="CÃƒÂ³digo:" class="col-ficha">INV-630</td>
+                                <td data-label="Código:" class="col-ficha">INV-630</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Concreto para Solados (Clase F):</b> Vaciado de solados para nivelaciÃƒÂ³n y limpieza bajo estructuras.
-                                    <span class="param-desc">El espesor mÃƒÂ­nimo del solado debe ser de 5 cm.</span>
-                                    <span class="tolerance">Clase F (f'c = 14 MPa / 2000 PSI) a los 28 dÃƒÂ­as.</span>
+                                    <b>Concreto para Solados (Clase F):</b> Vaciado de solados para nivelación y limpieza bajo estructuras.
+                                    <span class="param-desc">El espesor mínimo del solado debe ser de 5 cm.</span>
+                                    <span class="tolerance">Clase F (f'c = 14 MPa / 2000 PSI) a los 28 días.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval">
                                     <select class="status-select" onchange="changeColor(this)">
@@ -520,17 +520,17 @@
                                     </select>
                                 </td>
                                 <td data-label="Evidencias:" class="col-obs">
-                                    <textarea placeholder="VerificaciÃƒÂ³n de nivelaciÃƒÂ³n, espesor, limpieza base..."></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
+                                    <textarea placeholder="Verificación de nivelación, espesor, limpieza base..."></textarea>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
                                     <div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="CÃƒÂ³digo:" class="col-ficha">CAP-IV-2</td>
+                                <td data-label="Código:" class="col-ficha">CAP-IV-2</td>
                                 <td data-label="Requisito:" class="col-req">
                                     <b>Prefabricados y Montaje (Box Culvert, Vigas, Prelosas):</b> Cumplimiento del plan de Izaje y transporte.
-                                    <span class="param-desc">Las juntas elastomÃƒÂ©ricas deben ser estancas. La cama de apoyo debe estar compactada.</span>
-                                    <span class="tolerance">Transporte solo al alcanzar 80% f'c (Box/Prelosas: 28 MPa | Vigas/Puentes Peatonales: 35 MPa) | Montaje con mÃƒÂ­n. 2 apoyos | Norma Juntas NTC 5672</span>
+                                    <span class="param-desc">Las juntas elastoméricas deben ser estancas. La cama de apoyo debe estar compactada.</span>
+                                    <span class="tolerance">Transporte solo al alcanzar 80% f'c (Box/Prelosas: 28 MPa | Vigas/Puentes Peatonales: 35 MPa) | Montaje con mín. 2 apoyos | Norma Juntas NTC 5672</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval">
                                     <select class="status-select" onchange="changeColor(this)">
@@ -538,17 +538,17 @@
                                     </select>
                                 </td>
                                 <td data-label="Evidencias:" class="col-obs">
-                                    <textarea placeholder="ValidaciÃƒÂ³n de plan de izaje, equipos usados, estado de juntas..."></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
+                                    <textarea placeholder="Validación de plan de izaje, equipos usados, estado de juntas..."></textarea>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
                                     <div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td data-label="CÃƒÂ³digo:" class="col-ficha">INV-663</td>
+                                <td data-label="Código:" class="col-ficha">INV-663</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>TuberÃƒÂ­a PlÃƒÂ¡stica:</b> InstalaciÃƒÂ³n de tuberÃƒÂ­a para alcantarillado. VerificaciÃƒÂ³n de alineamiento, pendientes y base (cama o solado).
-                                    <span class="param-desc">Las juntas deben ser impermeables con sello elastomÃƒÂ©rico.</span>
-                                    <span class="tolerance">Alineamiento: max 10mm/m de variaciÃƒÂ³n. | Relleno zanja s/n INVIAS 610.</span>
+                                    <b>Tubería Plástica:</b> Instalación de tubería para alcantarillado. Verificación de alineamiento, pendientes y base (cama o solado).
+                                    <span class="param-desc">Las juntas deben ser impermeables con sello elastomérico.</span>
+                                    <span class="tolerance">Alineamiento: max 10mm/m de variación. | Relleno zanja s/n INVIAS 610.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval">
                                     <select class="status-select" onchange="changeColor(this)">
@@ -557,7 +557,7 @@
                                 </td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea placeholder="Control de pendientes, material de atraque, juntas..."></textarea>
-                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
+                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label>
                                     <div class="image-gallery"></div>
                                 </td>
                             </tr>
@@ -565,9 +565,9 @@
                     </table>
 
                     <div class="rejection-box">
-                        <h3>Ã¢Å¡Â Ã¯Â¸Â CLÃƒÂUSULAS DE RECHAZO Y DEMOLICIÃƒâ€œN (INV-E-410 / 418)</h3>
-                        <p>1. <b>Acabados:</b> Irregularidad superficial > 0.4cm con regla de 3m requiere desbaste o correcciÃƒÂ³n a costo del contratista.<br>
-                           2. <b>Resistencia:</b> Si los cilindros fallan a 28 dÃƒÂ­as, se extraerÃƒÂ¡n 3 nÃƒÂºcleos. <b>Si el promedio de los nÃƒÂºcleos es < 85% del f'c de diseÃƒÂ±o, o algÃƒÂºn nÃƒÂºcleo individual es < 75%, SE ORDENARÃƒÂ LA DEMOLICIÃƒâ€œN TOTAL DE LA ESTRUCTURA.</b></p>
+                        <h3>⚠️ CLÁUSULAS DE RECHAZO Y DEMOLICIÓN (INV-E-410 / 418)</h3>
+                        <p>1. <b>Acabados:</b> Irregularidad superficial > 0.4cm con regla de 3m requiere desbaste o corrección a costo del contratista.<br>
+                           2. <b>Resistencia:</b> Si los cilindros fallan a 28 días, se extraerán 3 núcleos. <b>Si el promedio de los núcleos es < 85% del f'c de diseño, o algún núcleo individual es < 75%, SE ORDENARÁ LA DEMOLICIÓN TOTAL DE LA ESTRUCTURA.</b></p>
                     </div>
 
                     <div class="signatures-title">5. FIRMAS:</div>
@@ -575,10 +575,10 @@
                         <div class="sig-box">
                             <div class="firma-img-container"><img id="firma-1" class="firma-img" src=""></div>
                             <div class="firma-controls no-print">
-                                <button type="button" class="btn-firma" onclick="openSignaturePad('firma-1')">Ã¢Å“ÂÃ¯Â¸Â</button>
+                                <button type="button" class="btn-firma" onclick="openSignaturePad('firma-1')">✍️</button>
                                 <input type="file" id="up-firma-1" accept="image/*" class="hidden-file-input" onchange="loadSignatureImg(event, 'firma-1')">
-                                <label class="btn-firma" for="up-firma-1" style="cursor:pointer; margin:0;">Ã°Å¸â€œÂ</label>
-                                <button type="button" class="btn-firma" onclick="clearSignature('firma-1')">Ã¢ÂÅ’</button>
+                                <label class="btn-firma" for="up-firma-1" style="cursor:pointer; margin:0;">📁</label>
+                                <button type="button" class="btn-firma" onclick="clearSignature('firma-1')">❌</button>
                             </div>
                             <div class="sig-text">
                                 Representante Del Contratista<br>
@@ -588,26 +588,26 @@
                         <div class="sig-box">
                             <div class="firma-img-container"><img id="firma-2" class="firma-img" src=""></div>
                             <div class="firma-controls no-print">
-                                <button type="button" class="btn-firma" onclick="openSignaturePad('firma-2')">Ã¢Å“ÂÃ¯Â¸Â</button>
+                                <button type="button" class="btn-firma" onclick="openSignaturePad('firma-2')">✍️</button>
                                 <input type="file" id="up-firma-2" accept="image/*" class="hidden-file-input" onchange="loadSignatureImg(event, 'firma-2')">
-                                <label class="btn-firma" for="up-firma-2" style="cursor:pointer; margin:0;">Ã°Å¸â€œÂ</label>
-                                <button type="button" class="btn-firma" onclick="clearSignature('firma-2')">Ã¢ÂÅ’</button>
+                                <label class="btn-firma" for="up-firma-2" style="cursor:pointer; margin:0;">📁</label>
+                                <button type="button" class="btn-firma" onclick="clearSignature('firma-2')">❌</button>
                             </div>
                             <div class="sig-text">
-                                Representante De La InterventorÃƒÂ­a<br>
+                                Representante De La Interventoría<br>
                                 <div class="cc-row">C.C <input type="text"></div>
                             </div>
                         </div>
                         <div class="sig-box">
                             <div class="firma-img-container"><img id="firma-3" class="firma-img" src=""></div>
                             <div class="firma-controls no-print">
-                                <button type="button" class="btn-firma" onclick="openSignaturePad('firma-3')">Ã¢Å“ÂÃ¯Â¸Â</button>
+                                <button type="button" class="btn-firma" onclick="openSignaturePad('firma-3')">✍️</button>
                                 <input type="file" id="up-firma-3" accept="image/*" class="hidden-file-input" onchange="loadSignatureImg(event, 'firma-3')">
-                                <label class="btn-firma" for="up-firma-3" style="cursor:pointer; margin:0;">Ã°Å¸â€œÂ</label>
-                                <button type="button" class="btn-firma" onclick="clearSignature('firma-3')">Ã¢ÂÅ’</button>
+                                <label class="btn-firma" for="up-firma-3" style="cursor:pointer; margin:0;">📁</label>
+                                <button type="button" class="btn-firma" onclick="clearSignature('firma-3')">❌</button>
                             </div>
                             <div class="sig-text">
-                                Responsable De AdministraciÃƒÂ³n Municipal De GuatapÃƒÂ©<br>
+                                Responsable De Administración Municipal De Guatapé<br>
                                 Antioquia<br>
                                 <div class="cc-row">C.C <input type="text"></div>
                             </div>
@@ -621,7 +621,7 @@
 </div>
 
 <script>
-    // Fecha automÃƒÂ¡tica ajustada a datetime-local
+    // Fecha automática ajustada a datetime-local
     const now = new Date();
     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
     document.getElementById('fecha-hoy').value = now.toISOString().slice(0,16);
@@ -652,7 +652,7 @@
         return `K${km}+${mtsFormat}`;
     }
 
-    // Carga dinÃƒÂ¡mica de Logos
+    // Carga dinámica de Logos
     function loadLogo(input, imgId) {
         if (input.files && input.files[0]) {
             const reader = new FileReader();
@@ -666,7 +666,7 @@
         }
     }
 
-    // GalerÃƒÂ­a Multifoto con compresiÃƒÂ³n
+    // Galería Multifoto con compresión
     function handleFiles(input) {
         const gallery = input.parentElement.nextElementSibling;
         
@@ -678,7 +678,7 @@
                     imgOriginal.src = e.target.result;
                     imgOriginal.onload = function() {
                         const canvas = document.createElement('canvas');
-                        const MAX_DIM = 800; // CompresiÃƒÂ³n
+                        const MAX_DIM = 800; // Compresión
                         let width = imgOriginal.width; let height = imgOriginal.height;
                         if (width > height) { if (width > MAX_DIM) { height *= MAX_DIM / width; width = MAX_DIM; } } 
                         else { if (height > MAX_DIM) { width *= MAX_DIM / height; height = MAX_DIM; } }
@@ -692,7 +692,7 @@
                         img.src = compressedDataUrl;
                         img.title = "Toca para eliminar evidencia";
                         img.onclick = function() {
-                            if(confirm("Ã‚Â¿Eliminar esta fotografÃƒÂ­a tÃƒÂ©cnica del reporte?")) this.remove();
+                            if(confirm("¿Eliminar esta fotografía técnica del reporte?")) this.remove();
                         };
                         gallery.appendChild(img);
                     }
@@ -703,7 +703,7 @@
         input.value = ""; 
     }
 
-    // Cambio de color dinÃƒÂ¡mico del semÃƒÂ¡foro
+    // Cambio de color dinámico del semáforo
     function changeColor(selectElement) {
         selectElement.classList.remove('status-cumple', 'status-nocumple', 'status-na');
         if (selectElement.value === 'cumple') selectElement.classList.add('status-cumple');
@@ -733,12 +733,9 @@
     }
 
     function generarPDF() {
-        let actaNum = document.getElementById('acta-num') ? document.getElementById('acta-num').value.trim() : 'SN';
-        let tramoInfo = document.getElementById('cfg-tramo-actual') ? document.getElementById('cfg-tramo-actual').value : 'General';
-        let fileName = `Espec_Tecnicas_${tramoInfo}_N${actaNum}.pdf`;
-        try {
-            savePDFNativo('Espec_Tecnicas', fileName, document.body, true);
-        } catch(e) { console.error('Error in PDF', e); }
+        let d = new Date(); let stamp = d.toISOString().slice(0,10);
+        let fileName = "Espec_Tecnicas" + "_" + stamp + ".pdf";
+        savePDFNativo('Espec_Tecnicas', fileName, document.querySelector('.paper-container') || document.body, true);
     }
 
     // Cargar datos desde .json o .jw7
@@ -784,7 +781,7 @@
                             img.src = src;
                             img.title = "Toca para eliminar evidencia";
                             img.onclick = function() {
-                                if(confirm("Ã‚Â¿Eliminar esta fotografÃƒÂ­a tÃƒÂ©cnica del reporte?")) this.remove();
+                                if(confirm("¿Eliminar esta fotografía técnica del reporte?")) this.remove();
                             };
                             galleries[i].appendChild(img);
                         });
@@ -806,7 +803,7 @@
                 
                 showToast("Datos cargados correctamente", "success");
             } catch (err) {
-                showToast("Error al leer el archivo. AsegÃƒÂºrate de que sea un archivo vÃƒÂ¡lido.", "error");
+                showToast("Error al leer el archivo. Asegúrate de que sea un archivo válido.", "error");
             }
         };
         reader.readAsText(file);

@@ -10,6 +10,7 @@
     
     <content src="index.html" />
     <access origin="*" />
+    <plugin name="cordova-plugin-file" spec="^8.0.0" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
@@ -23,6 +24,13 @@
         <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
         <icon src="icon_ios.png" width="1024" height="1024" />
         
+        <edit-config target="UIFileSharingEnabled" file="*-Info.plist" mode="merge">
+            <true/>
+        </edit-config>
+        <edit-config target="LSSupportsOpeningDocumentsInPlace" file="*-Info.plist" mode="merge">
+            <true/>
+        </edit-config>
+
         <edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="merge">
             <string>GSC Actas requiere acceso a la fototeca para adjuntar imágenes a los registros y evidencias.</string>
         </edit-config>

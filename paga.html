@@ -7,7 +7,7 @@
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>AUDITORÍA TÉCNICA Y AMBIENTAL PRO - VÍA GUATAPÉ</title>
+    <title>AUDITORÃƒÂA TÃƒâ€°CNICA Y AMBIENTAL PRO - VÃƒÂA GUATAPÃƒâ€°</title>
     <style>
         :root { 
             --primary: #0a2e50; 
@@ -183,19 +183,22 @@
         .modal-buttons { margin-top: 15px; display: flex; justify-content: center; gap: 10px; }
         .modal-buttons button { padding: 8px 15px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
     </style>
+    <script src="cordova.js"></script>
+    <script src="html2pdf.bundle.min.js"></script>
+    <script src="gsc_file_manager.js"></script>
 </head>
 <body>
 
     <nav class="no-print" style="background-color: var(--primary); padding: 10px; display: flex; justify-content: center; position: sticky; top: 0; z-index: 10000; margin-bottom: 20px;">
         <select id="global-nav" onchange="if(this.value) window.location.href=this.value" style="padding: 8px; border-radius: 6px; font-weight: bold; background: white; color: var(--primary); outline: none; border: 1px solid #ccc; max-width: 100%; width: 90%;">
             <option value="">Ir a...</option>
-            <option value="index.html">Menú Principal (Inicio)</option>
+            <option value="index.html">MenÃƒÂº Principal (Inicio)</option>
             <option value="acta_vecindad.html">Acta de Vecindad</option>
             <option value="acta_entorno.html">Acta de Entorno</option>
             <option value="proc_const.html">Proc. Constructivo</option>
-            <option value="pmt.html">PMT (Tránsito)</option>
+            <option value="pmt.html">PMT (TrÃƒÂ¡nsito)</option>
             <option value="paga.html">PAGA (Ambiental)</option>
-            <option value="espec_tecn.html">Espec. Técnicas</option>
+            <option value="espec_tecn.html">Espec. TÃƒÂ©cnicas</option>
         </select>
     </nav>
 
@@ -213,13 +216,13 @@
 </div>
 
 <div class="fab-container no-print">
-    <button class="btn-action btn-print" onclick="generarPDF()">🖨️ Generar PDF</button>
-    <button class="btn-action" style="background: #0288d1;" onclick="exportData('json')">💾 Guardar .json</button>
+    <button class="btn-action btn-print" onclick="generarPDF()">Ã°Å¸â€“Â¨Ã¯Â¸Â Generar PDF</button>
+    <button class="btn-action" style="background: #0288d1;" onclick="exportData('json')">Ã°Å¸â€™Â¾ Guardar .json</button>
     <label class="btn-action" style="background: #e65100; cursor: pointer; text-align: center; display: inline-block;">
-        📂 Cargar Datos
+        Ã°Å¸â€œâ€š Cargar Datos
         <input type="file" accept=".json, .gsc" style="display: none;" onchange="importData(event)">
     </label>
-    <button class="btn-action btn-clear" onclick="limpiarTodo()">🗑️ Limpiar</button>
+    <button class="btn-action btn-clear" onclick="limpiarTodo()">Ã°Å¸â€”â€˜Ã¯Â¸Â Limpiar</button>
 </div>
 
 <div class="paper-container">
@@ -231,15 +234,15 @@
                         <div class="logo-box">
                             <img id="logo1" src="logo_entidad.png" style="display:block; cursor:pointer;" title="Click para cambiar logo" onclick="this.nextElementSibling.querySelector('input').click()" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <label class="no-print" style="cursor:pointer; width:100%; height:100%; display:none; align-items:center; justify-content:center; flex-direction:column; border: 2px dashed #90a4ae; background: #f4f7f8; border-radius: 6px;">
-                                <span>+ Logo Alcaldía</span>
+                                <span>+ Logo AlcaldÃƒÂ­a</span>
                                 <input type="file" accept="image/*" onchange="loadLogo(this, 'logo1')">
                             </label>
                         </div>
                         
                         <div class="header-title">
-                            <h1>ACTA DE AUDITORÍA Y CONTROL AMBIENTAL</h1>
-                            <h2>VÍA RURAL GRANADA - GUATAPÉ (SECTOR LA SONADORA Y LA PEÑA)</h2>
-                            <p>EVALUACIÓN PLAN DE ADAPTACIÓN A LA GUÍA AMBIENTAL (PAGA)</p>
+                            <h1>ACTA DE AUDITORÃƒÂA Y CONTROL AMBIENTAL</h1>
+                            <h2>VÃƒÂA RURAL GRANADA - GUATAPÃƒâ€° (SECTOR LA SONADORA Y LA PEÃƒâ€˜A)</h2>
+                            <p>EVALUACIÃƒâ€œN PLAN DE ADAPTACIÃƒâ€œN A LA GUÃƒÂA AMBIENTAL (PAGA)</p>
                         </div>
                         
                         <div class="logo-box">
@@ -260,8 +263,8 @@
                     <table class="info-table">
                         <tr>
                             <td class="bg-gray">Contratista:</td>
-                            <td><input type="text" class="info-input" placeholder="Nombre/Razón Social"></td>
-                            <td class="bg-gray">Fecha de Auditoría:</td>
+                            <td><input type="text" class="info-input" placeholder="Nombre/RazÃƒÂ³n Social"></td>
+                            <td class="bg-gray">Fecha de AuditorÃƒÂ­a:</td>
                             <td><input type="date" class="info-input" id="fecha-hoy"></td>
                         </tr>
                         <tr>
@@ -272,34 +275,34 @@
                         </tr>
                     </table>
 
-                    <div class="section-title">1. GESTIÓN SOCIAL Y DOCUMENTAL (DAGA / PGS)</div>
+                    <div class="section-title">1. GESTIÃƒâ€œN SOCIAL Y DOCUMENTAL (DAGA / PGS)</div>
                     <table class="audit-table">
-                        <thead><tr><th class="col-ficha">FICHA</th><th class="col-req">REQUERIMIENTO PAGA AL DETALLE</th><th class="col-eval">ESTADO</th><th class="col-obs">REGISTRO Y EVIDENCIA FOTOGRÁFICA</th></tr></thead>
+                        <thead><tr><th class="col-ficha">FICHA</th><th class="col-req">REQUERIMIENTO PAGA AL DETALLE</th><th class="col-eval">ESTADO</th><th class="col-obs">REGISTRO Y EVIDENCIA FOTOGRÃƒÂFICA</th></tr></thead>
                         <tbody>
                             <tr>
                                 <td data-label="Ficha:" class="col-ficha">PGS-7.3-16</td>
                                 <td data-label="Requisito:" class="col-req">
                                     <b>Levantamiento Actas de Vecindad</b>
-                                    <span class="param-desc">Elaboración en el 100% de las infraestructuras, cercas, cultivos y servicios públicos aledaños ANTES de iniciar obras.</span>
-                                    <span class="tolerance">Tolerancia Cero: Debe incluir registro fotográfico/fílmico obligatorio y firma de interventoría.</span>
+                                    <span class="param-desc">ElaboraciÃƒÂ³n en el 100% de las infraestructuras, cercas, cultivos y servicios pÃƒÂºblicos aledaÃƒÂ±os ANTES de iniciar obras.</span>
+                                    <span class="tolerance">Tolerancia Cero: Debe incluir registro fotogrÃƒÂ¡fico/fÃƒÂ­lmico obligatorio y firma de interventorÃƒÂ­a.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea placeholder="Observaciones del hallazgo..."></textarea>
-                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
                                 <td data-label="Ficha:" class="col-ficha">PGS-6.1-21</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Atención Comunitaria (PQRS)</b>
-                                    <span class="param-desc">Disponer de puntos de recepción de quejas. Tiempos de ley para dar respuesta a la comunidad y autoridades.</span>
-                                    <span class="tolerance">Plazos obligatorios: 15 días hábiles para quejas/reclamos, 10 días para solicitudes de información.</span>
+                                    <b>AtenciÃƒÂ³n Comunitaria (PQRS)</b>
+                                    <span class="param-desc">Disponer de puntos de recepciÃƒÂ³n de quejas. Tiempos de ley para dar respuesta a la comunidad y autoridades.</span>
+                                    <span class="tolerance">Plazos obligatorios: 15 dÃƒÂ­as hÃƒÂ¡biles para quejas/reclamos, 10 dÃƒÂ­as para solicitudes de informaciÃƒÂ³n.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea placeholder="Observaciones del hallazgo..."></textarea>
-                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                         </tbody>
@@ -307,65 +310,65 @@
 
                     <div class="section-title">2. MANEJO DE MATERIALES, CONCRETOS Y ESCOMBROS (PAC)</div>
                     <table class="audit-table">
-                        <thead><tr><th class="col-ficha">FICHA</th><th class="col-req">REQUERIMIENTO PAGA AL DETALLE</th><th class="col-eval">ESTADO</th><th class="col-obs">REGISTRO Y EVIDENCIA FOTOGRÁFICA</th></tr></thead>
+                        <thead><tr><th class="col-ficha">FICHA</th><th class="col-req">REQUERIMIENTO PAGA AL DETALLE</th><th class="col-eval">ESTADO</th><th class="col-obs">REGISTRO Y EVIDENCIA FOTOGRÃƒÂFICA</th></tr></thead>
                         <tbody>
                             <tr>
                                 <td data-label="Ficha:" class="col-ficha">PAC-2.1-04</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Acopios Temporales de Materiales Pétreos</b>
-                                    <span class="param-desc">Confinamiento de materiales, aislamiento del piso con estibas/plásticos y cobertura con lona/polietileno.</span>
-                                    <span class="tolerance">Restricción: Volumen acopiado en vía solo para 1 o 2 jornadas. Máximo 24h si está en espacio público.</span>
+                                    <b>Acopios Temporales de Materiales PÃƒÂ©treos</b>
+                                    <span class="param-desc">Confinamiento de materiales, aislamiento del piso con estibas/plÃƒÂ¡sticos y cobertura con lona/polietileno.</span>
+                                    <span class="tolerance">RestricciÃƒÂ³n: Volumen acopiado en vÃƒÂ­a solo para 1 o 2 jornadas. MÃƒÂ¡ximo 24h si estÃƒÂ¡ en espacio pÃƒÂºblico.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea placeholder="Observaciones del hallazgo..."></textarea>
-                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
                                 <td data-label="Ficha:" class="col-ficha">PAC-2.1-04</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Preparación de Concretos (Placa Huella/Cunetas)</b>
-                                    <span class="param-desc">Diseño de formaletas herméticas. Evitar escurrimiento en la preparación in situ.</span>
-                                    <span class="tolerance">Prohibido tajantemente: Mezclar directamente sobre el suelo. Exigido uso de plataforma metálica o geotextil.</span>
+                                    <b>PreparaciÃƒÂ³n de Concretos (Placa Huella/Cunetas)</b>
+                                    <span class="param-desc">DiseÃƒÂ±o de formaletas hermÃƒÂ©ticas. Evitar escurrimiento en la preparaciÃƒÂ³n in situ.</span>
+                                    <span class="tolerance">Prohibido tajantemente: Mezclar directamente sobre el suelo. Exigido uso de plataforma metÃƒÂ¡lica o geotextil.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea placeholder="Observaciones del hallazgo..."></textarea>
-                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
                                 <td data-label="Ficha:" class="col-ficha">PAC-2.4-07</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Transporte y Disposición de RCD (Escombros)</b>
-                                    <span class="param-desc">Vehículos con contenedor continuo sin roturas. Certificado de ZODME o empresa autorizada (Ej. ECORCD S.A.S).</span>
-                                    <span class="tolerance">Exigencia: La carpa debe sujetarse fijamente bajando al menos 30 cm desde el borde superior del platón.</span>
+                                    <b>Transporte y DisposiciÃƒÂ³n de RCD (Escombros)</b>
+                                    <span class="param-desc">VehÃƒÂ­culos con contenedor continuo sin roturas. Certificado de ZODME o empresa autorizada (Ej. ECORCD S.A.S).</span>
+                                    <span class="tolerance">Exigencia: La carpa debe sujetarse fijamente bajando al menos 30 cm desde el borde superior del platÃƒÂ³n.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea placeholder="Observaciones del hallazgo..."></textarea>
-                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <div class="section-title">3. PROTECCIÓN HÍDRICA Y RESIDUOS SÓLIDOS (PGH)</div>
+                    <div class="section-title">3. PROTECCIÃƒâ€œN HÃƒÂDRICA Y RESIDUOS SÃƒâ€œLIDOS (PGH)</div>
                     <table class="audit-table">
-                        <thead><tr><th class="col-ficha">FICHA</th><th class="col-req">REQUERIMIENTO PAGA AL DETALLE</th><th class="col-eval">ESTADO</th><th class="col-obs">REGISTRO Y EVIDENCIA FOTOGRÁFICA</th></tr></thead>
+                        <thead><tr><th class="col-ficha">FICHA</th><th class="col-req">REQUERIMIENTO PAGA AL DETALLE</th><th class="col-eval">ESTADO</th><th class="col-obs">REGISTRO Y EVIDENCIA FOTOGRÃƒÂFICA</th></tr></thead>
                         <tbody>
                             <tr>
                                 <td data-label="Ficha:" class="col-ficha">PGH-3.2-09</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Manejo de Aguas Residuales Domésticas</b>
-                                    <span class="param-desc">Instalación de unidades sanitarias con la Asociación Internacional de Sanidad Portátil (PSAI).</span>
-                                    <span class="tolerance">Relación estricta: 1 baño por cada 15 trabajadores, separados por sexo. Mantenimiento comprobable mínimo 2 veces semanales.</span>
+                                    <b>Manejo de Aguas Residuales DomÃƒÂ©sticas</b>
+                                    <span class="param-desc">InstalaciÃƒÂ³n de unidades sanitarias con la AsociaciÃƒÂ³n Internacional de Sanidad PortÃƒÂ¡til (PSAI).</span>
+                                    <span class="tolerance">RelaciÃƒÂ³n estricta: 1 baÃƒÂ±o por cada 15 trabajadores, separados por sexo. Mantenimiento comprobable mÃƒÂ­nimo 2 veces semanales.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea placeholder="Observaciones del hallazgo..."></textarea>
-                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
@@ -373,58 +376,58 @@
                                 <td data-label="Requisito:" class="col-req">
                                     <b>Manejo de Residuos Peligrosos (RESPEL)</b>
                                     <span class="param-desc">Aislamiento de filtros, aceites y estopas. Almacenamiento bajo techo sin contacto con el suelo.</span>
-                                    <span class="tolerance">Empaque: Bolsas rojas de polipropileno calibre > 1.8 mm, peso máx 8 kg. Retiro máximo cada 8 días.</span>
+                                    <span class="tolerance">Empaque: Bolsas rojas de polipropileno calibre > 1.8 mm, peso mÃƒÂ¡x 8 kg. Retiro mÃƒÂ¡ximo cada 8 dÃƒÂ­as.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea placeholder="Observaciones del hallazgo..."></textarea>
-                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <div class="section-title">4. SEÑALIZACIÓN, MAQUINARIA Y CONTINGENCIAS (PMIT / PSST)</div>
+                    <div class="section-title">4. SEÃƒâ€˜ALIZACIÃƒâ€œN, MAQUINARIA Y CONTINGENCIAS (PMIT / PSST)</div>
                     <table class="audit-table">
-                        <thead><tr><th class="col-ficha">FICHA</th><th class="col-req">REQUERIMIENTO PAGA AL DETALLE</th><th class="col-eval">ESTADO</th><th class="col-obs">REGISTRO Y EVIDENCIA FOTOGRÁFICA</th></tr></thead>
+                        <thead><tr><th class="col-ficha">FICHA</th><th class="col-req">REQUERIMIENTO PAGA AL DETALLE</th><th class="col-eval">ESTADO</th><th class="col-obs">REGISTRO Y EVIDENCIA FOTOGRÃƒÂFICA</th></tr></thead>
                         <tbody>
                             <tr>
                                 <td data-label="Ficha:" class="col-ficha">PAC-2.3-06</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Cerramientos y Plan de Manejo de Tránsito</b>
-                                    <span class="param-desc">Aislamiento perimetral completo del frente de obra y senderos peatonales mínimos de 1 metro.</span>
-                                    <span class="tolerance">Material: Cinta naranja mín. 12 cm de ancho (o malla), apoyada sobre parales de 1.20 m de alto, espaciados cada 3 a 5 metros.</span>
+                                    <b>Cerramientos y Plan de Manejo de TrÃƒÂ¡nsito</b>
+                                    <span class="param-desc">Aislamiento perimetral completo del frente de obra y senderos peatonales mÃƒÂ­nimos de 1 metro.</span>
+                                    <span class="tolerance">Material: Cinta naranja mÃƒÂ­n. 12 cm de ancho (o malla), apoyada sobre parales de 1.20 m de alto, espaciados cada 3 a 5 metros.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea placeholder="Observaciones del hallazgo..."></textarea>
-                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
                                 <td data-label="Ficha:" class="col-ficha">PMIT-4.2-11</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Mantenimiento de Maquinaria y Vehículos</b>
-                                    <span class="param-desc">Vehículos con extintor multipropósito de 10 lb, equipo de carretera y alarmas de reversa activas.</span>
-                                    <span class="tolerance">Prohibición: Cero mtto. correctivo en la vía. El preventivo (cada 200h) debe usar material aislante sobre el suelo.</span>
+                                    <b>Mantenimiento de Maquinaria y VehÃƒÂ­culos</b>
+                                    <span class="param-desc">VehÃƒÂ­culos con extintor multipropÃƒÂ³sito de 10 lb, equipo de carretera y alarmas de reversa activas.</span>
+                                    <span class="tolerance">ProhibiciÃƒÂ³n: Cero mtto. correctivo en la vÃƒÂ­a. El preventivo (cada 200h) debe usar material aislante sobre el suelo.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea placeholder="Observaciones del hallazgo..."></textarea>
-                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                             <tr>
                                 <td data-label="Ficha:" class="col-ficha">Plan Cont.<br>PBSE 6.1</td>
                                 <td data-label="Requisito:" class="col-req">
-                                    <b>Atención de Derrames, Flora y Primeros Auxilios</b>
-                                    <span class="param-desc">Protección de árboles (no hay permiso de tala). Botiquín equipado (tabla rígida, gasas, isodine, inmovilizadores).</span>
-                                    <span class="tolerance">Crítico: Kit de derrames debe contener ARENA (está expresamente prohibido usar aserrín) y barreras absorbentes.</span>
+                                    <b>AtenciÃƒÂ³n de Derrames, Flora y Primeros Auxilios</b>
+                                    <span class="param-desc">ProtecciÃƒÂ³n de ÃƒÂ¡rboles (no hay permiso de tala). BotiquÃƒÂ­n equipado (tabla rÃƒÂ­gida, gasas, isodine, inmovilizadores).</span>
+                                    <span class="tolerance">CrÃƒÂ­tico: Kit de derrames debe contener ARENA (estÃƒÂ¡ expresamente prohibido usar aserrÃƒÂ­n) y barreras absorbentes.</span>
                                 </td>
                                 <td data-label="Estado:" class="col-eval"><select class="status-select" onchange="changeColor(this)"><option value="">--</option><option value="cumple">CUMPLE</option><option value="nocumple">NO CUMPLE</option><option value="na">N/A</option></select></td>
                                 <td data-label="Evidencias:" class="col-obs">
                                     <textarea placeholder="Observaciones del hallazgo..."></textarea>
-                                    <label class="upload-zone no-print"><span>📸 Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
+                                    <label class="upload-zone no-print"><span>Ã°Å¸â€œÂ¸ Adjuntar Evidencias</span><input type="file" multiple accept="image/*" onchange="handleFiles(this)"></label><div class="image-gallery"></div>
                                 </td>
                             </tr>
                         </tbody>
@@ -442,10 +445,10 @@
                                         <div style="padding: 0 10px 10px 10px;">
                                             <div style="border-top: 1px solid #000; padding-top: 8px;">
                                                 <div class="firma-controls no-print" style="margin-bottom: 5px;">
-                                                    <button type="button" class="btn-firma" onclick="openSignaturePad('firma-1')">✍️</button>
+                                                    <button type="button" class="btn-firma" onclick="openSignaturePad('firma-1')">Ã¢Å“ÂÃ¯Â¸Â</button>
                                                     <input type="file" id="up-firma-1" accept="image/*" class="hidden-file-input" onchange="loadSignatureImg(event, 'firma-1')">
-                                                    <label class="btn-firma" for="up-firma-1" style="cursor:pointer; margin:0;">📁</label>
-                                                    <button type="button" class="btn-firma" onclick="clearSignature('firma-1')">❌</button>
+                                                    <label class="btn-firma" for="up-firma-1" style="cursor:pointer; margin:0;">Ã°Å¸â€œÂ</label>
+                                                    <button type="button" class="btn-firma" onclick="clearSignature('firma-1')">Ã¢ÂÅ’</button>
                                                 </div>
                                                 <div style="color: #444; font-size: 11px;">
                                                     Representante Del Contratista<br>
@@ -466,13 +469,13 @@
                                         <div style="padding: 0 10px 10px 10px;">
                                             <div style="border-top: 1px solid #000; padding-top: 8px;">
                                                 <div class="firma-controls no-print" style="margin-bottom: 5px;">
-                                                    <button type="button" class="btn-firma" onclick="openSignaturePad('firma-2')">✍️</button>
+                                                    <button type="button" class="btn-firma" onclick="openSignaturePad('firma-2')">Ã¢Å“ÂÃ¯Â¸Â</button>
                                                     <input type="file" id="up-firma-2" accept="image/*" class="hidden-file-input" onchange="loadSignatureImg(event, 'firma-2')">
-                                                    <label class="btn-firma" for="up-firma-2" style="cursor:pointer; margin:0;">📁</label>
-                                                    <button type="button" class="btn-firma" onclick="clearSignature('firma-2')">❌</button>
+                                                    <label class="btn-firma" for="up-firma-2" style="cursor:pointer; margin:0;">Ã°Å¸â€œÂ</label>
+                                                    <button type="button" class="btn-firma" onclick="clearSignature('firma-2')">Ã¢ÂÅ’</button>
                                                 </div>
                                                 <div style="color: #444; font-size: 11px;">
-                                                    Representante De La Interventoría<br>
+                                                    Representante De La InterventorÃƒÂ­a<br>
                                                     <div style="display: flex; align-items: flex-end; margin-top: 8px;">
                                                         <span style="margin-right: 5px; color: #444;">C.C</span>
                                                         <input type="text" style="flex-grow: 1; border: none; border-bottom: 1px dotted #999; background: transparent; font-size: 11px; outline: none; padding: 0; width: auto; margin-top: 0; text-align: left;">
@@ -490,13 +493,13 @@
                                         <div style="padding: 0 10px 10px 10px;">
                                             <div style="border-top: 1px solid #000; padding-top: 8px;">
                                                 <div class="firma-controls no-print" style="margin-bottom: 5px;">
-                                                    <button type="button" class="btn-firma" onclick="openSignaturePad('firma-3')">✍️</button>
+                                                    <button type="button" class="btn-firma" onclick="openSignaturePad('firma-3')">Ã¢Å“ÂÃ¯Â¸Â</button>
                                                     <input type="file" id="up-firma-3" accept="image/*" class="hidden-file-input" onchange="loadSignatureImg(event, 'firma-3')">
-                                                    <label class="btn-firma" for="up-firma-3" style="cursor:pointer; margin:0;">📁</label>
-                                                    <button type="button" class="btn-firma" onclick="clearSignature('firma-3')">❌</button>
+                                                    <label class="btn-firma" for="up-firma-3" style="cursor:pointer; margin:0;">Ã°Å¸â€œÂ</label>
+                                                    <button type="button" class="btn-firma" onclick="clearSignature('firma-3')">Ã¢ÂÅ’</button>
                                                 </div>
                                                 <div style="color: #444; font-size: 11px;">
-                                                    Responsable De Administración Municipal De Guatapé<br>
+                                                    Responsable De AdministraciÃƒÂ³n Municipal De GuatapÃƒÂ©<br>
                                                     Antioquia<br>
                                                     <div style="display: flex; align-items: flex-end; margin-top: 8px;">
                                                         <span style="margin-right: 5px; color: #444;">C.C</span>
@@ -518,7 +521,7 @@
 </div>
 
 <script>
-    // Fecha automática
+    // Fecha automÃƒÂ¡tica
     document.getElementById('fecha-hoy').value = new Date().toISOString().slice(0, 16);
 
     // Carga de Logos
@@ -535,7 +538,7 @@
         }
     }
 
-    // Carga múltiple de fotos
+    // Carga mÃƒÂºltiple de fotos
     function handleFiles(input) {
         const gallery = input.parentElement.nextElementSibling;
         
@@ -548,7 +551,7 @@
                     img.title = "Toca para eliminar";
                     
                     img.onclick = function() {
-                        if(confirm("¿Deseas eliminar esta evidencia fotográfica?")) {
+                        if(confirm("Ã‚Â¿Deseas eliminar esta evidencia fotogrÃƒÂ¡fica?")) {
                             this.remove();
                         }
                     };
@@ -560,7 +563,7 @@
         input.value = ""; 
     }
 
-    // Semáforo de estados
+    // SemÃƒÂ¡foro de estados
     function changeColor(selectElement) {
         selectElement.classList.remove('status-cumple', 'status-nocumple', 'status-na');
         if (selectElement.value === 'cumple') selectElement.classList.add('status-cumple');
@@ -586,32 +589,16 @@
         const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
         const fileToSave = new File([blob], fileName, { type: 'application/json' });
 
-        if (navigator.canShare && navigator.canShare({ files: [fileToSave] })) {
-            navigator.share({
-                files: [fileToSave],
-                title: fileName,
-                text: 'Proyecto JSON GSC'
-            }).then(() => showToast(`Proyecto Compartido`))
-              .catch(err => { console.error(err); fallbackDownload(blob, fileName); });
-        } else {
-            fallbackDownload(blob, fileName);
-        }
-
-        function fallbackDownload(b, n) {
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(b);
-            a.download = n;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }
+        saveJSONNativo('PAGA', fileName, data);
     }
 
     function generarPDF() {
-        if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
-            alert("✨ iOS TIP:\n\n1. Cuando se abra la vista previa de impresión, TOCA Y AMPLÍA (pellizca hacia afuera) la primera hoja.\n2. Se convertirá en un visor de PDF.\n3. Allí toca el botón 'Compartir' arriba a la derecha y elige 'Guardar en Archivos'.");
-        }
-        setTimeout(() => { window.print(); }, 500);
+        let actaNum = document.getElementById('acta-num') ? document.getElementById('acta-num').value.trim() : 'SN';
+        let tramoInfo = document.getElementById('cfg-tramo-actual') ? document.getElementById('cfg-tramo-actual').value : 'General';
+        let fileName = `PAGA_${tramoInfo}_N${actaNum}.pdf`;
+        try {
+            savePDFNativo('PAGA', fileName, document.body, true);
+        } catch(e) { console.error('Error in PDF', e); }
     }
 
     // Cargar datos desde .json
@@ -657,7 +644,7 @@
                             img.src = src;
                             img.title = "Toca para eliminar evidencia";
                             img.onclick = function() {
-                                if(confirm("¿Eliminar esta fotografía técnica del reporte?")) this.remove();
+                                if(confirm("Ã‚Â¿Eliminar esta fotografÃƒÂ­a tÃƒÂ©cnica del reporte?")) this.remove();
                             };
                             galleries[i].appendChild(img);
                         });
@@ -679,7 +666,7 @@
                 
                 showToast("Datos cargados correctamente", "success");
             } catch (err) {
-                showToast("Error al leer el archivo. Asegúrate de que sea un archivo válido.", "error");
+                showToast("Error al leer el archivo. AsegÃƒÂºrate de que sea un archivo vÃƒÂ¡lido.", "error");
             }
         };
         reader.readAsText(file);
@@ -805,7 +792,7 @@
 
     // Limpieza manual total (para que funcione en iOS sin trabarse)
     function limpiarTodo() {
-        if(!confirm('¿Estás seguro de que deseas borrar todos los datos, firmas y fotos del formulario?')) return;
+        if(!confirm('Ã‚Â¿EstÃƒÂ¡s seguro de que deseas borrar todos los datos, firmas y fotos del formulario?')) return;
         
         document.querySelectorAll('input[type="text"], textarea').forEach(i => i.value = '');
         
@@ -822,7 +809,7 @@
         document.getElementById('logo2').style.display = 'none';
         document.getElementById('logo2').nextElementSibling.style.display = 'flex';
         
-        // Limpiar firmas digitales también
+        // Limpiar firmas digitales tambiÃƒÂ©n
         document.querySelectorAll('.firma-img').forEach(img => {
             img.src = '';
             img.style.display = 'none';

@@ -43,16 +43,21 @@ jobs:
 
       - name: Compilar iOS (Bypass de Firma para Sideload)
         run: |
-          cd cordova_project
-          # Forzamos la compilación para dispositivo físico desactivando todos los chequeos de firma de Apple
-          cordova build ios --device \
-            --buildFlag="CODE_SIGNING_ALLOWED=NO" \
-            --buildFlag="CODE_SIGNING_REQUIRED=NO" \
-            --buildFlag="CODE_SIGN_IDENTITY="
+          cd cordova_project/platforms/ios
+          xcodebuild clean build \
+            -workspace "GSC Actas.xcworkspace" \
+            -scheme "GSC Actas" \
+            -configuration Release \
+            -destination "generic/platform=iOS" \
+            SYMROOT="$(pwd)/build" \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            ENTITLEMENTS_REQUIRED=NO
 
       - name: Empaquetar a .ipa (Para Sideloadly / AltStore)
         run: |
-          cd cordova_project/platforms/ios/build/device/
+          cd cordova_project/platforms/ios/build/Release-iphoneos/
           
           # Un archivo .ipa es simplemente un ZIP que contiene una carpeta llamada "Payload" con la app adentro.
           mkdir Payload

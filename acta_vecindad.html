@@ -1243,7 +1243,7 @@
         let actaNum = document.getElementById('acta-num') ? document.getElementById('acta-num').value.trim() : 'SN';
         let tramoInfo = document.getElementById('cfg-tramo-actual') ? document.getElementById('cfg-tramo-actual').value : 'General';
         let fileName = "Acta_Vecindad" + "_T" + tramoInfo + "_N" + actaNum + ".pdf";
-        savePDFNativo('Acta_Vecindad', fileName, document.getElementById('vecindad'), true);
+        savePDFNativo('Acta_Vecindad', fileName, document.body);
     }
 
     </script>

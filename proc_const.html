@@ -907,7 +907,7 @@
     function generarPDF() {
         let d = new Date(); let stamp = d.toISOString().slice(0,10);
         let fileName = "Proc_Construccion" + "_" + stamp + ".pdf";
-        savePDFNativo('Proc_Construccion', fileName, document.querySelector('.paper-container') || document.body, true);
+        savePDFNativo('Proc_Construccion', fileName, document.body);
     }
 
     // Cargar datos desde JSON

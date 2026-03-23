@@ -735,7 +735,7 @@
     function generarPDF() {
         let d = new Date(); let stamp = d.toISOString().slice(0,10);
         let fileName = "Espec_Tecnicas" + "_" + stamp + ".pdf";
-        savePDFNativo('Espec_Tecnicas', fileName, document.querySelector('.paper-container') || document.body, true);
+        savePDFNativo('Espec_Tecnicas', fileName, document.body);
     }
 
     // Cargar datos desde .json o .jw7

@@ -656,7 +656,7 @@
     function generarPDF() {
         let d = new Date(); let stamp = d.toISOString().slice(0,10);
         let fileName = "PMT" + "_" + stamp + ".pdf";
-        savePDFNativo('PMT', fileName, document.querySelector('.paper-container') || document.body, true);
+        savePDFNativo('PMT', fileName, document.body);
     }
 
     // Cargar datos desde .json

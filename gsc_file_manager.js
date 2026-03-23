@@ -1,115 +1,150 @@
-// gsc_file_manager.js
-// Maneja el guardado transparente en el sistema de archivos de iOS (vía Cordova-plugin-file)
+// =============================================================================
+// gsc_file_manager.js — Motor Nativo de Archivos GSC para iOS (.ipa / Cordova)
+// =============================================================================
 
-function getGSCFolder(docType, subFolder, callback) {
-    if (!window.cordova || !cordova.file || !cordova.file.documentsDirectory) {
-        throw new Error("Cordova File API no disponible");
-    }
-
-    window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function (dirEntry) {
-        // Carpeta del documento (Ej: Acta_Entorno)
-        dirEntry.getDirectory(docType, { create: true, exclusive: false }, function (docDir) {
-            // Subcarpeta (Ej: PDF o JSON)
-            docDir.getDirectory(subFolder, { create: true, exclusive: false }, function (finalDir) {
+/**
+ * Obtiene (y crea si no existe) la ruta de subcarpeta nativa en iOS.
+ * Estructura: documentsDirectory / docType / subFolder
+ */
+function _getGSCDir(docType, subFolder, callback) {
+    window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function(root) {
+        root.getDirectory(docType, { create: true }, function(docDir) {
+            docDir.getDirectory(subFolder, { create: true }, function(finalDir) {
                 callback(finalDir);
-            }, onError);
-        }, onError);
-    }, onError);
-
-    function onError(err) {
-        console.error("Error obteniendo carpeta nativa", err);
-        if(typeof showToast !== 'undefined') showToast("Error de sistema de archivos: " + err.code);
-    }
+            }, _fsError);
+        }, _fsError);
+    }, _fsError);
 }
 
-function writeBlobToFile(dirEntry, fileName, blob, successMsg) {
-    dirEntry.getFile(fileName, { create: true, exclusive: false }, function (fileEntry) {
-        fileEntry.createWriter(function (fileWriter) {
-            fileWriter.onwriteend = function() {
-                if(typeof showToast !== 'undefined') showToast(successMsg);
+function _fsError(err) {
+    console.error('[GSC FileManager] Error FS:', err);
+    if (typeof showToast !== 'undefined') showToast('Error de sistema de archivos: ' + (err.code || JSON.stringify(err)));
+}
+
+/**
+ * Escribe un Blob en un archivo dentro del directorio dado.
+ */
+function _writeBlob(dirEntry, fileName, blob, successMsg) {
+    dirEntry.getFile(fileName, { create: true, exclusive: false }, function(fileEntry) {
+        fileEntry.createWriter(function(writer) {
+            writer.onwriteend = function() {
+                console.log('[GSC FileManager] Guardado:', fileEntry.fullPath);
+                if (typeof showToast !== 'undefined') showToast(successMsg);
             };
-            fileWriter.onerror = function(e) {
-                console.error("Fallo al escribir archivo", e);
-                if(typeof showToast !== 'undefined') showToast("Error al escribir el archivo");
+            writer.onerror = function(e) {
+                console.error('[GSC FileManager] Error escribiendo:', e);
+                if (typeof showToast !== 'undefined') showToast('Error al escribir el archivo.');
             };
-            fileWriter.write(blob);
-        }, function(err) { console.error("Error createWriter", err); });
-    }, function(err) { console.error("Error getFile", err); });
+            writer.write(blob);
+        }, _fsError);
+    }, _fsError);
 }
 
-function saveJSONNativo(formType, fileName, dataObj) {
-    // formType: Ej "Acta_Entorno"
-    if (!window.cordova || !cordova.file) {
-        // Fallback Web
-        let blob = new Blob([JSON.stringify(dataObj)], {type: "application/json"});
-        fallbackDownload(blob, fileName, "Proyecto Guardado Web");
-        return;
-    }
-
-    try {
-        let blob = new Blob([JSON.stringify(dataObj)], {type: "application/json"});
-        getGSCFolder(formType, "JSON", function(dirEntry) {
-            writeBlobToFile(dirEntry, fileName, blob, `Guardado en: ${formType}/JSON/${fileName}`);
-        });
-    } catch (e) {
-        console.error(e);
-        let blob = new Blob([JSON.stringify(dataObj)], {type: "application/json"});
-        fallbackDownload(blob, fileName, "Proyecto Guardado Fallback");
-    }
-}
-
-function savePDFNativo(formType, fileName, htmlElementToPrint, isLandscape = true) {
-    // Si hay un contenedor global de notificaciones (toast), ocultarlo si afecta el render visual
-    let toast = document.getElementById('toast-container');
-    if (toast) toast.style.display = 'none';
-
-    // Ocultar elementos "no-print"
-    let noPrintEls = htmlElementToPrint.querySelectorAll('.no-print');
-    noPrintEls.forEach(el => {
-        // Guardamos el display original por si acaso
-        el.dataset.oldDisplay = el.style.display;
-        el.style.display = 'none';
-    });
-
-    if(typeof showToast !== 'undefined') showToast("Generando PDF... Puede tardar unos segundos.");
-
-    let opt = {
-      margin:       0.2, // Márgenes pequeños para maximizar espacio
-      filename:     fileName,
-      image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  { scale: 2, useCORS: true, logging: false },
-      jsPDF:        { unit: 'in', format: 'letter', orientation: isLandscape ? 'landscape' : 'portrait' }
-    };
-
-    html2pdf().set(opt).from(htmlElementToPrint).output('blob').then(function(pdfBlob) {
-        // Restaurar elementos
-        if (toast) toast.style.display = '';
-        noPrintEls.forEach(el => {
-            el.style.display = el.dataset.oldDisplay || '';
-        });
-        
-        if (!window.cordova || !cordova.file) {
-            // Fallback Web: Descarga directa
-            fallbackDownload(pdfBlob, fileName, "PDF Generado Web");
-            return;
-        }
-
-        getGSCFolder(formType, "PDF", function(dirEntry) {
-            writeBlobToFile(dirEntry, fileName, pdfBlob, `PDF Guardado: ${formType}/PDF/${fileName}`);
-        });
-    }).catch(err => {
-        // Restaurar elementos en caso de fallo
-        if (toast) toast.style.display = '';
-        noPrintEls.forEach(el => el.style.display = el.dataset.oldDisplay || '');
-        console.error("Error generando PDF", err);
-        if(typeof showToast !== 'undefined') showToast("Error al generar PDF");
-    });
-}
-
-function fallbackDownload(blob, fileName, msg) {
-    let url = URL.createObjectURL(blob);
-    let a = document.createElement('a'); a.href = url; a.download = fileName;
-    document.body.appendChild(a); a.click(); document.body.removeChild(a); 
+/**
+ * Descarga de respaldo (funciona en Safari/navegador web).
+ */
+function _fallbackDownload(blob, fileName) {
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    if(typeof showToast !== 'undefined') showToast(msg);
+}
+
+// =============================================================================
+// GUARDAR JSON
+// =============================================================================
+function saveJSONNativo(docType, fileName, dataObj) {
+    var blob = new Blob([JSON.stringify(dataObj)], { type: 'application/json' });
+
+    if (window.cordova && cordova.file && cordova.file.documentsDirectory) {
+        _getGSCDir(docType, 'JSON', function(dir) {
+            _writeBlob(dir, fileName, blob, '✅ JSON guardado en ' + docType + '/JSON');
+        });
+    } else {
+        _fallbackDownload(blob, fileName);
+        if (typeof showToast !== 'undefined') showToast('JSON descargado: ' + fileName);
+    }
+}
+
+// =============================================================================
+// GENERAR Y GUARDAR PDF
+// Usa html2pdf.js para convertir el DOM a PDF sin usar window.print()
+// =============================================================================
+function savePDFNativo(docType, fileName, targetElement) {
+    if (typeof showToast !== 'undefined') showToast('⏳ Generando PDF, espere...');
+
+    // Ocultar todos los elementos .no-print durante la renderización
+    var noPrintEls = document.querySelectorAll('.no-print');
+    noPrintEls.forEach(function(el) {
+        el._gscOldDisplay = el.style.display;
+        el.style.setProperty('display', 'none', 'important');
+    });
+
+    // Esperar un frame para asegurar que el DOM se re-pintó sin los elementos ocultos
+    setTimeout(function() {
+        var opt = {
+            margin:       [10, 8, 10, 8],   // mm: [arriba, derecha, abajo, izquierda]
+            filename:     fileName,
+            image:        { type: 'jpeg', quality: 0.85 },
+            html2canvas: {
+                scale:         2,            // Alta resolución
+                useCORS:       true,
+                allowTaint:    true,
+                logging:       false,
+                windowWidth:   document.documentElement.scrollWidth,
+                windowHeight:  document.documentElement.scrollHeight,
+                onclone: function(clonedDoc) {
+                    // En el clon, asegurarnos que tablas e imágenes sean bloques completos
+                    var style = clonedDoc.createElement('style');
+                    style.textContent =
+                        '.no-print { display: none !important; }' +
+                        'img { break-inside: avoid; page-break-inside: avoid; display: block; max-width: 100%; }' +
+                        'table { border-collapse: collapse; }' +
+                        'tr, td, th { break-inside: avoid; page-break-inside: avoid; }' +
+                        '.ficha-punto, .photo-card, .audit-table tr { break-inside: avoid; page-break-inside: avoid; }';
+                    clonedDoc.head.appendChild(style);
+                }
+            },
+            jsPDF: {
+                unit:        'mm',
+                format:      'letter',    // Tamaño carta (215.9 x 279.4 mm)
+                orientation: 'portrait'
+            },
+            pagebreak: {
+                mode:  ['css', 'legacy'],
+                avoid: ['img', 'tr', 'td', '.ficha-punto', '.photo-card', '.firma-box', '.audit-table tr']
+            }
+        };
+
+        html2pdf()
+            .set(opt)
+            .from(targetElement)
+            .output('blob')
+            .then(function(pdfBlob) {
+                // Restaurar visibilidad
+                noPrintEls.forEach(function(el) {
+                    el.style.display = el._gscOldDisplay || '';
+                });
+
+                if (window.cordova && cordova.file && cordova.file.documentsDirectory) {
+                    _getGSCDir(docType, 'PDF', function(dir) {
+                        _writeBlob(dir, fileName, pdfBlob, '✅ PDF guardado en ' + docType + '/PDF');
+                    });
+                } else {
+                    _fallbackDownload(pdfBlob, fileName);
+                    if (typeof showToast !== 'undefined') showToast('✅ PDF descargado: ' + fileName);
+                }
+            })
+            .catch(function(err) {
+                noPrintEls.forEach(function(el) {
+                    el.style.display = el._gscOldDisplay || '';
+                });
+                console.error('[GSC FileManager] Error generando PDF:', err);
+                if (typeof showToast !== 'undefined') showToast('❌ Error al generar el PDF. Ver consola.');
+            });
+    }, 150);
 }

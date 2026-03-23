@@ -992,7 +992,7 @@
         let actaNum = document.getElementById('acta-num') ? document.getElementById('acta-num').value.trim() : 'SN';
         let tramoInfo = document.getElementById('cfg-tramo-actual') ? document.getElementById('cfg-tramo-actual').value : 'General';
         let fileName = "Acta_Entorno" + "_T" + tramoInfo + "_N" + actaNum + ".pdf";
-        savePDFNativo('Acta_Entorno', fileName, document.getElementById('entorno'), true);
+        savePDFNativo('Acta_Entorno', fileName, document.body);
     }
 
     </script>

@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSC S.A.S. - Acta Entorno Relacional - La Sonadora</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1f497d">
+    <style>
+        /* =======================================================================
+           1. ESTILOS GENERALES Y VARIABLES
+           ======================================================================= */
+        :root { --primary: #0f172a; --secondary: #ecfdf5; --tertiary: #f8fafc; --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--font-main); background-color: #f1f5f9; color: #1e293b; font-size: 0.75rem;}
+        
+        nav { background-color: var(--primary); padding: 10px; display: flex; gap: 10px; justify-content: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1); }
+        nav button { background-color: transparent; color: white; border: 1px solid rgba(255,255,255,0.3); padding: 8px 15px; cursor: pointer; font-weight: bold; border-radius: 6px; transition: all 0.2s ease-in-out; }
+        nav button:hover { background-color: rgba(255,255,255,0.1); transform: translateY(-1px); }
+        nav button:active { transform: scale(0.98); }
+        nav button.active { background-color: white; color: var(--primary); border-color: white; }
+        
+        .container { max-width: 1100px; margin: 20px auto; background: white; padding: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1); border-radius: 12px; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        /* =======================================================================
+           2. CABECERA (HEADER) EXACTA A LA IMAGEN 
+           ======================================================================= */
+        .header-main { width: 100%; border-collapse: collapse; border: 1px solid black; text-align: center; margin-bottom: 0;}
+        .header-main td { border: 1px solid black; padding: 5px; vertical-align: middle;}
+        
+        .logo-cell { width: 25%; text-align: center; vertical-align: middle; }
+        .logo-cell img { max-height: 65px; max-width: 100%; object-fit: contain; display: inline-block; }
+        .title-cell { width: 50%; text-align: center; vertical-align: middle; font-size: 1.1rem; font-weight: bold; text-transform: uppercase; -webkit-print-color-adjust: exact; print-color-adjust: exact;}
+        
+        .header-meta { width: 100%; border-collapse: collapse; border: 1px solid black; border-top: none; text-align: center; margin-bottom: 15px;}
+        .header-meta td, .header-meta th { border: 1px solid black; padding: 4px; vertical-align: middle;}
+        .bg-blue { background-color: var(--primary); color: white; font-weight: bold; -webkit-print-color-adjust: exact; print-color-adjust: exact;}
+        
+        .text-center { text-align: center; }
+        .text-left { text-align: left; padding-left: 5px !important;}
+        .text-right { text-align: right; padding-right: 5px !important;}
+        .bold { font-weight: bold; }
+
+        input[type="text"], input[type="date"], input[type="number"] { width: 100%; border: none; border-bottom: 1px solid #cbd5e1; background: transparent; font-family: inherit; font-size: inherit; outline: none; text-align: inherit; padding: 2px 0; transition: all 0.2s ease-in-out; }
+        input:focus, .editable-div:focus, select:focus { border-bottom: 2px solid var(--primary) !important; background-color: rgba(15, 23, 42, 0.02) !important; }
+
+        .editable-div { min-height: 1.2rem; outline: none; white-space: pre-wrap; word-wrap: break-word; font-family: inherit; display: inline-block; width: 100%; border-bottom: 1px dashed #cbd5e1; padding: 2px 4px; transition: all 0.2s ease-in-out; border-radius: 4px 4px 0 0;}
+        .editable-div:empty:before { content: attr(placeholder); color: #94a3b8; font-style: italic; }
+
+        .section-title { background-color: var(--primary); color: white; font-weight: bold; padding: 4px; border: 1px solid black; font-size: 0.8rem; text-transform: uppercase; -webkit-print-color-adjust: exact; print-color-adjust: exact;}
+
+        select.selector-tramo { width: 100%; border: none; border-bottom: 1px dashed #cbd5e1; font-weight: bold; font-family: inherit; font-size: inherit; text-align: center; text-align-last: center; appearance: none; -webkit-appearance: none; outline: none; background: transparent; transition: all 0.2s ease-in-out; border-radius: 4px 4px 0 0;}
+
+        /* =======================================================================
+           3. SECCIONES 1 Y 2 (MAPA Y OBSERVACIONES)
+           ======================================================================= */
+        .top-split { display: flex; width: 100%; border: 1px solid black; border-top: none; margin-bottom: 15px; flex-wrap: wrap;}
+        .top-left { width: 40%; border-right: 1px solid black; padding: 5px; display: flex; align-items: center; justify-content: center; position: relative;}
+        .top-left img { max-width: 100%; max-height: 300px; object-fit: contain; }
+        .top-right { width: 60%; padding: 0; display: flex; flex-direction: column; }
+        
+        .tramo-info { display: flex; border-bottom: 1px solid black;}
+        .tramo-info div { padding: 4px; border-right: 1px solid black;}
+        .tramo-info div:last-child { border-right: none; flex-grow: 1;}
+
+        .map-placeholder { width: 100%; height: 250px; background-color: #eee; display: flex; align-items: center; justify-content: center; font-style: italic; color: #999;}
+        .obs-general { padding: 5px;}
+
+        /* =======================================================================
+           4. TABLA RESUMEN DE PUNTOS
+           ======================================================================= */
+        .table-responsive { width: 100%; overflow-x: auto; margin-bottom: 15px;}
+        .summary-table { width: 100%; border-collapse: collapse; text-align: center; border: 1px solid black;}
+        .summary-table th { background-color: #5b9bd5; color: white; border: 1px solid black; padding: 4px; font-size: 0.7rem; -webkit-print-color-adjust: exact; print-color-adjust: exact;}
+        .summary-table td { border: 1px solid black; padding: 2px; }
+        
+        .st-malo { background-color: #f8cbad !important; color: #c00000 !important; font-weight: bold; -webkit-print-color-adjust: exact; print-color-adjust: exact;}
+        .st-regular { background-color: #ffe699 !important; color: #833c0c !important; font-weight: bold; -webkit-print-color-adjust: exact; print-color-adjust: exact;}
+        .st-bueno { background-color: #e2efda !important; color: #385723 !important; font-weight: bold; -webkit-print-color-adjust: exact; print-color-adjust: exact;}
+        .st-danado { background-color: #c65911 !important; color: white !important; font-weight: bold; -webkit-print-color-adjust: exact; print-color-adjust: exact;}
+        select.estado-sel { width: 100%; border: none; outline: none; font-weight: bold; text-align: center; text-align-last: center; appearance: none; background: transparent; cursor: pointer;}
+
+        /* =======================================================================
+           5. FICHAS DETALLADAS POR PUNTO (RELACIONALES)
+           ======================================================================= */
+        .grid-fichas { display: flex; flex-direction: column; gap: 15px; margin-top: 10px;}
+        .ficha-punto { border: 1px solid black; page-break-inside: avoid; break-inside: avoid; }
+        .ficha-header { background-color: var(--primary); color: white; font-weight: bold; text-align: center; padding: 4px; font-size: 0.85rem; -webkit-print-color-adjust: exact; print-color-adjust: exact;}
+        
+        .ficha-internal { display: flex; flex-direction: column; border-top: 1px solid black; }
+        .ficha-texto { width: 100%; border-bottom: 1px solid black; }
+        .ficha-fotos { padding: 15px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; background: #fafafa; justify-items: center;}
+        
+        .p-table { width: 100%; border-collapse: collapse; text-align: center; border-style: hidden;}
+        .p-table td, .p-table th { border: 1px solid black; padding: 3px; vertical-align: middle;}
+        .p-table th.bg-light-blue { background-color: #5b9bd5; color: white; -webkit-print-color-adjust: exact; print-color-adjust: exact;}
+        .p-table .lbl { font-weight: bold; background-color: #e9ecef; -webkit-print-color-adjust: exact; print-color-adjust: exact;}
+
+        .img-slot { width: 100%; border: 1px dashed #ccc; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; position: relative; background: #fff; padding: 10px; box-sizing: border-box; border-radius: 6px;}
+        .img-slot img { max-width: 100%; max-height: 250px; object-fit: contain; }
+        .photo-label { font-weight: bold; font-size: 0.8rem; color: var(--primary); margin-top: 5px; text-align: center;}
+        .del-btn { position: absolute; top: 5px; right: 5px; background: red; color: white; border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; font-weight: bold; z-index: 2; display: flex; align-items: center; justify-content: center;}
+
+        /* =======================================================================
+           6. CONCLUSIONES Y FIRMAS
+           ======================================================================= */
+        .conclusiones-table { width: 100%; border-collapse: collapse; border: 1px solid black; margin-bottom: 15px;}
+        .conclusiones-table th { background-color: #5b9bd5; color: white; padding: 4px; text-align: center; border: 1px solid black; -webkit-print-color-adjust: exact; print-color-adjust: exact;}
+        .conclusiones-table td { border: 1px solid black; padding: 0; }
+
+        .firmas-wrapper { border: 1px solid black; padding-top: 10px; margin-bottom: 20px;}
+        .firmas { display: flex; justify-content: space-between; flex-wrap: wrap; page-break-inside: avoid; break-inside: avoid; width: 100%;}
+        .firma-box { text-align: left; font-weight: normal; font-size: 0.75rem; color: #333; flex: 1; min-width: 200px; border-right: 1px solid black; padding: 5px;}
+        .firma-box:last-child { border-right: none; }
+        .firma-img-container { width: 100%; height: 60px; border-bottom: 1px solid black; display: flex; align-items: flex-end; justify-content: center; margin-bottom: 3px; }
+        .firma-img { max-height: 60px; max-width: 100%; object-fit: contain; display: none; }
+        
+        .firma-controls { margin-top: 3px; display: flex; gap: 3px; justify-content: center; flex-wrap: wrap;}
+        .btn-firma { background-color: #f8fafc; border: 1px solid #cbd5e1; color: var(--primary); padding: 3px 6px; font-size: 0.65rem; border-radius: 4px; cursor: pointer; font-weight: bold; transition: all 0.2s ease-in-out;}
+        .btn-firma:hover { background-color: var(--primary); color: white; border-color: var(--primary); transform: translateY(-1px); }
+        .btn-firma:active { transform: scale(0.95); }
+
+        /* =======================================================================
+           7. MODALES Y BOTONES GLOBALES
+           ======================================================================= */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center; }
+        .modal-content { background: white; padding: 20px; border-radius: 8px; width: 95%; max-width: 500px; text-align: center; }
+        .signature-pad { border: 2px dashed #ccc; background-color: #fafafa; touch-action: none; width: 100%; height: 180px; border-radius: 4px; }
+        .modal-buttons { margin-top: 15px; display: flex; justify-content: center; gap: 10px; }
+        .modal-buttons button { padding: 8px 15px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.2s ease-in-out; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .modal-buttons button:hover { filter: brightness(1.1); transform: translateY(-1px); }
+        .modal-buttons button:active { transform: scale(0.98); }
+
+        .photo-controls { display: flex; justify-content: center; gap: 10px; margin: 15px 0; flex-wrap: wrap;}
+        .btn-action { background-color: var(--primary); color: white; border: none; padding: 8px 15px; cursor: pointer; border-radius: 6px; font-weight: bold; text-transform: uppercase; font-size: 0.75rem; transition: all 0.2s ease-in-out; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .btn-action:hover { filter: brightness(1.1); transform: translateY(-1px); box-shadow: 0 4px 6px rgba(0,0,0,0.15); }
+        .btn-action:active { transform: scale(0.98); box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+        .btn-print { background-color: #dc2626; }
+        .btn-save { background-color: #16a34a; }
+        .btn-load { background-color: #0284c7; }
+        .btn-master-add { background-color: #16a34a; padding: 12px 20px; font-size: 0.85rem; width: 100%; max-width: 400px;}
+        .btn-del-ficha { background-color: #dc2626; color: white; border: none; padding: 2px 8px; cursor: pointer; font-weight: bold; float: right; border-radius: 4px; transition: all 0.2s; }
+        .btn-del-ficha:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+        /* Toast / Snackbar Styles */
+        #toast-container { visibility: hidden; min-width: 250px; background-color: #1e293b; color: #fff; text-align: center; border-radius: 8px; padding: 16px; position: fixed; z-index: 10000; left: 50%; bottom: 20px; transform: translateX(-50%); font-size: 0.9rem; font-weight: 500; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: opacity 0.3s ease, bottom 0.3s ease; opacity: 0; }
+        #toast-container.show { visibility: visible; opacity: 1; bottom: 40px; }
+
+        .hidden-file-input { width: 0.1px; height: 0.1px; opacity: 0; overflow: hidden; position: absolute; z-index: -1; }
+
+        /* =======================================================================
+           8. BLINDAJE EXTREMO DE IMPRESIÓN (LANDSCAPE)
+           ======================================================================= */
+        @media print {
+            body { background: white; margin: 0; padding: 0; font-size: 0.75rem; color: black; }
+            .container { box-shadow: none; margin: 0; width: 100%; max-width: 100%; padding: 0; border: none; }
+            nav, .photo-controls, .btn-del-ficha, .del-btn, .no-print, .firma-controls { display: none !important; }
+            
+            @page { margin: 1.5cm; size: letter portrait; }
+            
+            input[type="text"], input[type="date"], input[type="number"], select { border: none !important; background: transparent !important; color: black; padding: 0; -webkit-appearance: none; appearance: none;}
+            .editable-div { background: transparent !important; overflow: visible !important; height: auto !important; border-bottom: none !important; padding: 0 !important; }
+            
+            table { page-break-inside: auto !important; border-collapse: collapse !important; }
+            tr { page-break-inside: avoid !important; break-inside: avoid !important; }
+            td, th { border: 1px solid black !important; }
+            
+            .grid-fichas { display: block !important; }
+            .ficha-punto { display: block !important; width: 100% !important; border: 1px solid black !important; page-break-inside: auto !important; break-inside: auto !important; margin-bottom: 20px !important;}
+            .ficha-internal { display: flex !important; flex-direction: column !important; border-top: 1px solid black !important; page-break-inside: auto !important; break-inside: auto !important; }
+            .ficha-texto { width: 100% !important; border-right: none !important; border-bottom: 1px solid black !important; page-break-inside: avoid !important; break-inside: avoid !important; }
+            
+            .ficha-fotos { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 15px !important; width: 100% !important; text-align: center !important; page-break-inside: auto !important; break-inside: auto !important; padding: 15px !important; background: transparent !important;}
+            
+            .img-slot { border: none !important; background: transparent !important; page-break-inside: avoid !important; break-inside: avoid !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
+            .img-slot img { max-height: 380px !important; max-width: 100% !important; object-fit: contain !important; border: 1px solid #ccc !important; padding: 4px !important; background: white !important; page-break-inside: avoid !important; break-inside: avoid !important; display: block !important; margin: 0 auto 5px auto !important; border-radius: 4px !important;}
+            .photo-label { font-size: 0.8rem !important; }
+
+            .firmas-wrapper { display: inline-block !important; width: 100% !important; page-break-inside: avoid !important; break-inside: avoid !important; margin-top: 10px !important;}
+            .firmas { display: flex !important; width: 100% !important; page-break-inside: avoid !important; break-inside: avoid !important; border-top: none;}
+            .firma-box { display: inline-block !important; flex: 1 !important; vertical-align: top !important; border-right: 1px solid black !important; padding: 0 5px !important;}
+            .firma-box:last-child { border-right: none !important;}
+            .firma-img-container { border-bottom: 1px solid black !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <button onclick="openTab('config')">⚙️ Configuración</button>
+        <button class="active" onclick="openTab('entorno')">🛣️ Acta de Entorno Oficial</button>
+    </nav>
+
+    <div id="config" class="container tab-content">
+        <h2>Datos del Contrato - Proyecto La Sonadora</h2>
+        <table class="summary-table" style="text-align: left; margin-top: 10px;">
+            <tr><th style="width: 30%;">Campo</th><th>Valor</th></tr>
+            <tr><td>Proyecto</td><td><div contenteditable="true" id="cfg-proyecto" class="editable-div">MEJORAMIENTO DE LA VÍA GRANADA – GUATAPÉ SECTOR LA SONADORA Y LA PEÑA, DEL MUNICIPIO DE GUATAPÉ, ANTIOQUIA</div></td></tr>
+            <tr><td>Contratante</td><td><input type="text" id="cfg-contratante" value="EMPRESA AUTONOMA DE GUATAPE"></td></tr>
+            <tr><td>Nombre Interventoría</td><td><input type="text" id="cfg-interventoria" value="GRIMAUDIS SIERRA CORREA GSC S.A.S"></td></tr>
+            <tr><td>Contratista de Obra</td><td><input type="text" id="cfg-contratista" value="CONSICOR S.A.S"></td></tr>
+            <tr><td>Tramo Nombre</td><td><input type="text" id="cfg-tramo-nombre" value="TRAMO 1 - LA SONADORA"></td></tr>
+            <tr><td>Long. Aprox (mts)</td><td><input type="text" id="cfg-tramo-long" value="1200 m"></td></tr>
+        </table>
+    </div>
+
+    <div id="entorno" class="container tab-content active saveable-form">
+        
+        <table class="header-main">
+            <tr>
+                <td class="logo-cell"><img src="logo_consicor.png" alt="Consicor" onerror="this.style.display='none'"></td>
+                <td class="title-cell">ACTA DE ESTADO INICIAL DEL ESPACIO PÚBLICO, VÍAS Y ENTORNO</td>
+                <td class="logo-cell"><img src="logo_gsc.png" alt="GSC Ingeniería" onerror="this.style.display='none'"></td>
+            </tr>
+        </table>
+        <table class="header-meta">
+            <tr>
+                <th colspan="3" class="bg-blue" style="width: 25%;">FECHA</th>
+                <th colspan="3" class="bg-blue" style="width: 75%;">PROYECTO BPIN 2025003050056</th>
+            </tr>
+            <tr>
+                <td style="width: 8.33%;"><input type="text" class="save-data text-center" placeholder="18"></td>
+                <td style="width: 8.33%;"><input type="text" class="save-data text-center" placeholder="MARZO" style="text-transform: uppercase;"></td>
+                <td style="width: 8.33%;"><input type="text" class="save-data text-center" placeholder="2026"></td>
+                <td colspan="3" rowspan="3" class="cfg-out-proyecto text-center bold" style="font-size: 0.75rem;"></td>
+            </tr>
+            <tr>
+                <td class="text-center" style="font-size: 0.6rem; color: #666;">DD</td><td class="text-center" style="font-size: 0.6rem; color: #666;">MM</td><td class="text-center" style="font-size: 0.6rem; color: #666;">AA</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="bg-blue">ACTA No.:</td>
+                <td><input type="text" id="acta-num" class="save-data text-center" placeholder="1"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="bold text-center">Contratante:</td>
+                <td colspan="2" class="cfg-out-contratante text-center"></td>
+                <td class="bold text-center" style="width: 15%;">Nombre de Interventoria:</td>
+                <td class="cfg-out-interventoria text-center" style="width: 35%;"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="bold text-center">Nombre Contratista de Obra:</td>
+                <td colspan="4" class="cfg-out-contratista text-left"></td>
+            </tr>
+        </table>
+
+        <div class="top-split">
+            <div class="top-left">
+                <div style="position: absolute; top: 0; left: 0; background: var(--primary); color: white; padding: 2px 5px; font-weight: bold; font-size: 0.7rem; -webkit-print-color-adjust: exact; print-color-adjust: exact;">1. REGISTRO FOTOGRÁFICO</div>
+                <img src="mapa_tramo_1.jpg" id="mapa-global-img" alt="Plano del Proyecto" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="map-placeholder no-print" id="map-ph" style="display: none;">Ubicación del Proyecto (mapa_tramo_X.jpg)</div>
+            </div>
+            <div class="top-right">
+                <div class="section-title" style="border-top: none; border-left: none; border-right: none;">1. TRAMO</div>
+                <div class="tramo-info">
+                    <div style="width: 30%;">Dirección</div>
+                    <div class="text-center" style="padding:0;">
+                        <select id="cfg-tramo-actual" class="selector-tramo save-data" style="width:100%; height:100%; padding: 4px;" onchange="actualizarMapaGlobal(this.value)">
+                            <option value="1">TRAMO 1 - LA SONADORA</option>
+                            <option value="2">TRAMO 2</option>
+                            <option value="3">TRAMO 3</option>
+                            <option value="4">TRAMO 4 - LA PEÑA</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="tramo-info">
+                    <div style="width: 30%;">Long. Aprox (mts)</div>
+                    <div class="cfg-out-tramo-long text-center"></div>
+                </div>
+                <div class="tramo-info">
+                    <div style="width: 30%;">Abscisas del Tramo</div>
+                    <div class="text-center" style="padding:0; flex-grow:1; display:flex;">
+                        <input type="text" id="cfg-abscisa-ini" class="save-data" style="width: 50%; text-align:center;" placeholder="K Inicial" onblur="formatearAbscisa(this)">
+                        <span style="align-self:center; font-weight:bold;">-</span>
+                        <input type="text" id="cfg-abscisa-fin" class="save-data" style="width: 50%; text-align:center;" placeholder="K Final" onblur="formatearAbscisa(this)">
+                    </div>
+                </div>
+                
+                <div class="section-title" style="border-left: none; border-right: none;">2. OBSERVACIONES ESTADO ESPACIO PUBLICO ANTES DE INTERVENIR</div>
+                <div contenteditable="true" class="obs-general editable-div save-div">El tramo objeto de intervención presenta las siguientes condiciones iniciales:
+
+<b>Infraestructura Vial:</b> La vía se encuentra actualmente en afirmado, presentando un estado de conservación que oscila entre regular y malo.
+
+<b>Servicios Públicos y Mobiliario:</b> En el entorno se identifican postes en estados variables...
+
+<b>Sistema de Drenaje:</b> El sistema de alcantarillado presenta un deterioro crítico...</div>
+            </div>
+        </div>
+
+        <div class="photo-controls no-print" style="margin-bottom: 20px;">
+            <button class="btn-action btn-master-add" onclick="crearNuevoPuntoMaster()">➕ REGISTRAR NUEVO PUNTO DE INSPECCIÓN</button>
+        </div>
+
+        <div class="section-title">3. RESUMEN DE PUNTOS INSPECCIONADOS</div>
+        <div class="table-responsive">
+            <table class="summary-table" id="summary-table">
+                <thead>
+                    <tr>
+                        <th style="width: 3%;">N°</th>
+                        <th style="width: 5%;">ID</th>
+                        <th style="width: 12%;">Tramo/Abscisa</th>
+                        <th style="width: 12%;">Tipo Elemento</th>
+                        <th style="width: 12%;">Tipo Vía / Andén</th>
+                        <th style="width: 8%;">Estado</th>
+                        <th style="width: 10%;">Fecha</th>
+                        <th style="width: 8%;">Latitud</th>
+                        <th style="width: 8%;">Longitud</th>
+                        <th style="width: 25%;">Observaciones Generales</th>
+                        <th class="no-print" style="width: 3%;">X</th>
+                    </tr>
+                </thead>
+                <tbody id="summary-tbody">
+                    </tbody>
+            </table>
+        </div>
+
+        <div class="section-title" style="margin-top: 20px;">4. DETALLE DE PUNTOS INSPECCIONADOS</div>
+        <div class="grid-fichas" id="points-container">
+            </div>
+
+        <div class="section-title" style="margin-top: 20px;">4. CONCLUSIONES Y RECOMENDACIONES</div>
+        <table class="conclusiones-table">
+            <tr><th>Hallazgos principales</th></tr>
+            <tr><td><div contenteditable="true" class="editable-div save-div" id="c-hallazgos" style="min-height: 40px; padding: 5px;"></div></td></tr>
+            <tr><th>Elementos en buen estado</th></tr>
+            <tr><td><div contenteditable="true" class="editable-div save-div" id="c-buenos" style="min-height: 40px; padding: 5px;"></div></td></tr>
+            <tr><th>Elementos dañados o con intervención requerida</th></tr>
+            <tr><td><div contenteditable="true" class="editable-div save-div" id="c-malos" style="min-height: 40px; padding: 5px;"></div></td></tr>
+            <tr><th>Recomendaciones</th></tr>
+            <tr><td><div contenteditable="true" class="editable-div save-div" id="c-recom" style="min-height: 40px; padding: 5px;"></div></td></tr>
+            <tr><th>Acciones prioritarias</th></tr>
+            <tr><td><div contenteditable="true" class="editable-div save-div" id="c-acciones" style="min-height: 40px; padding: 5px;"></div></td></tr>
+        </table>
+
+        <div class="section-title" style="margin-bottom: 0;">5. Firmas:</div>
+        <div class="firmas-wrapper">
+            <div class="firmas">
+                <div class="firma-box">
+                    <div class="firma-img-container"><img id="f-ent-1" class="firma-img"></div>
+                    <div class="firma-controls no-print">
+                        <button class="btn-firma" onclick="openSignaturePad('f-ent-1')">✍️</button>
+                        <input type="file" id="up-f-ent-1" accept="image/*" class="hidden-file-input" onchange="loadSignatureImg(event, 'f-ent-1')">
+                        <label class="btn-firma" style="display:flex; align-items:center; justify-content:center; cursor:pointer;" for="up-f-ent-1">📁</label>
+                        <button class="btn-firma" onclick="clearSignature('f-ent-1')">❌</button>
+                    </div>
+                    Representante Del Contratista<br>C.C <input type="text" class="save-data" style="width: 80%; border-bottom: 1px dotted #ccc; display: inline-block;">
+                </div>
+                <div class="firma-box">
+                    <div class="firma-img-container"><img id="f-ent-2" class="firma-img"></div>
+                    <div class="firma-controls no-print">
+                        <button class="btn-firma" onclick="openSignaturePad('f-ent-2')">✍️</button>
+                        <input type="file" id="up-f-ent-2" accept="image/*" class="hidden-file-input" onchange="loadSignatureImg(event, 'f-ent-2')">
+                        <label class="btn-firma" style="display:flex; align-items:center; justify-content:center; cursor:pointer;" for="up-f-ent-2">📁</label>
+                        <button class="btn-firma" onclick="clearSignature('f-ent-2')">❌</button>
+                    </div>
+                    Representante De La Interventoría<br>C.C <input type="text" class="save-data" style="width: 80%; border-bottom: 1px dotted #ccc; display: inline-block;">
+                </div>
+                <div class="firma-box">
+                    <div class="firma-img-container"><img id="f-ent-3" class="firma-img"></div>
+                    <div class="firma-controls no-print">
+                        <button class="btn-firma" onclick="openSignaturePad('f-ent-3')">✍️</button>
+                        <input type="file" id="up-f-ent-3" accept="image/*" class="hidden-file-input" onchange="loadSignatureImg(event, 'f-ent-3')">
+                        <label class="btn-firma" style="display:flex; align-items:center; justify-content:center; cursor:pointer;" for="up-f-ent-3">📁</label>
+                        <button class="btn-firma" onclick="clearSignature('f-ent-3')">❌</button>
+                    </div>
+                    Responsable De Administración Municipal De Guatapé Antioquia<br>C.C <input type="text" class="save-data" style="width: 80%; border-bottom: 1px dotted #ccc; display: inline-block;">
+                </div>
+            </div>
+        </div>
+
+        <div class="photo-controls no-print">
+            <button class="btn-action btn-save" onclick="exportarActaEntorno()">💾 Guardar Proyecto (.json)</button>
+            <input type="file" id="file-import-entorno" accept=".json" class="hidden-file-input" onchange="importarActaEntorno(event)">
+            <label class="btn-action btn-load" style="display:flex; align-items:center; justify-content:center; cursor:pointer;" for="file-import-entorno">📂 Cargar Proyecto</label>
+            <button class="btn-action btn-print" onclick="generarPDF()">🖨️ Exportar PDF Oficial</button>
+        </div>
+
+    </div>
+
+    <div id="signature-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 style="color: var(--primary);">Dibuje su firma</h3>
+            <canvas id="signature-pad" class="signature-pad"></canvas>
+            <div class="modal-buttons">
+                <button class="btn-action btn-save" onclick="saveSignature()">Guardar</button>
+                <button class="btn-action btn-print" onclick="closeSignatureModal()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container">Mensaje</div>
+
+    <script>
+        if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').catch(err => { console.log('SW offline ready'); }); }); }
+
+        // SISTEMA DE TOAST (UX MÚLTIPLE)
+        function showToast(msj) {
+            let toast = document.getElementById('toast-container');
+            toast.innerText = msj;
+            toast.classList.add('show');
+            setTimeout(() => { toast.classList.remove('show'); }, 3000);
+        }
+
+        // PESTAÑAS Y CONFIGURACIÓN
+        function openTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+            syncConfig();
+        }
+
+        function syncConfig() {
+            document.querySelectorAll('.cfg-out-proyecto').forEach(el => el.innerText = document.getElementById('cfg-proyecto').innerText);
+            document.querySelectorAll('.cfg-out-contratante').forEach(el => el.innerText = document.getElementById('cfg-contratante').value);
+            document.querySelectorAll('.cfg-out-interventoria').forEach(el => el.innerText = document.getElementById('cfg-interventoria').value);
+            document.querySelectorAll('.cfg-out-contratista').forEach(el => el.innerText = document.getElementById('cfg-contratista').value);
+            document.querySelectorAll('.cfg-out-tramo-long').forEach(el => el.innerText = document.getElementById('cfg-tramo-long').value);
+        }
+
+        document.getElementById('cfg-proyecto').addEventListener('blur', syncConfig);
+        ['cfg-contratante', 'cfg-interventoria', 'cfg-contratista', 'cfg-tramo-long'].forEach(id => {
+            document.getElementById(id).addEventListener('input', syncConfig);
+        });
+
+        const DATOS_TRAMOS = {
+            "1": { inicio: "K4+684", fin: "K5+211", long: "527 m", nombre: "TRAMO 1 - LA SONADORA" },
+            "2": { inicio: "K5+371", fin: "K5+577", long: "206 m", nombre: "TRAMO 2" },
+            "3": { inicio: "K5+971", fin: "K6+730", long: "759 m", nombre: "TRAMO 3" },
+            "4": { inicio: "K6+905", fin: "K7+144", long: "239 m", nombre: "TRAMO 4 - LA PEÑA" }
+        };
+
+        function actualizarMapaGlobal(numTramo) {
+            let datos = DATOS_TRAMOS[numTramo];
+            if(datos) {
+                document.getElementById('cfg-abscisa-ini').value = datos.inicio;
+                document.getElementById('cfg-abscisa-fin').value = datos.fin;
+                document.getElementById('cfg-tramo-long').value = datos.long;
+                document.getElementById('cfg-tramo-nombre').value = datos.nombre;
+                syncConfig();
+            }
+
+            let imgMap = document.getElementById('mapa-global-img');
+            let phMap = document.getElementById('map-ph');
+            imgMap.src = `mapa_tramo_${numTramo}.jpg`;
+            imgMap.onerror = function() {
+                this.style.display = 'none'; phMap.style.display = 'flex';
+                phMap.innerText = `Plano General Tramo ${numTramo} (Asegúrese de subir mapa_tramo_${numTramo}.jpg)`;
+            };
+            imgMap.onload = function() { this.style.display = 'block'; phMap.style.display = 'none'; };
+        }
+
+        window.onload = function() { syncConfig(); actualizarMapaGlobal(document.getElementById('cfg-tramo-actual').value); };
+
+        // =======================================================================
+        // MOTOR MATEMÁTICO DE ABSCISAS
+        // =======================================================================
+        function formatearAbscisa(input) {
+            let val = input.value.trim().toUpperCase();
+            if (!val) return;
+            if (val.includes('-')) {
+                let parts = val.split('-');
+                input.value = parseSingle(parts[0]) + ' - ' + parseSingle(parts[1]);
+            } else {
+                input.value = parseSingle(val);
+            }
+        }
+        function parseSingle(val) {
+            let cleanVal = val.replace(/K/g, '').replace(/\+/g, '').replace(/,/g, '.').replace(/\s/g, '');
+            let num = parseFloat(cleanVal);
+            if (isNaN(num)) return val.trim();
+            let km = Math.floor(num / 1000);
+            let mts = num % 1000;
+            let mtsFormat = (mts % 1 !== 0) ? mts.toFixed(2) : mts.toFixed(2);
+            mtsFormat = mtsFormat.padStart(6, '0').replace('.', ',');
+            return `K${km}+${mtsFormat}`;
+        }
+
+        // =======================================================================
+        // MOTOR RELACIONAL: RESUMEN <-> DETALLE
+        // =======================================================================
+        let globalPointId = 0;
+        
+        function crearNuevoPuntoMaster() {
+            globalPointId++;
+            let pId = globalPointId;
+
+            // 1. CREAR FILA EN RESUMEN
+            const tbody = document.getElementById('summary-tbody');
+            let nextNum = tbody.querySelectorAll('tr').length + 1;
+            const tr = document.createElement('tr');
+            tr.id = `row-${pId}`;
+            tr.innerHTML = `
+                <td class="row-num">${nextNum}</td>
+                <td><div contenteditable="true" class="editable-div text-center save-td sync-id-${pId}" oninput="syncField(${pId}, 'id', this)">${nextNum}</div></td>
+                <td><input type="text" class="input-abscisa text-center save-td sync-tramo-${pId}" placeholder="K1+..." style="font-size:0.6rem;" onblur="formatearAbscisa(this); syncField(${pId}, 'tramo', this)"></td>
+                <td><div contenteditable="true" class="editable-div text-center save-td sync-tipo-${pId}" placeholder="Vía vehicular" oninput="syncField(${pId}, 'tipo', this)"></div></td>
+                <td><div contenteditable="true" class="editable-div text-center save-td sync-via-${pId}" placeholder="Afirmado" oninput="syncField(${pId}, 'via', this)"></div></td>
+                <td style="padding: 0;">
+                    <select class="estado-sel estado-malo save-td sync-estado-${pId}" onchange="updateColorSync(this, ${pId})">
+                        <option value="Malo" class="estado-malo">Malo</option><option value="Regular" class="estado-regular">Regular</option><option value="Bueno" class="estado-bueno">Bueno</option><option value="Dañado" class="estado-danado">Dañado</option>
+                    </select>
+                </td>
+                <td><input type="date" class="text-center save-td sync-fecha-${pId}" style="font-size:0.65rem;" oninput="syncField(${pId}, 'fecha', this)"></td>
+                <td><div contenteditable="true" class="editable-div text-center save-td sync-lat-${pId}" placeholder="6,34..." oninput="syncField(${pId}, 'lat', this)"></div></td>
+                <td><div contenteditable="true" class="editable-div text-center save-td sync-lon-${pId}" placeholder="-75,38..." oninput="syncField(${pId}, 'lon', this)"></div></td>
+                <td><div contenteditable="true" class="editable-div text-left save-td save-td-obs-resumen" placeholder="Observación general..." style="font-size:0.65rem;"></div></td>
+                <td class="no-print"><button class="btn-del" onclick="borrarPuntoMaster(${pId})">X</button></td>
+            `;
+            tbody.appendChild(tr);
+
+            // 2. CREAR FICHA EN DETALLE
+            const container = document.getElementById('points-container');
+            const card = document.createElement('div');
+            card.className = 'ficha-punto';
+            card.id = `card-${pId}`;
+            
+            card.innerHTML = `
+                <div class="ficha-header no-print">PUNTO MAESTRO ID: <span class="sync-id-${pId}">${nextNum}</span>
+                    <button class="btn-del-ficha" onclick="borrarPuntoMaster(${pId})">X Eliminar Punto</button>
+                </div>
+                <div class="ficha-internal">
+                    <div class="ficha-texto" style="padding: 0;">
+                        <table class="p-table" style="border-style: hidden;">
+                            <tr><th colspan="4" class="bg-light-blue">IDENTIFICACIÓN</th></tr>
+                            <tr>
+                                <td class="lbl" style="width: 20%;">ID Registro:</td>
+                                <td style="width: 30%;"><div contenteditable="true" class="editable-div text-center save-pt sync-id-${pId}" oninput="syncField(${pId}, 'id', this)">${nextNum}</div></td>
+                                <td class="lbl" style="width: 20%;" rowspan="2">Tramo:</td>
+                                <td style="width: 30%;" rowspan="2"><input type="text" class="input-abscisa text-center save-pt sync-tramo-${pId}" placeholder="K1+... - K1+..." onblur="formatearAbscisa(this); syncField(${pId}, 'tramo', this)"></td>
+                            </tr>
+                            <tr>
+                                <td class="lbl">Fecha:</td>
+                                <td><input type="date" class="text-center save-pt sync-fecha-${pId}" oninput="syncField(${pId}, 'fecha', this)"></td>
+                            </tr>
+                            <tr><th colspan="4" class="bg-light-blue">GEOLOCALIZACIÓN</th></tr>
+                            <tr>
+                                <td class="lbl">Latitud:</td>
+                                <td><div contenteditable="true" class="editable-div text-center save-pt sync-lat-${pId}" oninput="syncField(${pId}, 'lat', this)"></div></td>
+                                <td class="lbl">Longitud:</td>
+                                <td><div contenteditable="true" class="editable-div text-center save-pt sync-lon-${pId}" oninput="syncField(${pId}, 'lon', this)"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="lbl">Altitud (m):</td>
+                                <td><div contenteditable="true" class="editable-div text-center save-pt save-pt-alt"></div></td>
+                                <td class="lbl">Precisión GPS:</td>
+                                <td><div contenteditable="true" class="editable-div text-center save-pt save-pt-pre">—</div></td>
+                            </tr>
+                            <tr><td colspan="4" style="border: none; height: 3px;"></td></tr>
+                            <tr>
+                                <td class="lbl">Tipo de Elemento:</td>
+                                <td><div contenteditable="true" class="editable-div text-center save-pt sync-tipo-${pId}" oninput="syncField(${pId}, 'tipo', this)"></div></td>
+                                <td class="lbl">Estado:</td>
+                                <td style="padding: 0;">
+                                    <select class="estado-sel estado-malo save-pt sync-estado-${pId}" onchange="updateColorSync(this, ${pId})">
+                                        <option value="Malo" class="estado-malo">Malo</option><option value="Regular" class="estado-regular">Regular</option><option value="Bueno" class="estado-bueno">Bueno</option><option value="Dañado" class="estado-danado">Dañado</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="lbl">Tipo de Andén:</td>
+                                <td><div contenteditable="true" class="editable-div text-center save-pt save-pt-and">—</div></td>
+                                <td class="lbl">Bordillos:</td>
+                                <td><div contenteditable="true" class="editable-div text-center save-pt save-pt-bor">—</div></td>
+                            </tr>
+                            <tr>
+                                <td class="lbl">Tipo de Vía:</td>
+                                <td colspan="3"><div contenteditable="true" class="editable-div text-center save-pt sync-via-${pId}" oninput="syncField(${pId}, 'via', this)"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="lbl">Observaciones (Específicas):</td>
+                                <td colspan="3"><div contenteditable="true" class="editable-div text-left save-pt save-pt-obs-detalle" style="min-height: 40px; padding: 2px;"></div></td>
+                            </tr>
+                            <tbody class="tbody-fotos-${pId}">
+                                <tr><th colspan="4" class="bg-light-blue">REGISTRO FOTOGRÁFICO</th></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="display:flex; flex-direction:column;">
+                        <div class="ficha-fotos" id="fotos-grid-${pId}">
+                            </div>
+                        <div class="no-print" style="text-align: center; padding: 5px; background: #e9ecef; border-left: 1px solid black;">
+                            <input type="file" id="up-foto-${pId}" accept="image/*" class="hidden-file-input" multiple onchange="addDynamicPhotos(event, ${pId})">
+                            <label class="btn-action" style="background:#17a2b8; width: 90%; display:inline-block; box-sizing:border-box; cursor:pointer;" for="up-foto-${pId}">📷 Añadir Foto(s)</label>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
+        }
+
+        function syncField(pId, field, sourceEl) {
+            let val = (sourceEl.tagName === 'INPUT' || sourceEl.tagName === 'SELECT') ? sourceEl.value : sourceEl.innerText;
+            document.querySelectorAll(`.sync-${field}-${pId}`).forEach(el => {
+                if (el !== sourceEl) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'SELECT') { if(el.value !== val) el.value = val; } 
+                    else { if(el.innerText !== val) el.innerText = val; }
+                }
+            });
+        }
+
+        function updateColorSync(select, pId) {
+            let val = select.value;
+            document.querySelectorAll(`.sync-estado-${pId}`).forEach(el => {
+                el.value = val;
+                el.className = `estado-sel save-td sync-estado-${pId}`;
+                if(el.classList.contains('save-pt')) el.className = `estado-sel save-pt sync-estado-${pId}`;
+                if(val === 'Malo') el.classList.add('st-malo');
+                if(val === 'Regular') el.classList.add('st-regular');
+                if(val === 'Bueno') el.classList.add('st-bueno');
+                if(val === 'Dañado') el.classList.add('st-danado');
+            });
+        }
+
+        function borrarPuntoMaster(pId) {
+            if(confirm("¿Eliminar este punto por completo?")) {
+                document.getElementById(`row-${pId}`).remove();
+                document.getElementById(`card-${pId}`).remove();
+                document.querySelectorAll('#summary-tbody tr').forEach((tr, i) => tr.querySelector('.row-num').innerText = i+1);
+                renumberAllGlobalPhotos();
+            }
+        }
+
+        // =======================================================================
+        // MOTOR FOTOGRÁFICO DINÁMICO Y CONSECUTIVO GLOBAL (IOS PWA SAFE)
+        // =======================================================================
+        function addDynamicPhotos(event, pId) {
+            const files = event.target.files;
+            const grid = document.getElementById(`fotos-grid-${pId}`);
+            
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                if (!file.type.match('image.*')) continue;
+                
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function(e) {
+                    const imgOriginal = new Image();
+                    imgOriginal.src = e.target.result;
+                    imgOriginal.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        const MAX_DIM = 800; // Compresión
+                        let width = imgOriginal.width; let height = imgOriginal.height;
+                        if (width > height) { if (width > MAX_DIM) { height *= MAX_DIM / width; width = MAX_DIM; } } 
+                        else { if (height > MAX_DIM) { width *= MAX_DIM / height; height = MAX_DIM; } }
+                        canvas.width = width; canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(imgOriginal, 0, 0, width, height);
+                        
+                        const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.6);
+
+                        const slot = document.createElement('div');
+                        slot.className = 'img-slot global-photo-slot';
+                        
+                        slot.innerHTML = `
+                            <button class="del-btn no-print" onclick="deleteDynamicPhoto(this)">X</button>
+                            <img src="${compressedDataUrl}" class="save-master-img" style="display:block;">
+                            <div class="photo-label">FOTO X</div>
+                        `;
+                        grid.appendChild(slot);
+                        renumberAllGlobalPhotos();
+                    }
+                };
+            }
+            event.target.value = ''; 
+        }
+
+        function deleteDynamicPhoto(btn) {
+            btn.parentElement.remove();
+            renumberAllGlobalPhotos();
+        }
+
+        function renumberAllGlobalPhotos() {
+            let globalCounter = 1;
+            
+            document.querySelectorAll('.ficha-punto').forEach(card => {
+                let pId = card.id.split('-')[1];
+                let tbodyFotos = card.querySelector(`.tbody-fotos-${pId}`);
+                
+                tbodyFotos.innerHTML = `<tr><th colspan="4" class="bg-light-blue">REGISTRO FOTOGRÁFICO</th></tr>`;
+                
+                let photosInCard = card.querySelectorAll('.global-photo-slot');
+                
+                if(photosInCard.length === 0) {
+                     tbodyFotos.innerHTML += `<tr><td class="lbl">Fotos:</td><td colspan="3">Sin registro</td></tr>`;
+                } else {
+                    photosInCard.forEach((slot, index) => {
+                        let currentNum = globalCounter++;
+                        slot.querySelector('.photo-label').innerText = `FOTO ${currentNum}`;
+                        let rowLabel = index === 0 ? "Foto del punto:" : `Foto detallada ${index}:`;
+                        tbodyFotos.innerHTML += `
+                            <tr>
+                                <td class="lbl">${rowLabel}</td>
+                                <td colspan="3"><div contenteditable="true" class="editable-div text-center save-code-img">FOTO ${currentNum}</div></td>
+                            </tr>
+                        `;
+                    });
+                }
+            });
+        }
+
+        // =======================================================================
+        // MOTOR DE FIRMAS CANVA GSC
+        // =======================================================================
+        let sigCanvas = document.getElementById('signature-pad');
+        let sigCtx = sigCanvas.getContext('2d');
+        let drawing = false; let activeFirmaId = null;
+
+        sigCanvas.addEventListener('touchstart', (e) => { e.preventDefault(); drawing = true; drawSig(e.touches[0]); }, { passive: false });
+        sigCanvas.addEventListener('touchend', (e) => { e.preventDefault(); drawing = false; sigCtx.beginPath(); }, { passive: false });
+        sigCanvas.addEventListener('touchmove', (e) => { e.preventDefault(); drawSig(e.touches[0]); }, { passive: false });
+        sigCanvas.addEventListener('mousedown', (e) => { drawing = true; sigCtx.beginPath(); drawSig(e); });
+        sigCanvas.addEventListener('mouseup', () => { drawing = false; sigCtx.beginPath(); });
+        sigCanvas.addEventListener('mousemove', drawSig);
+
+        function drawSig(e) {
+            if (!drawing) return;
+            let rect = sigCanvas.getBoundingClientRect();
+            sigCtx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+            sigCtx.stroke(); sigCtx.beginPath(); sigCtx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+        }
+
+        function openSignaturePad(targetImgId) {
+            activeFirmaId = targetImgId;
+            document.getElementById('signature-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; 
+            setTimeout(() => {
+                sigCanvas.width = sigCanvas.offsetWidth; sigCanvas.height = sigCanvas.offsetHeight;
+                sigCtx.lineWidth = 3; sigCtx.lineCap = 'round'; sigCtx.strokeStyle = '#000';
+            }, 10);
+        }
+
+        function closeSignatureModal() {
+            document.getElementById('signature-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            sigCtx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
+        }
+
+        function saveSignature() {
+            if(!activeFirmaId) return;
+            let imgElement = document.getElementById(activeFirmaId);
+            imgElement.src = sigCanvas.toDataURL('image/png');
+            imgElement.style.display = 'block';
+            closeSignatureModal();
+        }
+
+        function loadSignatureImg(event, targetImgId) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                let imgElement = document.getElementById(targetImgId);
+                imgElement.src = e.target.result; imgElement.style.display = 'block';
+            };
+            reader.readAsDataURL(file); event.target.value = ''; 
+        }
+
+        function clearSignature(targetImgId) {
+            let img = document.getElementById(targetImgId); img.src = ''; img.style.display = 'none';
+        }
+
+        // =======================================================================
+        // PERSISTENCIA RELACIONAL (.json)
+        // =======================================================================
+        function exportarActaEntorno() {
+            let actaNum = document.getElementById('acta-num').value.trim() || 'SN';
+            let tramo = document.getElementById('cfg-tramo-actual').value;
+            let fileName = `Entorno_Sonadora_Relacional_T${tramo}_N${actaNum}.json`;
+
+            let data = {
+                tipo: 'entorno_relacional_v3', 
+                config: {},
+                header: [],
+                summaryTable: [], 
+                puntos: [],
+                conclusiones: [],
+                firmas: []
+            };
+
+            ['cfg-proyecto', 'cfg-contratante', 'cfg-interventoria', 'cfg-contratista', 'cfg-tramo-long'].forEach(id => {
+                let el = document.getElementById(id);
+                data.config[id] = el.isContentEditable ? el.innerHTML : el.value;
+            });
+            data.config['cfg-tramo-actual'] = document.getElementById('cfg-tramo-actual').value;
+
+            let tab = document.getElementById('entorno');
+
+            tab.querySelectorAll('input.save-data[type="text"], input.save-data[type="date"], .save-div:not(.save-td):not(.save-pt)').forEach(el => {
+                if(el.tagName === 'INPUT') data.header.push(el.value);
+                else data.header.push(el.innerHTML);
+            });
+
+            tab.querySelectorAll('#summary-tbody tr').forEach(tr => {
+                let row = [];
+                tr.querySelectorAll('.save-td').forEach(tdInput => {
+                    if(tdInput.tagName === 'SELECT') row.push(tdInput.value);
+                    else if(tdInput.tagName === 'INPUT') row.push(tdInput.value);
+                    else row.push(tdInput.innerHTML); 
+                });
+                data.summaryTable.push(row);
+            });
+
+            document.querySelectorAll('.ficha-punto').forEach(card => {
+                let pId = card.id.split('-')[1];
+                let ptObj = {
+                    id: card.querySelector(`.sync-id-${pId}`).innerText,
+                    tramo: card.querySelector(`.sync-tramo-${pId}`).value,
+                    fecha: card.querySelector(`.sync-fecha-${pId}`).value,
+                    lat: card.querySelector(`.sync-lat-${pId}`).innerText,
+                    lon: card.querySelector(`.sync-lon-${pId}`).innerText,
+                    alt: card.querySelector(`.save-pt-alt`).innerText,
+                    pre: card.querySelector(`.save-pt-pre`).innerText,
+                    tipo: card.querySelector(`.sync-tipo-${pId}`).innerText,
+                    estado: card.querySelector(`.sync-estado-${pId}`).value,
+                    and: card.querySelector(`.save-pt-and`).innerText,
+                    bor: card.querySelector(`.save-pt-bor`).innerText,
+                    via: card.querySelector(`.sync-via-${pId}`).innerText,
+                    obs: card.querySelector(`.save-pt-obs-detalle`).innerHTML,
+                    fotos: [] 
+                };
+                card.querySelectorAll('.save-master-img').forEach(img => {
+                    ptObj.fotos.push(img.src);
+                });
+                
+                ptObj.codigosFotos = [];
+                card.querySelectorAll('.save-code-img').forEach(code => {
+                    ptObj.codigosFotos.push(code.innerText);
+                });
+
+                data.puntos.push(ptObj);
+            });
+
+            document.querySelectorAll('.conclusiones-table .save-div').forEach(el => {
+                data.conclusiones.push(el.innerHTML);
+            });
+
+            tab.querySelectorAll('.firma-img').forEach((img) => { data.firmas.push(img.getAttribute('src') || ""); });
+
+            let blob = new Blob([JSON.stringify(data)], {type: "application/json"});
+            let url = URL.createObjectURL(blob);
+            let a = document.createElement('a'); a.href = url; a.download = fileName;
+            document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+            showToast(`Proyecto Guardado: ${fileName}`);
+        }
+
+        function importarActaEntorno(event) {
+            let file = event.target.files[0];
+            if (!file) return;
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    let data = JSON.parse(e.target.result);
+                    if (data.tipo !== 'entorno_relacional_v3') { showToast("Error: Archivo incorrecto o versión antigua."); return; }
+
+                    for(let id in data.config) {
+                        let el = document.getElementById(id);
+                        if(el.isContentEditable) el.innerHTML = data.config[id];
+                        else el.value = data.config[id];
+                    }
+                    syncConfig();
+                    document.getElementById('cfg-tramo-actual').value = data.config['cfg-tramo-actual'];
+                    actualizarMapaGlobal(data.config['cfg-tramo-actual']);
+
+                    let tab = document.getElementById('entorno');
+                    
+                    let hIdx = 0;
+                    tab.querySelectorAll('input.save-data[type="text"], input.save-data[type="date"], .save-div:not(.save-td):not(.save-pt)').forEach(el => {
+                        if(data.header[hIdx] !== undefined) {
+                            if(el.tagName === 'INPUT') el.value = data.header[hIdx];
+                            else el.innerHTML = data.header[hIdx];
+                        }
+                        hIdx++;
+                    });
+
+                    document.getElementById('summary-tbody').innerHTML = '';
+                    document.getElementById('points-container').innerHTML = '';
+                    globalPointId = 0;
+
+                    if(data.puntos) {
+                        let rowIndex = 0;
+                        data.puntos.forEach(ptData => {
+                            crearNuevoPuntoMaster(); 
+                            let pId = globalPointId;
+                            
+                            let idEl = document.querySelector(`#card-${pId} .sync-id-${pId}`); idEl.innerText = ptData.id; syncField(pId, 'id', idEl);
+                            let tramoEl = document.querySelector(`#card-${pId} .sync-tramo-${pId}`); tramoEl.value = ptData.tramo; syncField(pId, 'tramo', tramoEl);
+                            let fechaEl = document.querySelector(`#card-${pId} .sync-fecha-${pId}`); fechaEl.value = ptData.fecha; syncField(pId, 'fecha', fechaEl);
+                            let latEl = document.querySelector(`#card-${pId} .sync-lat-${pId}`); latEl.innerText = ptData.lat; syncField(pId, 'lat', latEl);
+                            let lonEl = document.querySelector(`#card-${pId} .sync-lon-${pId}`); lonEl.innerText = ptData.lon; syncField(pId, 'lon', lonEl);
+                            
+                            document.querySelector(`#card-${pId} .save-pt-alt`).innerText = ptData.alt || '';
+                            document.querySelector(`#card-${pId} .save-pt-pre`).innerText = ptData.pre || '';
+                            
+                            let tipoEl = document.querySelector(`#card-${pId} .sync-tipo-${pId}`); tipoEl.innerText = ptData.tipo; syncField(pId, 'tipo', tipoEl);
+                            let estadoEl = document.querySelector(`#card-${pId} .sync-estado-${pId}`); estadoEl.value = ptData.estado; updateColorSync(estadoEl, pId);
+                            
+                            document.querySelector(`#card-${pId} .save-pt-and`).innerText = ptData.and || '';
+                            document.querySelector(`#card-${pId} .save-pt-bor`).innerText = ptData.bor || '';
+                            
+                            let viaEl = document.querySelector(`#card-${pId} .sync-via-${pId}`); viaEl.innerText = ptData.via; syncField(pId, 'via', viaEl);
+                            
+                            document.querySelector(`#card-${pId} .save-pt-obs-detalle`).innerHTML = ptData.obs || '';
+
+                            if (data.summaryTable && data.summaryTable[rowIndex]) {
+                                let obsGeneral = data.summaryTable[rowIndex][8]; 
+                                document.querySelector(`#row-${pId} .save-td-obs-resumen`).innerHTML = obsGeneral || '';
+                            }
+
+                            let grid = document.getElementById(`fotos-grid-${pId}`);
+                            ptData.fotos.forEach(src => {
+                                const slot = document.createElement('div');
+                                slot.className = 'img-slot global-photo-slot';
+                                slot.innerHTML = `
+                                    <button class="del-btn no-print" onclick="deleteDynamicPhoto(this)">X</button>
+                                    <img src="${src}" class="save-master-img" style="display:block;">
+                                    <div class="photo-label">FOTO X</div>
+                                `;
+                                grid.appendChild(slot);
+                            });
+                            rowIndex++;
+                        });
+                        
+                        renumberAllGlobalPhotos(); 
+
+                        let ptIndex = 0;
+                        document.querySelectorAll('.ficha-punto').forEach(card => {
+                            let ptData = data.puntos[ptIndex];
+                            if(ptData && ptData.codigosFotos) {
+                                let codeIndex = 0;
+                                card.querySelectorAll('.save-code-img').forEach(code => {
+                                    if(ptData.codigosFotos[codeIndex]) code.innerText = ptData.codigosFotos[codeIndex];
+                                    codeIndex++;
+                                });
+                            }
+                            ptIndex++;
+                        });
+                    }
+
+                    let cIdx = 0;
+                    document.querySelectorAll('.conclusiones-table .save-div').forEach(el => {
+                        if(data.conclusiones[cIdx] !== undefined) el.innerHTML = data.conclusiones[cIdx];
+                        cIdx++;
+                    });
+
+                    if(data.firmas) {
+                        let fIdx = 0;
+                        tab.querySelectorAll('.firma-img').forEach((img) => {
+                            if(data.firmas[fIdx]) { img.src = data.firmas[fIdx]; img.style.display = 'block'; }
+                            fIdx++;
+                        });
+                    }
+
+                    showToast("Proyecto Cargado Correctamente.");
+                } catch (error) { showToast("Error: Archivo dañado."); console.error(error); }
+            }; reader.readAsText(file);
+            event.target.value = ''; 
+        }
+
+        // IMPRESIÓN PDF BLINDADA PARA IPHONE (LANDSCAPE)
+        function generarPDF() {
+            const originalTitle = document.title;
+            let actaNum = document.getElementById('acta-num').value.trim() || 'SN';
+            let tramo = document.getElementById('cfg-tramo-actual').value;
+            document.title = `Entorno_Sonadora_T${tramo}_N${actaNum}`;
+            
+            setTimeout(() => {
+                window.print();
+                setTimeout(() => { document.title = originalTitle; }, 2000);
+            }, 500);
+        }
+
+    </script>
+</body>
+</html>

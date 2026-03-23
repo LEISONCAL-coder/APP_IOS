@@ -1,0 +1,70 @@
+name: Build iOS App (AltStore / Sideloadly)
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build-app:
+    name: Build iOS IPA
+    runs-on: macos-latest
+
+    steps:
+      - name: Extraer código del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar Cordova globalmente
+        run: npm install -g cordova
+
+      - name: Preparar Estructura del Proyecto Cordova
+        run: |
+          mkdir cordova_project
+          cd cordova_project
+          
+          cordova create . com.gsc.ingenieria.actas "GSC_Actas"
+          
+          rm -rf www/*
+          
+          rsync -a --exclude='cordova_project' --exclude='.git' --exclude='.github' ../ ./www/
+          
+          cp ../config.xml ./config.xml
+          cp ../logo_gsc.png ./logo_gsc.png
+
+      - name: Agregar Plataforma iOS
+        run: |
+          cd cordova_project
+          cordova platform add ios
+
+      - name: Compilar iOS (Bypass de Firma para Sideload)
+        run: |
+          cd cordova_project
+          # Forzamos la compilación para dispositivo físico desactivando todos los chequeos de firma de Apple
+          cordova build ios --device \
+            --buildFlag="CODE_SIGNING_ALLOWED=NO" \
+            --buildFlag="CODE_SIGNING_REQUIRED=NO" \
+            --buildFlag="CODE_SIGN_IDENTITY="
+
+      - name: Empaquetar a .ipa (Para Sideloadly / AltStore)
+        run: |
+          cd cordova_project/platforms/ios/build/device/
+          
+          # Un archivo .ipa es simplemente un ZIP que contiene una carpeta llamada "Payload" con la app adentro.
+          mkdir Payload
+          
+          # Movemos el .app (el nombre puede variar ligeramente por espacios) dentro de la carpeta Payload
+          mv *.app Payload/
+          
+          # Comprimimos la carpeta Payload y le damos la extensión .ipa
+          zip -qr GSC_Actas.ipa Payload/
+
+      - name: Guardar el .ipa Descargable
+        uses: actions/upload-artifact@v4
+        with:
+          name: GSC_Actas_iOS_Sideload
+          path: cordova_project/platforms/ios/build/device/GSC_Actas.ipa

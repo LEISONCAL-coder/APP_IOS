@@ -1,6 +1,7 @@
 // =============================================================================
 // gsc_file_manager.js — Motor de Archivos GSC para iOS (.ipa / Cordova)
-// Sin plugins adicionales. Usa cordova-plugin-file (JSON) + window.print() (PDF)
+// PDF: usa navigator.share() con blob HTML — funciona en WKWebView iOS 14+
+// JSON: usa cordova-plugin-file para guardar en Documents/
 // =============================================================================
 
 // ---- SISTEMA DE ARCHIVOS NATIVO (cordova-plugin-file) ----
@@ -52,7 +53,7 @@ function saveJSONNativo(docType, fileName, dataObj) {
 
     if (window.cordova && cordova.file && cordova.file.documentsDirectory) {
         _getGSCDir(docType, 'JSON', function(dir) {
-            _writeBlob(dir, fileName, blob, '✅ Guardado en ' + docType + '/JSON');
+            _writeBlob(dir, fileName, blob, '✅ JSON guardado en ' + docType + '/JSON');
         });
     } else {
         _fallbackDownload(blob, fileName);
@@ -61,65 +62,98 @@ function saveJSONNativo(docType, fileName, dataObj) {
 }
 
 // =============================================================================
-// EXPORTAR PDF — window.print() con CSS optimizado para iOS nativo
+// EXPORTAR PDF — Estrategia híbrida para Cordova WKWebView iOS
 //
-// Muestra un modal de instrucciones claro, luego llama window.print().
-// El PDF se guarda desde el diálogo de impresión de iOS con 2 toques.
+// 1. Genera un HTML autocontenido con todo el CSS inline y datos actuales
+// 2. Intenta compartirlo con navigator.share() (abre hoja nativa iOS)
+//    → El usuario puede: Imprimir, Guardar en Archivos, Mail, AirDrop, etc.
+// 3. Si share no está disponible, guarda el .html en Documents/ via Cordova
 // =============================================================================
 function savePDFNativo(docType, fileName, _ignored) {
 
-    // --- CSS de impresión ---
-    var styleId = '_gsc_print_override';
-    var existing = document.getElementById(styleId);
-    if (existing) existing.remove();
-    var style = document.createElement('style');
-    style.id = styleId;
-    style.textContent =
-        '@page { size: letter portrait; margin: 15mm 10mm; }' +
-        'body { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }' +
-        'nav, .no-print, .fab-container, #toast-container, .modal-overlay,' +
-        '.btn-action, .btn-firma, .hidden-file-input { display: none !important; }' +
-        'img { break-inside: avoid !important; page-break-inside: avoid !important; display: block !important; max-width: 100% !important; }' +
-        'table { border-collapse: collapse !important; }' +
-        'tr, td, th { break-inside: avoid !important; page-break-inside: avoid !important; }' +
-        '.ficha-punto, .photo-card, .img-slot, .global-photo-slot,' +
-        '.firma-box, .firma-wrapper, .audit-table tr { break-inside: avoid !important; page-break-inside: avoid !important; }';
-    document.head.appendChild(style);
+    if (typeof showToast !== 'undefined') showToast('⏳ Preparando documento...');
 
-    // --- Modal de instrucciones iOS (claro, sin alert()) ---
-    var overlayId = '_gsc_pdf_overlay';
-    var oldOverlay = document.getElementById(overlayId);
-    if (oldOverlay) oldOverlay.remove();
+    // CSS de impresión para cuando el usuario imprima desde Safari
+    var printCSS = [
+        '<style>',
+        '@page { size: letter portrait; margin: 15mm 10mm; }',
+        'body { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; font-family: -apple-system, sans-serif; }',
+        'nav, .no-print, .fab-container, #toast-container, .modal-overlay,',
+        '.btn-action, .btn-firma, .hidden-file-input, .upload-zone { display: none !important; }',
+        'img { break-inside: avoid !important; page-break-inside: avoid !important; display: block !important; max-width: 100% !important; }',
+        'table { border-collapse: collapse !important; }',
+        'tr, td, th { break-inside: avoid !important; page-break-inside: avoid !important; }',
+        '.ficha-punto, .photo-card, .audit-table tr, .firma-box, .firma-wrapper { break-inside: avoid !important; page-break-inside: avoid !important; }',
+        '.paper-container { box-shadow: none !important; border-top: none !important; border-radius: 0 !important; padding: 0 !important; max-width: 100% !important; }',
+        '.print-wrapper { display: table !important; width: 100% !important; }',
+        '.print-wrapper > thead { display: table-header-group !important; }',
+        '.print-wrapper > tbody { display: table-row-group !important; }',
+        '.audit-table { display: table !important; }',
+        '.audit-table tbody { display: table-row-group !important; }',
+        '.audit-table tr { display: table-row !important; margin: 0 !important; box-shadow: none !important; }',
+        '.audit-table td, .audit-table th { display: table-cell !important; }',
+        '.audit-table td::before { display: none !important; }',
+        '.status-select { border: none !important; background: transparent !important; font-weight: bold !important; }',
+        'textarea { border: none !important; background: transparent !important; resize: none !important; min-height: 0 !important; }',
+        '</style>'
+    ].join('\n');
 
-    var overlay = document.createElement('div');
-    overlay.id = overlayId;
-    overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,20,60,0.85);z-index:99999;display:flex;align-items:center;justify-content:center;';
-    overlay.innerHTML =
-        '<div style="background:#fff;border-radius:14px;padding:26px 22px;max-width:340px;width:90%;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,0.4);">' +
-          '<div style="font-size:36px;margin-bottom:8px;">🖨️</div>' +
-          '<h3 style="color:#002060;margin:0 0 14px;font-size:16px;">Guardar como PDF</h3>' +
-          '<p style="font-size:13px;color:#444;line-height:1.6;margin:0 0 18px;">' +
-            'Se abrirá el diálogo de impresión de iOS.<br><br>' +
-            '<b>1.</b> Toca el ícono <b>📤 Compartir</b><br>' +
-            '(arriba a la derecha de la pantalla)<br><br>' +
-            '<b>2.</b> Elige <b>"Guardar en Archivos"</b><br>' +
-            'para seleccionar dónde guardarlo como PDF.' +
-          '</p>' +
-          '<button id="_gsc_pdf_btn" style="background:#002060;color:#fff;border:none;border-radius:50px;padding:12px 30px;font-size:15px;font-weight:bold;cursor:pointer;width:100%;">Continuar → Imprimir</button>' +
-        '</div>';
-    document.body.appendChild(overlay);
+    // Capturar todos los estilos actuales de la página
+    var allStyles = '';
+    Array.prototype.forEach.call(document.querySelectorAll('style, link[rel="stylesheet"]'), function(el) {
+        if (el.tagName === 'STYLE') { allStyles += '<style>' + el.textContent + '</style>\n'; }
+    });
 
-    document.getElementById('_gsc_pdf_btn').onclick = function() {
-        overlay.remove();
-        var originalTitle = document.title;
-        document.title = fileName.replace('.pdf', '');
-        setTimeout(function() {
-            window.print();
-            setTimeout(function() {
-                document.title = originalTitle;
-                var s = document.getElementById(styleId);
-                if (s) s.remove();
-            }, 3000);
-        }, 200);
-    };
+    // Construir HTML autocontenido
+    var htmlContent = '<!DOCTYPE html><html lang="es"><head>' +
+        '<meta charset="UTF-8">' +
+        '<meta name="viewport" content="width=device-width, initial-scale=1.0">' +
+        '<title>' + fileName.replace('.pdf', '') + '</title>' +
+        allStyles +
+        printCSS +
+        '</head><body>' +
+        document.body.innerHTML +
+        '<script>' +
+        // Auto-print cuando se abra en Safari
+        'window.onload = function() {' +
+        '  var noprint = document.querySelectorAll(".no-print, nav, .fab-container, #toast-container, .modal-overlay");' +
+        '  noprint.forEach(function(el) { el.style.display = "none"; });' +
+        '};' +
+        '<\/script>' +
+        '</body></html>';
+
+    var htmlBlob = new Blob([htmlContent], { type: 'text/html' });
+    var htmlFileName = fileName.replace('.pdf', '') + '.html';
+
+    // ---- Intento 1: navigator.share() — abre hoja nativa de iOS ----
+    if (navigator.canShare && navigator.canShare({ files: [new File([htmlBlob], htmlFileName, { type: 'text/html' })] })) {
+        var fileToShare = new File([htmlBlob], htmlFileName, { type: 'text/html' });
+        navigator.share({
+            files: [fileToShare],
+            title: fileName.replace('.pdf', ''),
+            text: 'Abrir en Safari y compartir → Imprimir para guardar como PDF'
+        }).then(function() {
+            if (typeof showToast !== 'undefined') showToast('✅ Documento compartido');
+        }).catch(function(err) {
+            console.warn('[GSC] Share cancelado o error:', err);
+            _saveHTMLFallback(docType, htmlFileName, htmlBlob);
+        });
+
+    // ---- Intento 2: Guardar .html con cordova-plugin-file ----
+    } else {
+        _saveHTMLFallback(docType, htmlFileName, htmlBlob);
+    }
+}
+
+function _saveHTMLFallback(docType, htmlFileName, htmlBlob) {
+    if (window.cordova && cordova.file && cordova.file.documentsDirectory) {
+        _getGSCDir(docType, 'PDF', function(dir) {
+            _writeBlob(dir, htmlFileName, htmlBlob,
+                '✅ Guardado en Archivos > ' + docType + '/PDF\n' +
+                'Ábralo desde la app Archivos para imprimir como PDF');
+        });
+    } else {
+        _fallbackDownload(htmlBlob, htmlFileName);
+        if (typeof showToast !== 'undefined') showToast('✅ Archivo descargado: ' + htmlFileName);
+    }
 }

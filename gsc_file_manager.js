@@ -1,5 +1,6 @@
 // =============================================================================
-// gsc_file_manager.js — Motor Nativo de Archivos GSC para iOS (.ipa / Cordova)
+// gsc_file_manager.js — Motor de Archivos GSC para iOS (.ipa / Cordova)
+// Sin plugins adicionales. Usa cordova-plugin-file (JSON) + window.print() (PDF)
 // =============================================================================
 
 // ---- SISTEMA DE ARCHIVOS NATIVO (cordova-plugin-file) ----
@@ -16,7 +17,7 @@ function _getGSCDir(docType, subFolder, callback) {
 
 function _fsError(err) {
     console.error('[GSC] Error FS:', err);
-    if (typeof showToast !== 'undefined') showToast('Error de sistema: ' + (err.code || JSON.stringify(err)));
+    if (typeof showToast !== 'undefined') showToast('Error de sistema: ' + (err.code || err));
 }
 
 function _writeBlob(dirEntry, fileName, blob, successMsg) {
@@ -44,14 +45,14 @@ function _fallbackDownload(blob, fileName) {
 }
 
 // =============================================================================
-// GUARDAR JSON
+// GUARDAR JSON (siempre nativo en device, descarga en web)
 // =============================================================================
 function saveJSONNativo(docType, fileName, dataObj) {
     var blob = new Blob([JSON.stringify(dataObj)], { type: 'application/json' });
 
     if (window.cordova && cordova.file && cordova.file.documentsDirectory) {
         _getGSCDir(docType, 'JSON', function(dir) {
-            _writeBlob(dir, fileName, blob, '✅ Guardado en ' + docType + '/JSON/' + fileName);
+            _writeBlob(dir, fileName, blob, '✅ Guardado en ' + docType + '/JSON');
         });
     } else {
         _fallbackDownload(blob, fileName);
@@ -60,63 +61,65 @@ function saveJSONNativo(docType, fileName, dataObj) {
 }
 
 // =============================================================================
-// GENERAR PDF — Usa cordova-plugin-printer (motor nativo iOS)
-// Si no está disponible, usa window.print() como respaldo.
+// EXPORTAR PDF — window.print() con CSS optimizado para iOS nativo
+//
+// En iOS (.ipa), esto muestra la hoja nativa de impresión.
+// El usuario toca el ícono de Compartir (📤) y elige "Guardar en Archivos"
+// para depositar el PDF donde desee (o directamente en su correo/Drive).
 // =============================================================================
 function savePDFNativo(docType, fileName, _ignored) {
 
-    // Preparar CSS adicional para el PDF: sin cortes en fotos ni celdas de tabla
-    var printRules = [
-        '@page { size: letter portrait; margin: 12mm 8mm; }',
-        'body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }',
-        '.no-print, nav, .fab-container, #toast-container, .modal-overlay { display: none !important; }',
-        'img { break-inside: avoid; page-break-inside: avoid; max-width: 100%; display: block; }',
-        'table { border-collapse: collapse; }',
-        'tr, td, th { break-inside: avoid; page-break-inside: avoid; }',
-        '.ficha-punto, .photo-card, .audit-table tr, .firma-box { break-inside: avoid; page-break-inside: avoid; }',
-        '.img-slot, .global-photo-slot { break-inside: avoid; page-break-inside: avoid; }'
+    // 1. Inyectar estilos de impresión específicos para iOS
+    var styleId = '_gsc_print_override';
+    var existing = document.getElementById(styleId);
+    if (existing) existing.remove();
+
+    var style = document.createElement('style');
+    style.id = styleId;
+    style.textContent = [
+        '@page {',
+        '  size: letter portrait;',   /* Tamaño carta */
+        '  margin: 15mm 10mm;',
+        '}',
+        'body { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }',
+
+        /* Ocultar controles de UI */
+        'nav, .no-print, .fab-container, #toast-container, .modal-overlay,',
+        '.btn-action, .btn-firma, .photo-controls, .hidden-file-input { display: none !important; }',
+
+        /* Sin cortes en fotos */
+        'img { break-inside: avoid !important; page-break-inside: avoid !important;',
+        '      display: block !important; max-width: 100% !important; }',
+
+        /* Sin cortes en filas y celdas de tabla */
+        'table { border-collapse: collapse !important; }',
+        'tr, td, th { break-inside: avoid !important; page-break-inside: avoid !important; }',
+
+        /* Sin cortes en fichas, tarjetas de foto y cajas de firma */
+        '.ficha-punto, .photo-card, .img-slot, .global-photo-slot,',
+        '.firma-box, .firma-wrapper, .audit-table tr {',
+        '  break-inside: avoid !important; page-break-inside: avoid !important;',
+        '}',
+
+        /* Forzar fondo blanco */
+        'body, * { background-color: white; }'
     ].join('\n');
 
-    // Serializar el HTML completo de la página con el CSS extra inyectado
-    var docHTML = '<!DOCTYPE html><html><head><meta charset="utf-8">' +
-        '<style>' + printRules + '</style>' +
-        '</head><body>' + document.body.innerHTML + '</body></html>';
+    document.head.appendChild(style);
 
-    // ---- OPCIÓN A: cordova-plugin-printer (nativo iOS, máxima calidad) ----
-    if (window.cordova && cordova.plugins && cordova.plugins.printer) {
-        var opts = {
-            name:        fileName,
-            orientation: 'portrait',
-            monochrome:  false,
-            border:      true
-        };
+    // 2. Fijar el título del documento (será el nombre por defecto del PDF)
+    var originalTitle = document.title;
+    document.title = fileName.replace('.pdf', '');
 
-        // La función print() muestra el diálogo nativo de iOS donde el usuario
-        // puede elegir "Salvar como PDF" y guardarlo en cualquier carpeta (Files, Mail, etc.)
-        cordova.plugins.printer.print(docHTML, opts, function(success) {
-            if (success) {
-                if (typeof showToast !== 'undefined') showToast('✅ PDF exportado correctamente');
-            }
-        });
+    // 3. Lanzar el diálogo de impresión nativo de iOS
+    setTimeout(function() {
+        window.print();
 
-    // ---- OPCIÓN B: window.print() como respaldo (Safari / web) ----
-    } else {
-        // Inyectar estilos de impresión temporalmente
-        var styleTag = document.createElement('style');
-        styleTag.id = '_gsc_print_style';
-        styleTag.textContent = printRules;
-        document.head.appendChild(styleTag);
-
-        var originalTitle = document.title;
-        document.title = fileName.replace('.pdf', '');
-
+        // 4. Restaurar título y limpiar estilos después de que cierre el diálogo
         setTimeout(function() {
-            window.print();
-            setTimeout(function() {
-                document.title = originalTitle;
-                var s = document.getElementById('_gsc_print_style');
-                if (s) s.remove();
-            }, 2000);
-        }, 300);
-    }
+            document.title = originalTitle;
+            var s = document.getElementById(styleId);
+            if (s) s.remove();
+        }, 3000);
+    }, 300);
 }

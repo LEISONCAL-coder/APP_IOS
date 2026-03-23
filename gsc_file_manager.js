@@ -2,10 +2,8 @@
 // gsc_file_manager.js — Motor Nativo de Archivos GSC para iOS (.ipa / Cordova)
 // =============================================================================
 
-/**
- * Obtiene (y crea si no existe) la ruta de subcarpeta nativa en iOS.
- * Estructura: documentsDirectory / docType / subFolder
- */
+// ---- SISTEMA DE ARCHIVOS NATIVO (cordova-plugin-file) ----
+
 function _getGSCDir(docType, subFolder, callback) {
     window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function(root) {
         root.getDirectory(docType, { create: true }, function(docDir) {
@@ -17,39 +15,30 @@ function _getGSCDir(docType, subFolder, callback) {
 }
 
 function _fsError(err) {
-    console.error('[GSC FileManager] Error FS:', err);
-    if (typeof showToast !== 'undefined') showToast('Error de sistema de archivos: ' + (err.code || JSON.stringify(err)));
+    console.error('[GSC] Error FS:', err);
+    if (typeof showToast !== 'undefined') showToast('Error de sistema: ' + (err.code || JSON.stringify(err)));
 }
 
-/**
- * Escribe un Blob en un archivo dentro del directorio dado.
- */
 function _writeBlob(dirEntry, fileName, blob, successMsg) {
     dirEntry.getFile(fileName, { create: true, exclusive: false }, function(fileEntry) {
         fileEntry.createWriter(function(writer) {
             writer.onwriteend = function() {
-                console.log('[GSC FileManager] Guardado:', fileEntry.fullPath);
                 if (typeof showToast !== 'undefined') showToast(successMsg);
             };
             writer.onerror = function(e) {
-                console.error('[GSC FileManager] Error escribiendo:', e);
-                if (typeof showToast !== 'undefined') showToast('Error al escribir el archivo.');
+                console.error('[GSC] Error escribiendo:', e);
+                if (typeof showToast !== 'undefined') showToast('Error al guardar archivo.');
             };
             writer.write(blob);
         }, _fsError);
     }, _fsError);
 }
 
-/**
- * Descarga de respaldo (funciona en Safari/navegador web).
- */
 function _fallbackDownload(blob, fileName) {
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
-    a.href = url;
-    a.download = fileName;
-    document.body.appendChild(a);
-    a.click();
+    a.href = url; a.download = fileName;
+    document.body.appendChild(a); a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 }
@@ -62,89 +51,72 @@ function saveJSONNativo(docType, fileName, dataObj) {
 
     if (window.cordova && cordova.file && cordova.file.documentsDirectory) {
         _getGSCDir(docType, 'JSON', function(dir) {
-            _writeBlob(dir, fileName, blob, '✅ JSON guardado en ' + docType + '/JSON');
+            _writeBlob(dir, fileName, blob, '✅ Guardado en ' + docType + '/JSON/' + fileName);
         });
     } else {
         _fallbackDownload(blob, fileName);
-        if (typeof showToast !== 'undefined') showToast('JSON descargado: ' + fileName);
+        if (typeof showToast !== 'undefined') showToast('✅ JSON descargado: ' + fileName);
     }
 }
 
 // =============================================================================
-// GENERAR Y GUARDAR PDF
-// Usa html2pdf.js para convertir el DOM a PDF sin usar window.print()
+// GENERAR PDF — Usa cordova-plugin-printer (motor nativo iOS)
+// Si no está disponible, usa window.print() como respaldo.
 // =============================================================================
-function savePDFNativo(docType, fileName, targetElement) {
-    if (typeof showToast !== 'undefined') showToast('⏳ Generando PDF, espere...');
+function savePDFNativo(docType, fileName, _ignored) {
 
-    // Ocultar todos los elementos .no-print durante la renderización
-    var noPrintEls = document.querySelectorAll('.no-print');
-    noPrintEls.forEach(function(el) {
-        el._gscOldDisplay = el.style.display;
-        el.style.setProperty('display', 'none', 'important');
-    });
+    // Preparar CSS adicional para el PDF: sin cortes en fotos ni celdas de tabla
+    var printRules = [
+        '@page { size: letter portrait; margin: 12mm 8mm; }',
+        'body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }',
+        '.no-print, nav, .fab-container, #toast-container, .modal-overlay { display: none !important; }',
+        'img { break-inside: avoid; page-break-inside: avoid; max-width: 100%; display: block; }',
+        'table { border-collapse: collapse; }',
+        'tr, td, th { break-inside: avoid; page-break-inside: avoid; }',
+        '.ficha-punto, .photo-card, .audit-table tr, .firma-box { break-inside: avoid; page-break-inside: avoid; }',
+        '.img-slot, .global-photo-slot { break-inside: avoid; page-break-inside: avoid; }'
+    ].join('\n');
 
-    // Esperar un frame para asegurar que el DOM se re-pintó sin los elementos ocultos
-    setTimeout(function() {
-        var opt = {
-            margin:       [10, 8, 10, 8],   // mm: [arriba, derecha, abajo, izquierda]
-            filename:     fileName,
-            image:        { type: 'jpeg', quality: 0.85 },
-            html2canvas: {
-                scale:         2,            // Alta resolución
-                useCORS:       true,
-                allowTaint:    true,
-                logging:       false,
-                windowWidth:   document.documentElement.scrollWidth,
-                windowHeight:  document.documentElement.scrollHeight,
-                onclone: function(clonedDoc) {
-                    // En el clon, asegurarnos que tablas e imágenes sean bloques completos
-                    var style = clonedDoc.createElement('style');
-                    style.textContent =
-                        '.no-print { display: none !important; }' +
-                        'img { break-inside: avoid; page-break-inside: avoid; display: block; max-width: 100%; }' +
-                        'table { border-collapse: collapse; }' +
-                        'tr, td, th { break-inside: avoid; page-break-inside: avoid; }' +
-                        '.ficha-punto, .photo-card, .audit-table tr { break-inside: avoid; page-break-inside: avoid; }';
-                    clonedDoc.head.appendChild(style);
-                }
-            },
-            jsPDF: {
-                unit:        'mm',
-                format:      'letter',    // Tamaño carta (215.9 x 279.4 mm)
-                orientation: 'portrait'
-            },
-            pagebreak: {
-                mode:  ['css', 'legacy'],
-                avoid: ['img', 'tr', 'td', '.ficha-punto', '.photo-card', '.firma-box', '.audit-table tr']
-            }
+    // Serializar el HTML completo de la página con el CSS extra inyectado
+    var docHTML = '<!DOCTYPE html><html><head><meta charset="utf-8">' +
+        '<style>' + printRules + '</style>' +
+        '</head><body>' + document.body.innerHTML + '</body></html>';
+
+    // ---- OPCIÓN A: cordova-plugin-printer (nativo iOS, máxima calidad) ----
+    if (window.cordova && cordova.plugins && cordova.plugins.printer) {
+        var opts = {
+            name:        fileName,
+            orientation: 'portrait',
+            monochrome:  false,
+            border:      true
         };
 
-        html2pdf()
-            .set(opt)
-            .from(targetElement)
-            .output('blob')
-            .then(function(pdfBlob) {
-                // Restaurar visibilidad
-                noPrintEls.forEach(function(el) {
-                    el.style.display = el._gscOldDisplay || '';
-                });
+        // La función print() muestra el diálogo nativo de iOS donde el usuario
+        // puede elegir "Salvar como PDF" y guardarlo en cualquier carpeta (Files, Mail, etc.)
+        cordova.plugins.printer.print(docHTML, opts, function(success) {
+            if (success) {
+                if (typeof showToast !== 'undefined') showToast('✅ PDF exportado correctamente');
+            }
+        });
 
-                if (window.cordova && cordova.file && cordova.file.documentsDirectory) {
-                    _getGSCDir(docType, 'PDF', function(dir) {
-                        _writeBlob(dir, fileName, pdfBlob, '✅ PDF guardado en ' + docType + '/PDF');
-                    });
-                } else {
-                    _fallbackDownload(pdfBlob, fileName);
-                    if (typeof showToast !== 'undefined') showToast('✅ PDF descargado: ' + fileName);
-                }
-            })
-            .catch(function(err) {
-                noPrintEls.forEach(function(el) {
-                    el.style.display = el._gscOldDisplay || '';
-                });
-                console.error('[GSC FileManager] Error generando PDF:', err);
-                if (typeof showToast !== 'undefined') showToast('❌ Error al generar el PDF. Ver consola.');
-            });
-    }, 150);
+    // ---- OPCIÓN B: window.print() como respaldo (Safari / web) ----
+    } else {
+        // Inyectar estilos de impresión temporalmente
+        var styleTag = document.createElement('style');
+        styleTag.id = '_gsc_print_style';
+        styleTag.textContent = printRules;
+        document.head.appendChild(styleTag);
+
+        var originalTitle = document.title;
+        document.title = fileName.replace('.pdf', '');
+
+        setTimeout(function() {
+            window.print();
+            setTimeout(function() {
+                document.title = originalTitle;
+                var s = document.getElementById('_gsc_print_style');
+                if (s) s.remove();
+            }, 2000);
+        }, 300);
+    }
 }

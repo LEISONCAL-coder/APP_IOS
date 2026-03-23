@@ -11,6 +11,7 @@
     <content src="index.html" />
     <access origin="*" />
     <plugin name="cordova-plugin-file" spec="^8.0.0" />
+    <plugin name="cordova-plugin-printer" spec="^0.8.0" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />

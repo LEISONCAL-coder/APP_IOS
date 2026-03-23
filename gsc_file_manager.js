@@ -63,63 +63,63 @@ function saveJSONNativo(docType, fileName, dataObj) {
 // =============================================================================
 // EXPORTAR PDF — window.print() con CSS optimizado para iOS nativo
 //
-// En iOS (.ipa), esto muestra la hoja nativa de impresión.
-// El usuario toca el ícono de Compartir (📤) y elige "Guardar en Archivos"
-// para depositar el PDF donde desee (o directamente en su correo/Drive).
+// Muestra un modal de instrucciones claro, luego llama window.print().
+// El PDF se guarda desde el diálogo de impresión de iOS con 2 toques.
 // =============================================================================
 function savePDFNativo(docType, fileName, _ignored) {
 
-    // 1. Inyectar estilos de impresión específicos para iOS
+    // --- CSS de impresión ---
     var styleId = '_gsc_print_override';
     var existing = document.getElementById(styleId);
     if (existing) existing.remove();
-
     var style = document.createElement('style');
     style.id = styleId;
-    style.textContent = [
-        '@page {',
-        '  size: letter portrait;',   /* Tamaño carta */
-        '  margin: 15mm 10mm;',
-        '}',
-        'body { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }',
-
-        /* Ocultar controles de UI */
-        'nav, .no-print, .fab-container, #toast-container, .modal-overlay,',
-        '.btn-action, .btn-firma, .photo-controls, .hidden-file-input { display: none !important; }',
-
-        /* Sin cortes en fotos */
-        'img { break-inside: avoid !important; page-break-inside: avoid !important;',
-        '      display: block !important; max-width: 100% !important; }',
-
-        /* Sin cortes en filas y celdas de tabla */
-        'table { border-collapse: collapse !important; }',
-        'tr, td, th { break-inside: avoid !important; page-break-inside: avoid !important; }',
-
-        /* Sin cortes en fichas, tarjetas de foto y cajas de firma */
-        '.ficha-punto, .photo-card, .img-slot, .global-photo-slot,',
-        '.firma-box, .firma-wrapper, .audit-table tr {',
-        '  break-inside: avoid !important; page-break-inside: avoid !important;',
-        '}',
-
-        /* Forzar fondo blanco */
-        'body, * { background-color: white; }'
-    ].join('\n');
-
+    style.textContent =
+        '@page { size: letter portrait; margin: 15mm 10mm; }' +
+        'body { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }' +
+        'nav, .no-print, .fab-container, #toast-container, .modal-overlay,' +
+        '.btn-action, .btn-firma, .hidden-file-input { display: none !important; }' +
+        'img { break-inside: avoid !important; page-break-inside: avoid !important; display: block !important; max-width: 100% !important; }' +
+        'table { border-collapse: collapse !important; }' +
+        'tr, td, th { break-inside: avoid !important; page-break-inside: avoid !important; }' +
+        '.ficha-punto, .photo-card, .img-slot, .global-photo-slot,' +
+        '.firma-box, .firma-wrapper, .audit-table tr { break-inside: avoid !important; page-break-inside: avoid !important; }';
     document.head.appendChild(style);
 
-    // 2. Fijar el título del documento (será el nombre por defecto del PDF)
-    var originalTitle = document.title;
-    document.title = fileName.replace('.pdf', '');
+    // --- Modal de instrucciones iOS (claro, sin alert()) ---
+    var overlayId = '_gsc_pdf_overlay';
+    var oldOverlay = document.getElementById(overlayId);
+    if (oldOverlay) oldOverlay.remove();
 
-    // 3. Lanzar el diálogo de impresión nativo de iOS
-    setTimeout(function() {
-        window.print();
+    var overlay = document.createElement('div');
+    overlay.id = overlayId;
+    overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,20,60,0.85);z-index:99999;display:flex;align-items:center;justify-content:center;';
+    overlay.innerHTML =
+        '<div style="background:#fff;border-radius:14px;padding:26px 22px;max-width:340px;width:90%;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,0.4);">' +
+          '<div style="font-size:36px;margin-bottom:8px;">🖨️</div>' +
+          '<h3 style="color:#002060;margin:0 0 14px;font-size:16px;">Guardar como PDF</h3>' +
+          '<p style="font-size:13px;color:#444;line-height:1.6;margin:0 0 18px;">' +
+            'Se abrirá el diálogo de impresión de iOS.<br><br>' +
+            '<b>1.</b> Toca el ícono <b>📤 Compartir</b><br>' +
+            '(arriba a la derecha de la pantalla)<br><br>' +
+            '<b>2.</b> Elige <b>"Guardar en Archivos"</b><br>' +
+            'para seleccionar dónde guardarlo como PDF.' +
+          '</p>' +
+          '<button id="_gsc_pdf_btn" style="background:#002060;color:#fff;border:none;border-radius:50px;padding:12px 30px;font-size:15px;font-weight:bold;cursor:pointer;width:100%;">Continuar → Imprimir</button>' +
+        '</div>';
+    document.body.appendChild(overlay);
 
-        // 4. Restaurar título y limpiar estilos después de que cierre el diálogo
+    document.getElementById('_gsc_pdf_btn').onclick = function() {
+        overlay.remove();
+        var originalTitle = document.title;
+        document.title = fileName.replace('.pdf', '');
         setTimeout(function() {
-            document.title = originalTitle;
-            var s = document.getElementById(styleId);
-            if (s) s.remove();
-        }, 3000);
-    }, 300);
+            window.print();
+            setTimeout(function() {
+                document.title = originalTitle;
+                var s = document.getElementById(styleId);
+                if (s) s.remove();
+            }, 3000);
+        }, 200);
+    };
 }

@@ -10,7 +10,7 @@
     <title>AUDITORÍA PMT - MÓVIL Y ESCRITORIO</title>
     <style>
         :root { 
-            --primary: #002855; /* Azul institucional Interventoría */
+            --primary: #002060; /* Azul institucional GSC */ /* Azul institucional Interventoría */
             --secondary: #FF6600; /* Naranja Tránsito PMT */
             --accent: #d4af37;
             --border: #b0bec5;
@@ -566,6 +566,7 @@
 
     // Carga de Logos (Oculta el texto al cargar la imagen)
     function loadLogo(input, imgId, txtId) {
+        // txtId puede ser vacÃ­o si el logo usa el patrÃ³n img+onerror
         if (input.files && input.files[0]) {
             const reader = new FileReader();
             reader.onload = function(e) {

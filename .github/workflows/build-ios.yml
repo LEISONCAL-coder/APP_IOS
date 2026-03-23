@@ -45,8 +45,8 @@ jobs:
         run: |
           cd cordova_project/platforms/ios
           xcodebuild clean build \
-            -workspace "GSC Actas.xcworkspace" \
-            -scheme "GSC Actas" \
+            -workspace "App.xcworkspace" \
+            -scheme "App" \
             -configuration Release \
             -destination "generic/platform=iOS" \
             SYMROOT="$(pwd)/build" \

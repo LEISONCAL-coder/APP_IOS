@@ -8,7 +8,7 @@ on:
 jobs:
   build-app:
     name: Build iOS IPA
-    runs-on: macos-latest
+    runs-on: macos-13
 
     steps:
       - name: Extraer código del repositorio

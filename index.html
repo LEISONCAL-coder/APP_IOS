@@ -137,6 +137,19 @@
     </header>
 
     <main>
+        <nav class="no-print" style="margin-bottom: 20px;">
+            <select id="global-nav" onchange="if(this.value) window.location.href=this.value" style="padding: 12px; border-radius: 12px; font-weight: bold; background: white; color: var(--primary-color); outline: none; border: none; width: 100%; box-shadow: 0 1px 2px rgba(0,0,0,0.05); font-size: 16px;">
+                <option value="">Sartar a otra sección...</option>
+                <option value="index.html">Menú Principal (Inicio)</option>
+                <option value="acta_vecindad.html">Acta de Vecindad</option>
+                <option value="acta_entorno.html">Acta de Entorno</option>
+                <option value="proc_const.html">Proc. Constructivo</option>
+                <option value="pmt.html">PMT (Tránsito)</option>
+                <option value="paga.html">PAGA (Ambiental)</option>
+                <option value="espec_tecn.html">Espec. Técnicas</option>
+            </select>
+        </nav>
+
         <div class="menu-list">
             <a href="acta_vecindad.html" class="menu-button">
                 <span class="menu-icon">🏠</span>

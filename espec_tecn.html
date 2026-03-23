@@ -254,6 +254,19 @@
 </head>
 <body>
 
+    <nav class="no-print" style="background-color: var(--primary); padding: 10px; display: flex; justify-content: center; position: sticky; top: 0; z-index: 10000; margin-bottom: 20px;">
+        <select id="global-nav" onchange="if(this.value) window.location.href=this.value" style="padding: 8px; border-radius: 6px; font-weight: bold; background: white; color: var(--primary); outline: none; border: 1px solid #ccc; max-width: 100%; width: 90%;">
+            <option value="">Ir a...</option>
+            <option value="index.html">Menú Principal (Inicio)</option>
+            <option value="acta_vecindad.html">Acta de Vecindad</option>
+            <option value="acta_entorno.html">Acta de Entorno</option>
+            <option value="proc_const.html">Proc. Constructivo</option>
+            <option value="pmt.html">PMT (Tránsito)</option>
+            <option value="paga.html">PAGA (Ambiental)</option>
+            <option value="espec_tecn.html">Espec. Técnicas</option>
+        </select>
+    </nav>
+
 <div id="toast-container" class="no-print"></div>
 
 <div id="signature-modal" class="modal-overlay">
@@ -268,7 +281,7 @@
 </div>
 
 <div class="fab-container no-print">
-    <button class="btn-action btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+    <button class="btn-action btn-print" onclick="generarPDF()">🖨️ Imprimir / Guardar PDF</button>
     <button class="btn-action" style="background: #0288d1;" onclick="exportData('json')">💾 Guardar .json</button>
     <label class="btn-action" style="background: #e65100; cursor: pointer; text-align: center; display: inline-block;">
         📂 Cargar Datos
@@ -709,13 +722,36 @@
             logo1: document.getElementById('logo1') ? document.getElementById('logo1').getAttribute('src') : null,
             logo2: document.getElementById('logo2') ? document.getElementById('logo2').getAttribute('src') : null
         };
+        const fileName = `acta_auditoria.${extension}`;
         const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = `acta_auditoria.${extension}`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        const fileToSave = new File([blob], fileName, { type: 'application/json' });
+
+        if (navigator.canShare && navigator.canShare({ files: [fileToSave] })) {
+            navigator.share({
+                files: [fileToSave],
+                title: fileName,
+                text: 'Proyecto JSON GSC'
+            }).then(() => showToast(`Proyecto Compartido`))
+              .catch(err => { console.error(err); fallbackDownload(blob, fileName); });
+        } else {
+            fallbackDownload(blob, fileName);
+        }
+
+        function fallbackDownload(b, n) {
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(b);
+            a.download = n;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    }
+
+    function generarPDF() {
+        if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+            alert("✨ iOS TIP:\n\n1. Cuando se abra la vista previa de impresión, TOCA Y AMPLÍA (pellizca hacia afuera) la primera hoja.\n2. Se convertirá en un visor de PDF.\n3. Allí toca el botón 'Compartir' arriba a la derecha y elige 'Guardar en Archivos'.");
+        }
+        setTimeout(() => { window.print(); }, 500);
     }
 
     // Cargar datos desde .json o .jw7

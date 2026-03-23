@@ -165,11 +165,37 @@
             .firma-box:last-child { border-right: none !important;}
             .firma-img-container { border-bottom: 1px solid black !important; }
         }
+
+        /* =======================================================================
+           9. DISEÑO RESPONSIVO (TELÉFONOS)
+           ======================================================================= */
+        @media screen and (max-width: 768px) {
+            .container { padding: 10px; margin: 5px; }
+            .top-split { flex-direction: column; }
+            .top-left, .top-right { width: 100%; border-right: none; border-bottom: 1px solid black; }
+            table.form-table, .header-meta, .header-main { display: block; overflow-x: auto; white-space: nowrap; }
+            .checkbox-group { flex-direction: column; align-items: flex-start; }
+            .firmas { flex-direction: column; gap: 15px; }
+            .firma-box { border-right: none; border-bottom: 1px solid black; padding-bottom: 15px; width: 100%; }
+            .photo-grid { grid-template-columns: 1fr; }
+            nav { flex-wrap: wrap; }
+            .btn-action { width: 100%; margin-bottom: 5px; }
+        }
     </style>
 </head>
 <body>
 
     <nav>
+        <select id="global-nav" onchange="if(this.value) window.location.href=this.value" style="padding: 6px; border-radius: 6px; font-weight: bold; background: white; color: var(--primary); outline: none; border: 1px solid #ccc; max-width: 100%;">
+            <option value="">Ir a...</option>
+            <option value="index.html">Menú Principal (Inicio)</option>
+            <option value="acta_vecindad.html">Acta de Vecindad</option>
+            <option value="acta_entorno.html">Acta de Entorno</option>
+            <option value="proc_const.html">Proc. Constructivo</option>
+            <option value="pmt.html">PMT (Tránsito)</option>
+            <option value="paga.html">PAGA (Ambiental)</option>
+            <option value="espec_tecn.html">Espec. Técnicas</option>
+        </select>
         <button onclick="openTab('config')">⚙️ Configuración</button>
         <button class="active" onclick="openTab('vecindad')">🏠 Acta de Vecindad Oficial</button>
     </nav>
@@ -1131,10 +1157,25 @@
             document.getElementById('vecindad').querySelectorAll('.firma-img').forEach((img) => { data.firmas.push(img.getAttribute('src') || ""); });
 
             let blob = new Blob([JSON.stringify(data)], {type: "application/json"});
-            let url = URL.createObjectURL(blob);
-            let a = document.createElement('a'); a.href = url; a.download = fileName;
-            document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
-            showToast(`Proyecto Guardado: ${fileName}`);
+            let fileToSave = new File([blob], fileName, {type: "application/json"});
+            
+            if (navigator.canShare && navigator.canShare({ files: [fileToSave] })) {
+                navigator.share({
+                    files: [fileToSave],
+                    title: fileName,
+                    text: 'Proyecto JSON GSC'
+                }).then(() => showToast(`Proyecto Compartido: ${fileName}`))
+                  .catch(err => { console.error(err); fallbackDownload(blob, fileName); });
+            } else {
+                fallbackDownload(blob, fileName);
+            }
+
+            function fallbackDownload(b, n) {
+                let url = URL.createObjectURL(b);
+                let a = document.createElement('a'); a.href = url; a.download = n;
+                document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+                showToast(`Proyecto Guardado: ${n}`);
+            }
         }
 
         function importarActaVecindad(event) {
@@ -1212,6 +1253,9 @@
         }
 
         function generarPDF() {
+            if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+                alert("✨ iOS TIP:\n\n1. Cuando se abra la vista previa de impresión, TOCA Y AMPLÍA (pellizca hacia afuera) la primera hoja.\n2. Se convertirá en un visor de PDF.\n3. Allí toca el botón 'Compartir' arriba a la derecha y elige 'Guardar en Archivos'.");
+            }
             const originalTitle = document.title;
             let actaNum = document.getElementById('acta-num').value.trim() || 'SN';
             let tramo = document.getElementById('cfg-tramo-actual').value;
